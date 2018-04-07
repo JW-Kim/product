@@ -10,10 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "file:/web/WEB-INF/spring/root-context.xml" })
+@ContextConfiguration(locations = {"file:**/root-context.xml"})
 public class MySqlConnectorTest {
 
-/*    @Inject
+    @Inject
     private DataSource dataSource;
 
     @Test
@@ -25,6 +25,6 @@ public class MySqlConnectorTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 
 }

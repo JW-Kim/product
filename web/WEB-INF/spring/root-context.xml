@@ -7,7 +7,7 @@
     <!-- 자신의 PC(로컬)에 MySql을 설치했을 경우 -->
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url"
                   value="jdbc:mysql://127.0.0.1:3306/PRODUCT_DB?useSSL=false&amp;serverTimezone=UTC">
         </property>
@@ -15,17 +15,33 @@
         <property name="password" value="showd45!"></property>
     </bean>
 
+    <bean id="dataSourceLog4j" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSource" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL         :  "/>
+            </bean>
+        </property>
+    </bean>
+
     <!-- mybatis SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+        <property name="mapperLocations" value="classpath*:product/**/*.xml" />
     </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>
+
 
     <!-- transactionManager -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <aop:config proxy-target-class="true">
+<!--    <aop:config proxy-target-class="true">
         <aop:pointcut id="txAdvisePointCut" expression="execution(* *..*Service.*(..))"/>
         <aop:advisor id="transactionAdvisor" pointcut-ref="txAdvisePointCut" advice-ref="txAdvice"/>
     </aop:config>
@@ -39,6 +55,6 @@
             <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
             <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
         </tx:attributes>
-    </tx:advice>
+    </tx:advice>-->
 
 </beans>

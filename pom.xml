@@ -8,14 +8,11 @@
     <artifactId>product1.0</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>../test</module>
-        <module>../test</module>
-        <module>../test</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -40,7 +37,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
         </dependency>
 
         <dependency>
@@ -63,7 +60,6 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.1</version>
         </dependency>
-
 
         <!-- MyBatis-Spring -->
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
@@ -91,7 +87,6 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.6.11</version>
-
         </dependency>
 
         <dependency>
@@ -101,9 +96,21 @@
         </dependency>
 
         <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <version>2.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.lazyluke</groupId>
+            <artifactId>log4jdbc-remix</artifactId>
+            <version>0.2.7</version>
         </dependency>
 
     </dependencies>
