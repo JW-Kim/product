@@ -41,7 +41,7 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-<!--    <aop:config proxy-target-class="true">
+    <aop:config proxy-target-class="true">
         <aop:pointcut id="txAdvisePointCut" expression="execution(* *..*Service.*(..))"/>
         <aop:advisor id="transactionAdvisor" pointcut-ref="txAdvisePointCut" advice-ref="txAdvice"/>
     </aop:config>
@@ -55,6 +55,6 @@
             <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
             <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
         </tx:attributes>
-    </tx:advice>-->
+    </tx:advice>
 
 </beans>
