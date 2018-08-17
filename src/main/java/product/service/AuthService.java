@@ -1,7 +1,7 @@
-package product.auth.service;
+package product.service;
 
-import product.auth.model.Auth;
-import product.auth.model.AuthGetParam;
+import product.model.Auth;
+import product.model.AuthGetParam;
 
 import java.util.List;
 

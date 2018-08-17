@@ -1,4 +1,4 @@
-package product.auth.model;
+package product.model;
 
 public class AuthGetParam {
     public String telNumber;

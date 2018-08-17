@@ -2,8 +2,8 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="product.auth.dao.AuthDao">
-    <resultMap id="userResultMap" type="product.auth.model.Auth">
+<mapper namespace="product.dao.AuthDao">
+    <resultMap id="userResultMap" type="product.model.Auth">
         <id property="userId" column="USER_ID" />
         <result property="phone" column="PHONE"/>
         <result property="regUserId" column="REG_USER_ID"/>
@@ -15,7 +15,7 @@
     <select id="selectAuth"  resultMap="userResultMap" >
       SELECT * FROM TB_USER_F
 
-        /*product.auth.dao.AuthDao.selectAuth*/
+        /*product.dao.AuthDao.selectAuth*/
     </select>
 
 </mapper>
