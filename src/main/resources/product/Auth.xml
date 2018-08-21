@@ -5,17 +5,14 @@
 <mapper namespace="product.dao.AuthDao">
     <resultMap id="userResultMap" type="product.model.Auth">
         <id property="userId" column="USER_ID" />
-        <result property="phone" column="PHONE"/>
-        <result property="regUserId" column="REG_USER_ID"/>
+        <result property="userNm" column="USER_NM"/>
         <result property="regDtm" column="REG_DTM"/>
-        <result property="modUserId" column="MOD_USER_ID"/>
-        <result property="modDtm" column="MOD_DTM"/>
     </resultMap>
 
     <select id="selectAuth"  resultMap="userResultMap" >
-      SELECT * FROM TB_USER_F
+      SELECT * FROM USER_F
 
         /*product.dao.AuthDao.selectAuth*/
-    </select>
+    </select>dfsdf
 
 </mapper>
