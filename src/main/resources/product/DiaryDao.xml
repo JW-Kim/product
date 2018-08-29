@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product.dao.DiaryDao">
+    <resultMap id="diaryResultMap" type="product.model.Diary">
+        <id property="diaryId" column="DIARY_ID" />
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="regUserId" column="REG_USER_ID"/>
+        <result property="fileId" column="FILE_ID"/>
+        <result property="regDtm" column="REG_DTM"/>
+        <result property="stateId" column="STATE_ID"/>
+        <result property="feelingCd" column="FEELING_CD"/>
+        <result property="healthCd" column="HEALTH_CD"/>
+        <result property="feverCd" column="FEVER_CD"/>
+        <result property="breakfastCd" column="BREAKFAST_CD"/>
+        <result property="lunchCd" column="LUNCH_CD"/>
+        <result property="dinnerCd" column="DINNER_CD"/>
+        <result property="shitCd" column="SHIT_CD"/>
+        <result property="shitCnt" column="SHIT_CNT"/>
+        <result property="shitDesc" column="SHIT_DESC"/>
+        <result property="sleepStartDtm" column="SLEEP_START_DTM"/>
+        <result property="sleepEndDtm" column="SLEEP_END_DTM"/>
+    </resultMap>
+
+    <select id="selectDiaryList"  resultMap="diaryResultMap" >
+        SELECT A.DIARY_ID,
+                A.TITLE CONTENT,
+                A.REG_USER_ID,
+                A.FILE_ID,
+                A.REG_DTM,
+                B.STATE_ID,
+                B.FEELING_CD,
+                B.HEALTH_CD,
+                B.FEVER_CD,
+                B.BREAKFAST_CD,
+                B.LUNCH_CD,
+                B.DINNER_CD,
+                B.SHIT_CD,
+                B.SHIT_CNT,
+                B.SHIT_DESC,
+                B.SLEEP_START_DTM,
+                B.SLEEP_END_DTM
+        FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
+        ORDER BY A.REG_DTM DESC;
+
+        /*product.dao.AuthDao.selectDiaryList*/
+    </select>
+
+</mapper>
