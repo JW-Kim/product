@@ -1,0 +1,88 @@
+/*jadclipse*/// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+
+package com.sds.ioffice.repo.exception;
+
+import org.springframework.core.NestedRuntimeException;
+
+import com.sds.ioffice.repo.cmm.VaultStatusMsg;
+import com.sds.ioffice.runtime.result.ResultCode;
+
+public class VadmRuntimeException extends NestedRuntimeException
+{    
+	private static final long serialVersionUID = 3070431731480464199L;
+	private int statusMsgCode;
+	private String message;
+	private ResultCode resultCode;
+	private Object data;
+
+    public VadmRuntimeException(String message)
+    {
+        super(message);
+        this.message = message;
+    }
+
+    public VadmRuntimeException(ResultCode resultCode, VaultStatusMsg statusMsg, String message)
+    {
+        super(message);
+        this.resultCode = resultCode;
+        this.statusMsgCode = statusMsg.getCode();
+        this.message = message;
+    }
+
+    public static long getSerialversionuid()
+    {
+        return 3070431731480464199L;
+    }
+
+    public void setMessage(String message)
+    {
+        this.message = message;
+    }
+    
+    public String getMessage()
+    {
+        return message;
+    }
+
+    public void setResultCode(ResultCode resultCode)
+    {
+        this.resultCode = resultCode;
+    }
+
+    public ResultCode getResultCode()
+    {
+        return resultCode;
+    }
+
+    public Object getData()
+    {
+        return data;
+    }
+
+    public void setData(Object data)
+    {
+        this.data = data;
+    }
+
+    public int getStatusMsgCode()
+    {
+    	return statusMsgCode;
+    }
+
+    public void setStatusMsgCode(int statusMsgCode) 
+    {
+    	this.statusMsgCode = statusMsgCode;
+    }
+
+}
+
+
+/*
+ DECOMPILATION REPORT
+
+ Decompiled from: D:\iOffice\dev_ioffice\maven\repository\com\sds\ioffice\efss_runtime\0.0.103\efss_runtime-0.0.103.jar
+ Total time: 746 ms
+ Jad reported messages/errors:
+ Exit status: 0
+ Caught exceptions:
+*/
