@@ -1,0 +1,79 @@
+
+
+package com.sds.ioffice.common.adm.utl;
+
+import java.util.List;
+
+import com.sds.ioffice.common.adm.cmm.model.Auth;
+
+/**
+ * 
+ * 세션정보를 위한 로컬 쓰레드 변수
+
+ */
+public class UserContext {
+
+	private static ThreadLocal<Auth> threadLocal = new ThreadLocal<Auth>();
+
+	public static void put(Auth loginInfo) {
+		if (loginInfo == null) {
+			return;
+		}
+		threadLocal.set(loginInfo);
+	}
+
+	public static Auth get() {
+		Auth loginInfo = threadLocal.get();
+		if (loginInfo == null) {
+			loginInfo = new Auth();
+			put(loginInfo);
+		}
+		return loginInfo;
+	}
+
+	public static void remove() {
+		threadLocal.remove();
+	}
+
+	public static String getAdminUserId() {
+		return get().getAdminUserId();
+	}
+
+	public static String getAdminUserNm() { return get().getAdminUserNm(); }
+
+	public static String getAdminLoginId() {
+		return get().getAdminLoginId();
+	}
+
+	public static int getTimeDiff() {
+		return get().getTimeDiff();
+	}
+
+	public static String getLangCd() {
+		return get().getLangCd();
+	}
+
+	public static String getUserId() {
+		return get().getUserId();
+	}
+
+	public static String getCoCdVal() {
+		return get().getCoCdVal();
+	}
+
+	public static void setCoCdVal(String coCdVal) {
+		get().setCoCdVal(coCdVal);
+	}
+
+	public static boolean isInsideSysEnv() {
+		return get().isInsideSysEnv();
+	}
+
+	public static List<String> getCorporationIdList() {
+		return get().getCorporationIdList();
+	}
+	
+	public static String getRoleSectCd() {
+		return get().getRoleSectCd();
+	}
+}
