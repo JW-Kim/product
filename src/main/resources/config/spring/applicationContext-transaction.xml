@@ -38,7 +38,7 @@
 
     <!-- 配置切面 aop -->
     <aop:config>
-        <aop:advisor advice-ref="interceptorAdvice" pointcut="execution(* com.markliu.ssm.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="interceptorAdvice" pointcut="execution(* com.product.luffy.service.impl.*.*(..))"/>
     </aop:config>
 
 </beans>

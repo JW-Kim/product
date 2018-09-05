@@ -28,7 +28,7 @@
          this value should be an existing directory on the local file system.
          即对于非eclipse项目需要指定绝对路径
          -->
-        <javaModelGenerator targetPackage="com.markliu.ssm.po"
+        <javaModelGenerator targetPackage="com.product.luffy.po"
                             targetProject="/media/markliu/Entertainment/Linux/SoftwareInformation/java/My_IntelliJ_projects/Spring-SpringMVC-Mybatis/src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
@@ -37,7 +37,7 @@
         </javaModelGenerator>
 
         <!-- targetProject:mapper映射文件生成的位置 -->
-        <sqlMapGenerator targetPackage="com.markliu.ssm.mapper"
+        <sqlMapGenerator targetPackage="com.product.luffy.mapper"
                          targetProject="/media/markliu/Entertainment/Linux/SoftwareInformation/java/My_IntelliJ_projects/Spring-SpringMVC-Mybatis/src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>
@@ -45,7 +45,7 @@
 
         <!-- targetPackage：mapper接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.markliu.ssm.mapper"
+                             targetPackage="com.product.luffy.mapper"
                              targetProject="/media/markliu/Entertainment/Linux/SoftwareInformation/java/My_IntelliJ_projects/Spring-SpringMVC-Mybatis/src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false"/>

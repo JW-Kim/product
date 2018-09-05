@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.markliu.ssm.mapper.ItemsMapper" >
-  <resultMap id="BaseResultMap" type="com.markliu.ssm.po.Items" >
+<mapper namespace="com.product.luffy.mapper.ItemsMapper" >
+  <resultMap id="BaseResultMap" type="com.product.luffy.po.Items" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="REAL" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List" >
     id, name, price, picture, createtime, detail
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.markliu.ssm.po.ItemsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.product.luffy.po.ItemsExample" >
     select
     <if test="distinct" >
       distinct
@@ -94,13 +94,13 @@
     delete from items
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.markliu.ssm.po.ItemsExample" >
+  <delete id="deleteByExample" parameterType="com.product.luffy.po.ItemsExample" >
     delete from items
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.markliu.ssm.po.Items" >
+  <insert id="insert" parameterType="com.product.luffy.po.Items" >
     insert into items (id, name, price, 
       picture, createtime, detail
       )
@@ -108,7 +108,7 @@
       #{picture,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{detail,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.markliu.ssm.po.Items" >
+  <insert id="insertSelective" parameterType="com.product.luffy.po.Items" >
     insert into items
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -151,7 +151,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.markliu.ssm.po.ItemsExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.product.luffy.po.ItemsExample" resultType="java.lang.Integer" >
     select count(*) from items
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -195,7 +195,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.markliu.ssm.po.Items" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.luffy.po.Items" >
     update items
     <set >
       <if test="name != null" >
@@ -216,7 +216,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.markliu.ssm.po.Items" >
+  <update id="updateByPrimaryKey" parameterType="com.product.luffy.po.Items" >
     update items
     set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=REAL},

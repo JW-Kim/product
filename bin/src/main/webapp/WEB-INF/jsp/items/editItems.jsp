@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<jsp:useBean id="itemsCustom" scope="request" type="com.markliu.ssm.po.ItemsCustom"/>
+<jsp:useBean id="itemsCustom" scope="request" type="com.product.luffy.po.ItemsCustom"/>
 
 <form id="itemForm" action="${pageContext.request.contextPath }/items/update_items"
       enctype="multipart/form-data" method="post">

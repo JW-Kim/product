@@ -22,7 +22,7 @@
         <property name="converters">
             <set>
                 <!-- 日期类型转换器 -->
-                <bean class="com.markliu.ssm.utils.converter.DateConverter"/>
+                <bean class="com.product.luffy.utils.converter.DateConverter"/>
                 <!-- 其他类型转换器 -->
 
             </set>
@@ -49,7 +49,7 @@
     </bean>
 
     <!-- 配置全局异常处理器 -->
-    <bean class="com.markliu.ssm.exception.GlobalItemsExceptionResolver"/>
+    <bean class="com.product.luffy.exception.GlobalItemsExceptionResolver"/>
 
     <!-- 配置文件上传组件 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -64,7 +64,7 @@
         <mvc:interceptor>
             <!-- path 指定对何种请求的 url 拦截， /** 表示对所有的url及子url进行拦截 -->
             <mvc:mapping path="/**"/>
-            <bean class="com.markliu.ssm.interceptor.LoginInterceptor" />
+            <bean class="com.product.luffy.interceptor.LoginInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

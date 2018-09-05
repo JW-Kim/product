@@ -36,7 +36,7 @@
      -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 指定扫描的包，如果存在多个包使用(逗号,)分割 -->
-        <property name="basePackage" value="com.markliu.ssm.mapper" />
+        <property name="basePackage" value="com.product.luffy.mapper" />
         <!-- 注意此处是sqlSessionFactoryBeanName，如果写成 sqlSessionFactory，ref="sqlSessionFactory"
              会造成 <context:property-placeholder location="classpath:config/db.properties"/> 失效 而连接不上数据库
          -->

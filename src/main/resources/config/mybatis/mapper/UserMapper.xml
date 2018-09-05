@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.markliu.ssm.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.markliu.ssm.po.User" >
+<mapper namespace="com.product.luffy.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.product.luffy.po.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     id, username, sex, birthday, address
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.markliu.ssm.po.UserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.product.luffy.po.UserExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,19 +93,19 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.markliu.ssm.po.UserExample" >
+  <delete id="deleteByExample" parameterType="com.product.luffy.po.UserExample" >
     delete from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.markliu.ssm.po.User" >
+  <insert id="insert" parameterType="com.product.luffy.po.User" >
     insert into user (id, username, sex, 
       birthday, address)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
       #{birthday,jdbcType=DATE}, #{address,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.markliu.ssm.po.User" >
+  <insert id="insertSelective" parameterType="com.product.luffy.po.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.markliu.ssm.po.UserExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.product.luffy.po.UserExample" resultType="java.lang.Integer" >
     select count(*) from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.markliu.ssm.po.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.luffy.po.User" >
     update user
     <set >
       <if test="username != null" >
@@ -200,7 +200,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.markliu.ssm.po.User" >
+  <update id="updateByPrimaryKey" parameterType="com.product.luffy.po.User" >
     update user
     set username = #{username,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},

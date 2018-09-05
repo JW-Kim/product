@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.markliu.ssm.mapper.OrderDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.markliu.ssm.po.OrderDetail" >
+<mapper namespace="com.product.luffy.mapper.OrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.product.luffy.po.OrderDetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="orders_id" property="ordersId" jdbcType="INTEGER" />
     <result column="items_id" property="itemsId" jdbcType="INTEGER" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, orders_id, items_id, itemsNum
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.markliu.ssm.po.OrderDetailExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.product.luffy.po.OrderDetailExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from order_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.markliu.ssm.po.OrderDetailExample" >
+  <delete id="deleteByExample" parameterType="com.product.luffy.po.OrderDetailExample" >
     delete from order_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.markliu.ssm.po.OrderDetail" >
+  <insert id="insert" parameterType="com.product.luffy.po.OrderDetail" >
     insert into order_detail (id, orders_id, items_id, 
       itemsNum)
     values (#{id,jdbcType=INTEGER}, #{ordersId,jdbcType=INTEGER}, #{itemsId,jdbcType=INTEGER}, 
       #{itemsnum,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.markliu.ssm.po.OrderDetail" >
+  <insert id="insertSelective" parameterType="com.product.luffy.po.OrderDetail" >
     insert into order_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.markliu.ssm.po.OrderDetailExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.product.luffy.po.OrderDetailExample" resultType="java.lang.Integer" >
     select count(*) from order_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.markliu.ssm.po.OrderDetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.luffy.po.OrderDetail" >
     update order_detail
     <set >
       <if test="ordersId != null" >
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.markliu.ssm.po.OrderDetail" >
+  <update id="updateByPrimaryKey" parameterType="com.product.luffy.po.OrderDetail" >
     update order_detail
     set orders_id = #{ordersId,jdbcType=INTEGER},
       items_id = #{itemsId,jdbcType=INTEGER},

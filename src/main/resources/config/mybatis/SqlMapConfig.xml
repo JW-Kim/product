@@ -9,7 +9,7 @@
     <!-- 别名的配置 -->
     <typeAliases>
         <!-- 批量扫描别名 -->
-        <package name="com.markliu.ssm.po" />
+        <package name="com.product.luffy.po" />
     </typeAliases>
 
     <!-- 配置 mapper

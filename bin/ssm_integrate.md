@@ -265,7 +265,7 @@ ItemsCustomMapper.xml:
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.markliu.ssm.mapper.ItemsCustomMapper">
+<mapper namespace="ItemsCustomMapper">
 
     <!-- 定义条件查询的 sql 片段 -->
     <sql id="ItemsCustom_Query_Where">
@@ -282,8 +282,8 @@ ItemsCustomMapper.xml:
      resultType：使用扩展的 Custom 类，便于后续系统的扩展
      -->
     <select id="getAllItemsLikeName"
-            parameterType="com.markliu.ssm.po.ItemsCustomQueryVo"
-            resultType="com.markliu.ssm.po.ItemsCustom">
+            parameterType="ItemsCustomQueryVo"
+            resultType="ItemsCustom">
         select * from items
         <where>
           <include refid="ItemsCustom_Query_Where" />
@@ -304,8 +304,8 @@ public interface ItemsCustomMapper {
 ```
 package com.markliu.ssm.service;
 
-import com.markliu.ssm.po.ItemsCustom;
-import com.markliu.ssm.po.ItemsCustomQueryVo;
+import ItemsCustom;
+import ItemsCustomQueryVo;
 import java.util.List;
 
 public interface ItemsService {
@@ -324,10 +324,10 @@ public interface ItemsService {
 ```
 package com.markliu.ssm.service.impl;
 
-import com.markliu.ssm.mapper.ItemsCustomMapper;
-import com.markliu.ssm.po.ItemsCustom;
-import com.markliu.ssm.po.ItemsCustomQueryVo;
-import com.markliu.ssm.service.ItemsService;
+import ItemsCustomMapper;
+import ItemsCustom;
+import ItemsCustomQueryVo;
+import ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
