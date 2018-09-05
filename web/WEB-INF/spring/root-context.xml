@@ -35,6 +35,7 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
+    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.GsonHttpMessageConverter" />
 
     <!-- transactionManager -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
