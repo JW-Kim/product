@@ -3,6 +3,13 @@ package com.product.luffy.po;
 import java.util.Date;
 
 public class User {
+	
+	private String userId;
+	
+	private String userNm;
+	
+	private Date regDtm;
+	
     private Integer id;
 
     private String username;
@@ -52,4 +59,35 @@ public class User {
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
     }
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserNm() {
+		return userNm;
+	}
+
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
+
+	public Date getRegDtm() {
+		return regDtm;
+	}
+
+	public void setRegDtm(Date regDtm) {
+		this.regDtm = regDtm;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userNm=" + userNm + ", regDtm=" + regDtm + ", id=" + id + ", username="
+				+ username + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address + "]";
+	}
+    
 }
