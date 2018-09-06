@@ -10,7 +10,6 @@ public class GridResponseObject<T> {
  	private String message;
  	private Collection<T> data;
  	private int total;
-	private int statusMsgCd;
 
 	public Collection<T> getData() {
 		if (data == null) {
@@ -54,21 +53,6 @@ public class GridResponseObject<T> {
     	this.message = message;
     }
 
-	
-    /**
-     * @return the statusMsgCd
-     */
-    public int getStatusMsgCd() {
-    	return statusMsgCd;
-    }
-
-	
-    /**
-     * @param statusMsgCd the statusMsgCd to set
-     */
-    public void setStatusMsgCd(int statusMsgCd) {
-    	this.statusMsgCd = statusMsgCd;
-    }
 
 	
     /**
