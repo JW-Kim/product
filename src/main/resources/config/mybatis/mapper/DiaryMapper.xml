@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.product.luffy.mapper.DiaryMapper" >
+  
+  <resultMap id="DiaryResultMap" type="com.product.luffy.po.Diary">
+  	<id 	column="DIARY_ID" 			property="diaryId"/>
+  	<result column="TITLE"				property="title"/>
+  	<result column="CONTENT"    		property="content"/>
+  	<result column="REG_USER_ID"    	property="regUserId"/>
+  	<result column="FILE_ID"    		property="fileId"/>
+  	<result column="STATE_ID"    		property="stateId"/>
+  	<result column="FEELING_CD"     	property="feelingCd"/>
+  	<result column="HEALTH_CD"    		property="healthCd"/>
+  	<result column="FEVER_CD"    		property="feverCd"/>
+  	<result column="BREAKFAST_CD"   	property="breakfastCd"/>
+  	<result column="LUNCH_CD"    		property="lunchCd"/>
+  	<result column="DINNER_CD"    		property="dinnerCd"/>
+  	<result column="SHIT_CD"    		property="shitCd"/>
+  	<result column="SHIT_CNT"    		property="shitCnt"/>
+  	<result column="SHIT_DESC"    		property="shitDesc"/>
+  	<result column="SLEEP_START_DTM"    property="sleepStartDtm"/>
+  	<result column="SLEEP_END_DTM"    	property="sleepEndDtm"/>
+  	<result column="REG_DTM"    		property="regDtm"/>
+  </resultMap>
+  
+  <select id="selectDiaryList" resultMap="DiaryResultMap">
+		SELECT A.DIARY_ID,
+		       A.TITLE,
+		       A.CONTENT,
+		       A.REG_USER_ID,
+		       A.FILE_ID,
+		       B.STATE_ID,
+		       B.FEELING_CD,
+		       B.HEALTH_CD,
+		       B.FEVER_CD,
+		       B.BREAKFAST_CD,
+		       B.LUNCH_CD,
+		       B.DINNER_CD,
+		       B.SHIT_CD,
+		       B.SHIT_CNT,
+		       B.SHIT_DESC,
+		       B.SLEEP_START_DTM,
+		       B.SLEEP_END_DTM,
+		       B.REG_DTM
+		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
+		 WHERE A.REG_USER_ID = '1'
+		ORDER BY A.REG_DTM DESC
+  </select>
+ 
+</mapper>
