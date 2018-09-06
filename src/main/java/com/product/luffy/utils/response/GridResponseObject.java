@@ -1,15 +1,3 @@
-/**
- * <pre>
- * Copyright (c) 2018 SamsungSDS, Inc.
- * All right reserved.
- * 
- * This software is the confidential and proprietary information of Samsung
- * SDS, Inc. You shall not disclose such Confidential Information and
- * shall use it only in accordance with the terms of the license agreement
- * you entered into with SamsungSDS.
- * 
- * </pre>
-*/
 package com.product.luffy.utils.response;
 
 
