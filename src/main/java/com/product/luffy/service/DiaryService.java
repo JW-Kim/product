@@ -7,4 +7,8 @@ import com.product.luffy.po.Diary;
 public interface DiaryService {
 	
 	public List<Diary> selectDiaryList();
+	
+	public Diary selectDiary(String diaryId);
+	
+	public int insertDiary(Diary diary);
 }
