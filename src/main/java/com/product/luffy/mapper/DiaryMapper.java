@@ -9,4 +9,10 @@ import com.product.luffy.po.Diary;
 @Repository("com.product.luffy.mapper.DiaryMapper")
 public interface DiaryMapper {
 	public List<Diary> selectDiaryList();
+	
+	public Diary selectDiary(String diaryId);
+	
+	public int insertDiary(Diary diary);
+	
+	public int insertState(Diary diary);
 }
