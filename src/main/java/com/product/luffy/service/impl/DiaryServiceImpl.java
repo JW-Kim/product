@@ -19,4 +19,20 @@ public class DiaryServiceImpl implements DiaryService {
 	public List<Diary> selectDiaryList() {
 		return diaryMapper.selectDiaryList();
 	}
+	
+	public Diary selectDiary(String diaryId) {
+		return diaryMapper.selectDiary(diaryId);
+	}
+	
+	public int insertDiary(Diary diary) {
+		int rtn = 0;
+		
+		//insert DIARY_F
+		rtn = diaryMapper.insertDiary(diary);
+		
+		//insert STATE_F
+		rtn = diaryMapper.insertState(diary);
+		
+		return rtn;
+	}
 }
