@@ -1,6 +1,6 @@
 package com.product.luffy.po;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Diary {
 	private String diaryId;
@@ -18,8 +18,8 @@ public class Diary {
 	private String shitCd;
 	private String shitCnt;
 	private String shitDesc;
-	private Date sleepStartDtm;
-	private Date sleepEndDtm;
+	private String sleepStartDtm;
+	private String sleepEndDtm;
 	private Date regDtm;
 	
 	
@@ -236,28 +236,32 @@ public class Diary {
 
 
 
-	public Date getSleepStartDtm() {
+
+
+
+
+	public String getSleepStartDtm() {
 		return sleepStartDtm;
 	}
 
 
 
 
-	public void setSleepStartDtm(Date sleepStartDtm) {
+	public void setSleepStartDtm(String sleepStartDtm) {
 		this.sleepStartDtm = sleepStartDtm;
 	}
 
 
 
 
-	public Date getSleepEndDtm() {
+	public String getSleepEndDtm() {
 		return sleepEndDtm;
 	}
 
 
 
 
-	public void setSleepEndDtm(Date sleepEndDtm) {
+	public void setSleepEndDtm(String sleepEndDtm) {
 		this.sleepEndDtm = sleepEndDtm;
 	}
 
