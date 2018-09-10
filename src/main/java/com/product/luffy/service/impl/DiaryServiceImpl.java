@@ -35,4 +35,14 @@ public class DiaryServiceImpl implements DiaryService {
 		
 		return rtn;
 	}
+	
+	public int updateDiary(Diary diary) {
+		int rtn = 0;
+		
+		rtn = diaryMapper.updateDiary(diary);
+		
+		rtn = diaryMapper.updateState(diary);
+		
+		return rtn;
+	}
 }
