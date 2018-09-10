@@ -15,4 +15,8 @@ public interface DiaryMapper {
 	public int insertDiary(Diary diary);
 	
 	public int insertState(Diary diary);
+	
+	public int updateDiary(Diary diary);
+	
+	public int updateState(Diary diary);
 }
