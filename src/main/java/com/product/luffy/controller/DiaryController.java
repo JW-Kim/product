@@ -1,5 +1,6 @@
 package com.product.luffy.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.product.luffy.po.Diary;
 import com.product.luffy.service.DiaryService;
 import com.product.luffy.utils.IdGen;
+import com.product.luffy.utils.Exception.ProductRuntimeException;
 import com.product.luffy.utils.response.GridResponseObject;
 import com.product.luffy.utils.response.HttpResultCode;
 import com.product.luffy.utils.response.ResponseObject;
@@ -60,13 +62,68 @@ public class DiaryController {
 	public @ResponseBody ResponseObject<String> insertDiary(@RequestBody Map<String, Object> requestParams){
 		LOGGER.debug(">>>>>>>>>>> insertDiary 시작 :"+ requestParams);
 		ResponseObject<String> responseObject = new ResponseObject<String>();
-		Diary diary = new Diary();
 		
-		LOGGER.debug(">>>>>> IdGen : "+ IdGen.getNextId());
+		Diary diary = setDiary(null, requestParams);		
 		
 		int rtn = diaryService.insertDiary(diary);
 		responseObject.setData(rtn);
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		return responseObject;
+	}
+	
+	@RequestMapping(value="/{diaryId}", method=RequestMethod.POST)
+	public @ResponseBody ResponseObject<String> updateDiary(@PathVariable("diaryId") String diaryId,
+														    @RequestBody Map<String, Object> requestParams){
+		LOGGER.debug(">>>>>>>>>>> updateDiary 시작 :"+ diaryId+ " : "+requestParams);
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		
+		Diary diary = setDiary(diaryId, requestParams);
+		
+		int rtn = diaryService.updateDiary(diary);
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return responseObject;
+	}
+	
+	private Diary setDiary(String diaryId, Map<String, Object> params) {
+		Diary diary = new Diary();
+		diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
+		String title = params.get("title") == null ? null : (String) params.get("title");
+		String content = params.get("content") == null ? null : (String) params.get("content");
+		String feelingCd = params.get("content") == null ? "" : (String) params.get("feelingCd");
+		String healthCd = params.get("content") == null ? "" : (String) params.get("healthCd");
+		String feverCd = params.get("content") == null ? "" : (String) params.get("feverCd");
+		String breakfastCd = params.get("content") == null ? "" : (String) params.get("breakfastCd");
+		String lunchCd = params.get("content") == null ? "" : (String) params.get("lunchCd");
+		String dinnerCd = params.get("content") == null ? "" : (String) params.get("dinnerCd");
+		String shitCd = params.get("content") == null ? "" : (String) params.get("shitCd");
+		String shitCnt = params.get("content") == null ? "" : (String) params.get("shitCnt");
+		String shitDesc = params.get("content") == null ? "" : (String) params.get("shitDesc");
+		String sleepStartDtm = params.get("content") == null ? null : (String) params.get("sleepStartDtm");
+		String sleepEndDtm = params.get("content") == null ? null : (String) params.get("sleepEndDtm");
+		
+		if(title == null || content == null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "타이틀, 내용에 등록된 내용이 없습니다.");
+		
+		diary.setDiaryId(diaryId);
+		diary.setTitle(title);
+		diary.setContent(content);
+		//TODO Session 처리
+		diary.setRegUserId("1");
+		//TODO File upload 처리
+		diary.setFileId(null);
+		diary.setStateId(IdGen.getNextId());
+		diary.setFeelingCd(feelingCd);
+		diary.setHealthCd(healthCd);
+		diary.setFeverCd(feverCd);
+		diary.setBreakfastCd(breakfastCd);
+		diary.setLunchCd(lunchCd);
+		diary.setDinnerCd(dinnerCd);
+		diary.setShitCd(shitCd);
+		diary.setShitCnt(shitCnt);
+		diary.setShitDesc(shitDesc);
+		diary.setSleepStartDtm(sleepStartDtm);
+		diary.setSleepEndDtm(sleepEndDtm);
+		
+		return diary;
 	}
 }
