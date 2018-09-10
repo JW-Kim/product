@@ -86,7 +86,7 @@
 		        NOW())
   </insert> 	
   
-  <insert id="insertState">
+  <insert id="insertState" parameterType="com.product.luffy.po.Diary">
 	  INSERT INTO `STATE_F`(`STATE_ID`,
 	                      `DIARY_ID`,
 	                      `FEELING_CD`,
@@ -116,4 +116,28 @@
 		        #{sleepEndDtm},
 		        NOW())
   </insert>
+  
+  <update id="updateDiary" parameterType="com.product.luffy.po.Diary">
+	UPDATE DIARY_F
+	   SET TITLE = #{title}, 
+	   CONTENT = #{content}
+	 WHERE DIARY_ID = #{diaryId}
+  </update>
+  
+  <update id="updateState" parameterType="com.product.luffy.po.Diary">
+	  UPDATE STATE_F
+	   SET FEELING_CD = #{feelingCd},
+	       HEALTH_CD = #{healthCd},
+	       FEVER_CD = #{feverCd},
+	       BREAKFAST_CD = #{breakfastCd},
+	       LUNCH_CD = #{lunchCd},
+	       DINNER_CD = #{dinnerCd},
+	       SHIT_CD = #{shitCd},
+	       SHIT_CNT = #{shitCnt},
+	       SHIT_DESC = #{shitDesc},
+	       SLEEP_START_DTM = #{sleepStartDtm},
+	       SLEEP_END_DTM = #{sleepEndDtm}
+	 WHERE DIARY_ID = '1';
+  </update>
+  
 </mapper>
