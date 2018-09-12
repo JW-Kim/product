@@ -18,8 +18,8 @@
   	<result column="SHIT_CD"    		property="shitCd"/>
   	<result column="SHIT_CNT"    		property="shitCnt"/>
   	<result column="SHIT_DESC"    		property="shitDesc"/>
-  	<result column="SLEEP_START_DTM"    property="sleepStartDtm"/>
-  	<result column="SLEEP_END_DTM"    	property="sleepEndDtm"/>
+  	<result column="SLEEP_START_TIME"   property="sleepStartTime"/>
+  	<result column="SLEEP_END_TIME"    	property="sleepEndTime"/>
   	<result column="REG_DTM"    		property="regDtm"/>
   </resultMap>
   
@@ -30,17 +30,17 @@
 		       A.REG_USER_ID,
 		       A.FILE_ID,
 		       B.STATE_ID,
-		       B.FEELING_CD,
-		       B.HEALTH_CD,
-		       B.FEVER_CD,
-		       B.BREAKFAST_CD,
-		       B.LUNCH_CD,
-		       B.DINNER_CD,
-		       B.SHIT_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEELING_CD = C.CD_DTL_ID)   AS FEELING_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.HEALTH_CD = C.CD_DTL_ID)    AS HEALTH_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEVER_CD = C.CD_DTL_ID)     AS FEVER_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.BREAKFAST_CD = C.CD_DTL_ID) AS BREAKFAST_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.LUNCH_CD = C.CD_DTL_ID)     AS LUNCH_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.DINNER_CD = C.CD_DTL_ID)    AS DINNER_CD,
+		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.SHIT_CD = C.CD_DTL_ID)      AS SHIT_CD,
 		       B.SHIT_CNT,
 		       B.SHIT_DESC,
-		       B.SLEEP_START_DTM,
-		       B.SLEEP_END_DTM,
+		       B.SLEEP_START_TIME,
+		       B.SLEEP_END_TIME,
 		       B.REG_DTM
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.REG_USER_ID = '1'
@@ -63,8 +63,8 @@
 		       B.SHIT_CD,
 		       B.SHIT_CNT,
 		       B.SHIT_DESC,
-		       B.SLEEP_START_DTM,
-		       B.SLEEP_END_DTM,
+		       B.SLEEP_START_TIME,
+		       B.SLEEP_END_TIME,
 		       B.REG_DTM
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.REG_USER_ID = '1' 
@@ -98,8 +98,8 @@
 	                      `SHIT_CD`,
 	                      `SHIT_CNT`,
 	                      `SHIT_DESC`,
-	                      `SLEEP_START_DTM`,
-	                      `SLEEP_END_DTM`,
+	                      `SLEEP_START_TIME`,
+	                      `SLEEP_END_TIME`,
 	                      `REG_DTM`)
 		VALUES (#{stateId},
 		        #{diaryId},
@@ -112,8 +112,8 @@
 		        #{shitCd},
 		        #{shitCnt},
 		        #{shitDesc},
-		        #{sleepStartDtm},
-		        #{sleepEndDtm},
+		        #{sleepStartTime},
+		        #{sleepEndTime},
 		        NOW())
   </insert>
   
@@ -135,9 +135,9 @@
 	       SHIT_CD = #{shitCd},
 	       SHIT_CNT = #{shitCnt},
 	       SHIT_DESC = #{shitDesc},
-	       SLEEP_START_DTM = #{sleepStartDtm},
-	       SLEEP_END_DTM = #{sleepEndDtm}
-	 WHERE DIARY_ID = '1';
+	       SLEEP_START_TIME = #{sleepStartTime},
+	       SLEEP_END_TIME = #{sleepEndTime}
+	 WHERE DIARY_ID = #{diaryId};
   </update>
   
 </mapper>
