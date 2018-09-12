@@ -23,6 +23,7 @@ public class Diary {
 	private String sleepEndTime;
 	private Timestamp regDtm;
 	private String chgRegDtm;
+	private String headerTitle;
 	
 	
 	public String getDiaryId() {
@@ -295,6 +296,20 @@ public class Diary {
 
 
 
+	public String getHeaderTitle() {
+		return headerTitle;
+	}
+
+
+
+
+	public void setHeaderTitle(String headerTitle) {
+		this.headerTitle = headerTitle;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Diary [diaryId=" + diaryId + ", title=" + title + ", content=" + content + ", regUserId=" + regUserId
@@ -302,15 +317,16 @@ public class Diary {
 				+ ", feverCd=" + feverCd + ", breakfastCd=" + breakfastCd + ", lunchCd=" + lunchCd + ", dinnerCd="
 				+ dinnerCd + ", shitCd=" + shitCd + ", shitCnt=" + shitCnt + ", shitDesc=" + shitDesc
 				+ ", sleepStartTime=" + sleepStartTime + ", sleepEndTime=" + sleepEndTime + ", regDtm=" + regDtm
-				+ ", chgRegDtm=" + chgRegDtm + ", getDiaryId()=" + getDiaryId() + ", getTitle()=" + getTitle()
-				+ ", getContent()=" + getContent() + ", getRegUserId()=" + getRegUserId() + ", getFileId()="
-				+ getFileId() + ", getStateId()=" + getStateId() + ", getFeelingCd()=" + getFeelingCd()
-				+ ", getHealthCd()=" + getHealthCd() + ", getFeverCd()=" + getFeverCd() + ", getBreakfastCd()="
-				+ getBreakfastCd() + ", getLunchCd()=" + getLunchCd() + ", getDinnerCd()=" + getDinnerCd()
-				+ ", getShitCd()=" + getShitCd() + ", getShitCnt()=" + getShitCnt() + ", getShitDesc()=" + getShitDesc()
-				+ ", getSleepStartTime()=" + getSleepStartTime() + ", getSleepEndTime()=" + getSleepEndTime()
-				+ ", getRegDtm()=" + getRegDtm() + ", getChgRegDtm()=" + getChgRegDtm() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", chgRegDtm=" + chgRegDtm + ", headerTitle=" + headerTitle + ", getDiaryId()=" + getDiaryId()
+				+ ", getTitle()=" + getTitle() + ", getContent()=" + getContent() + ", getRegUserId()=" + getRegUserId()
+				+ ", getFileId()=" + getFileId() + ", getStateId()=" + getStateId() + ", getFeelingCd()="
+				+ getFeelingCd() + ", getHealthCd()=" + getHealthCd() + ", getFeverCd()=" + getFeverCd()
+				+ ", getBreakfastCd()=" + getBreakfastCd() + ", getLunchCd()=" + getLunchCd() + ", getDinnerCd()="
+				+ getDinnerCd() + ", getShitCd()=" + getShitCd() + ", getShitCnt()=" + getShitCnt() + ", getShitDesc()="
+				+ getShitDesc() + ", getSleepStartTime()=" + getSleepStartTime() + ", getSleepEndTime()="
+				+ getSleepEndTime() + ", getRegDtm()=" + getRegDtm() + ", getChgRegDtm()=" + getChgRegDtm()
+				+ ", getHeaderTitle()=" + getHeaderTitle() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	
