@@ -1,5 +1,6 @@
 package com.product.luffy.po;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Diary {
@@ -18,11 +19,10 @@ public class Diary {
 	private String shitCd;
 	private String shitCnt;
 	private String shitDesc;
-	private String sleepStartDtm;
-	private String sleepEndDtm;
-	private Date regDtm;
-	
-	
+	private String sleepStartTime;
+	private String sleepEndTime;
+	private Timestamp regDtm;
+	private String chgRegDtm;
 	
 	
 	public String getDiaryId() {
@@ -239,44 +239,57 @@ public class Diary {
 
 
 
-
-	public String getSleepStartDtm() {
-		return sleepStartDtm;
+	public String getSleepStartTime() {
+		return sleepStartTime;
 	}
 
 
 
 
-	public void setSleepStartDtm(String sleepStartDtm) {
-		this.sleepStartDtm = sleepStartDtm;
+	public void setSleepStartTime(String sleepStartTime) {
+		this.sleepStartTime = sleepStartTime;
 	}
 
 
 
 
-	public String getSleepEndDtm() {
-		return sleepEndDtm;
+	public String getSleepEndTime() {
+		return sleepEndTime;
 	}
 
 
 
 
-	public void setSleepEndDtm(String sleepEndDtm) {
-		this.sleepEndDtm = sleepEndDtm;
+	public void setSleepEndTime(String sleepEndTime) {
+		this.sleepEndTime = sleepEndTime;
 	}
 
 
 
 
-	public Date getRegDtm() {
+	public Timestamp getRegDtm() {
 		return regDtm;
 	}
 
 
 
 
-	public void setRegDtm(Date regDtm) {
+	public void setRegDtm(Timestamp regDtm) {
 		this.regDtm = regDtm;
+	}
+
+
+
+
+	public String getChgRegDtm() {
+		return chgRegDtm;
+	}
+
+
+
+
+	public void setChgRegDtm(String chgRegDtm) {
+		this.chgRegDtm = chgRegDtm;
 	}
 
 
@@ -288,15 +301,16 @@ public class Diary {
 				+ ", fileId=" + fileId + ", stateId=" + stateId + ", feelingCd=" + feelingCd + ", healthCd=" + healthCd
 				+ ", feverCd=" + feverCd + ", breakfastCd=" + breakfastCd + ", lunchCd=" + lunchCd + ", dinnerCd="
 				+ dinnerCd + ", shitCd=" + shitCd + ", shitCnt=" + shitCnt + ", shitDesc=" + shitDesc
-				+ ", sleepStartDtm=" + sleepStartDtm + ", sleepEndDtm=" + sleepEndDtm + ", regDtm=" + regDtm
-				+ ", getDiaryId()=" + getDiaryId() + ", getTitle()=" + getTitle() + ", getContent()=" + getContent()
-				+ ", getRegUserId()=" + getRegUserId() + ", getFileId()=" + getFileId() + ", getStateId()="
-				+ getStateId() + ", getFeelingCd()=" + getFeelingCd() + ", getHealthCd()=" + getHealthCd()
-				+ ", getFeverCd()=" + getFeverCd() + ", getBreakfastCd()=" + getBreakfastCd() + ", getLunchCd()="
-				+ getLunchCd() + ", getDinnerCd()=" + getDinnerCd() + ", getShitCd()=" + getShitCd() + ", getShitCnt()="
-				+ getShitCnt() + ", getShitDesc()=" + getShitDesc() + ", getSleepStartDtm()=" + getSleepStartDtm()
-				+ ", getSleepEndDtm()=" + getSleepEndDtm() + ", getRegDtm()=" + getRegDtm() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", sleepStartTime=" + sleepStartTime + ", sleepEndTime=" + sleepEndTime + ", regDtm=" + regDtm
+				+ ", chgRegDtm=" + chgRegDtm + ", getDiaryId()=" + getDiaryId() + ", getTitle()=" + getTitle()
+				+ ", getContent()=" + getContent() + ", getRegUserId()=" + getRegUserId() + ", getFileId()="
+				+ getFileId() + ", getStateId()=" + getStateId() + ", getFeelingCd()=" + getFeelingCd()
+				+ ", getHealthCd()=" + getHealthCd() + ", getFeverCd()=" + getFeverCd() + ", getBreakfastCd()="
+				+ getBreakfastCd() + ", getLunchCd()=" + getLunchCd() + ", getDinnerCd()=" + getDinnerCd()
+				+ ", getShitCd()=" + getShitCd() + ", getShitCnt()=" + getShitCnt() + ", getShitDesc()=" + getShitDesc()
+				+ ", getSleepStartTime()=" + getSleepStartTime() + ", getSleepEndTime()=" + getSleepEndTime()
+				+ ", getRegDtm()=" + getRegDtm() + ", getChgRegDtm()=" + getChgRegDtm() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 	
