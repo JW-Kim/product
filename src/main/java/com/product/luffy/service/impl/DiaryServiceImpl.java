@@ -1,5 +1,6 @@
 package com.product.luffy.service.impl;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -10,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.product.luffy.controller.DiaryController;
 import com.product.luffy.mapper.DiaryMapper;
 import com.product.luffy.po.Diary;
 import com.product.luffy.service.DiaryService;
@@ -30,6 +30,7 @@ public class DiaryServiceImpl implements DiaryService {
 		List<Diary> diaryList = diaryMapper.selectDiaryList();
 		for(int i=0; i<diaryList.size(); i++) {
 			diaryList.get(i).setChgRegDtm(simpleDateFormat.format(diaryList.get(i).getRegDtm()));
+			diaryList.get(i).setHeaderTitle(new SimpleDateFormat("yyyy.MM.dd (E)", Locale.KOREA).format(diaryList.get(i).getRegDtm()));
 		}
 		
 		return diaryList;
@@ -65,4 +66,5 @@ public class DiaryServiceImpl implements DiaryService {
 		
 		return rtn;
 	}
+
 }
