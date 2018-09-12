@@ -1,27 +1,47 @@
 package com.product.luffy.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.product.luffy.controller.DiaryController;
 import com.product.luffy.mapper.DiaryMapper;
 import com.product.luffy.po.Diary;
 import com.product.luffy.service.DiaryService;
 
 @Service("com.product.luffy.service.impl.DiaryService")
 public class DiaryServiceImpl implements DiaryService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DiaryService.class);
 
 	@Resource(name="com.product.luffy.mapper.DiaryMapper")
 	private DiaryMapper diaryMapper;
 	
 	public List<Diary> selectDiaryList() {
-		return diaryMapper.selectDiaryList();
+		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 시작 {} : ");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시mm분", Locale.KOREA);
+		
+		List<Diary> diaryList = diaryMapper.selectDiaryList();
+		for(int i=0; i<diaryList.size(); i++) {
+			diaryList.get(i).setChgRegDtm(simpleDateFormat.format(diaryList.get(i).getRegDtm()));
+		}
+		
+		return diaryList;
 	}
 	
 	public Diary selectDiary(String diaryId) {
-		return diaryMapper.selectDiary(diaryId);
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시mm분", Locale.KOREA);
+		
+		Diary diary = diaryMapper.selectDiary(diaryId);
+		diary.setChgRegDtm(simpleDateFormat.format(diary.getRegDtm()));
+		
+		return diary;
 	}
 	
 	public int insertDiary(Diary diary) {
