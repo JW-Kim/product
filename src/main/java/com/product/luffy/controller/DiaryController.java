@@ -24,21 +24,21 @@ import com.product.luffy.utils.response.HttpResultCode;
 import com.product.luffy.utils.response.ResponseObject;
 
 @Controller
-@RequestMapping("diary")
+@RequestMapping("/diary")
 public class DiaryController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(DiaryController.class);
 	
-	@Resource(name="com.product.luffy.service.impl.DiaryService")
+	@Resource(name = "com.product.luffy.service.impl.DiaryService")
 	private DiaryService diaryService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody GridResponseObject<Diary> selectDiaryList(){
 		GridResponseObject<Diary> gridResponseObject = new GridResponseObject<Diary>();
-		
+		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 시작 {} : ");
 		List<Diary> diaryList = diaryService.selectDiaryList();
 
-		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 시작 {} : "+ diaryList);
+		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 끝 {} : "+ diaryList);
 		
 		gridResponseObject.setData(diaryList);
 		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
@@ -90,17 +90,17 @@ public class DiaryController {
 		diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
 		String title = params.get("title") == null ? null : (String) params.get("title");
 		String content = params.get("content") == null ? null : (String) params.get("content");
-		String feelingCd = params.get("content") == null ? "" : (String) params.get("feelingCd");
-		String healthCd = params.get("content") == null ? "" : (String) params.get("healthCd");
-		String feverCd = params.get("content") == null ? "" : (String) params.get("feverCd");
-		String breakfastCd = params.get("content") == null ? "" : (String) params.get("breakfastCd");
-		String lunchCd = params.get("content") == null ? "" : (String) params.get("lunchCd");
-		String dinnerCd = params.get("content") == null ? "" : (String) params.get("dinnerCd");
-		String shitCd = params.get("content") == null ? "" : (String) params.get("shitCd");
-		String shitCnt = params.get("content") == null ? "" : (String) params.get("shitCnt");
-		String shitDesc = params.get("content") == null ? "" : (String) params.get("shitDesc");
-		String sleepStartDtm = params.get("content") == null ? null : (String) params.get("sleepStartDtm");
-		String sleepEndDtm = params.get("content") == null ? null : (String) params.get("sleepEndDtm");
+		String feelingCd = params.get("feelingCd") == null ? "" : (String) params.get("feelingCd");
+		String healthCd = params.get("healthCd") == null ? "" : (String) params.get("healthCd");
+		String feverCd = params.get("feverCd") == null ? "" : (String) params.get("feverCd");
+		String breakfastCd = params.get("breakfastCd") == null ? "" : (String) params.get("breakfastCd");
+		String lunchCd = params.get("lunchCd") == null ? "" : (String) params.get("lunchCd");
+		String dinnerCd = params.get("dinnerCd") == null ? "" : (String) params.get("dinnerCd");
+		String shitCd = params.get("shitCd") == null ? "" : (String) params.get("shitCd");
+		String shitCnt = params.get("shitCnt") == null ? "" : (String) params.get("shitCnt");
+		String shitDesc = params.get("shitDesc") == null ? "" : (String) params.get("shitDesc");
+		String sleepStartTime = params.get("sleepStartTime") == null ? null : (String) params.get("sleepStartTime");
+		String sleepEndTime = params.get("sleepEndTime") == null ? null : (String) params.get("sleepEndTime");
 		
 		if(title == null || content == null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "타이틀, 내용에 등록된 내용이 없습니다.");
 		
@@ -121,8 +121,8 @@ public class DiaryController {
 		diary.setShitCd(shitCd);
 		diary.setShitCnt(shitCnt);
 		diary.setShitDesc(shitDesc);
-		diary.setSleepStartDtm(sleepStartDtm);
-		diary.setSleepEndDtm(sleepEndDtm);
+		diary.setSleepStartTime(sleepStartTime);
+		diary.setSleepEndTime(sleepEndTime);
 		
 		return diary;
 	}
