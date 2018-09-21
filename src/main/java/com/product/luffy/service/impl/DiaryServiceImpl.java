@@ -25,23 +25,15 @@ public class DiaryServiceImpl implements DiaryService {
 	
 	public List<Diary> selectDiaryList() {
 		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 시작 {} : ");
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시mm분", Locale.KOREA);
-		
 		List<Diary> diaryList = diaryMapper.selectDiaryList();
-		for(int i=0; i<diaryList.size(); i++) {
-			diaryList.get(i).setChgRegDtm(simpleDateFormat.format(diaryList.get(i).getRegDtm()));
-			diaryList.get(i).setHeaderTitle(new SimpleDateFormat("yyyy.MM.dd (E)", Locale.KOREA).format(diaryList.get(i).getRegDtm()));
-		}
-		
+
+		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 끝 {} : ", diaryList);
 		return diaryList;
 	}
 	
 	public Diary selectDiary(String diaryId) {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 HH시mm분", Locale.KOREA);
-		
 		Diary diary = diaryMapper.selectDiary(diaryId);
-		diary.setChgRegDtm(simpleDateFormat.format(diary.getRegDtm()));
-		
+	
 		return diary;
 	}
 	
