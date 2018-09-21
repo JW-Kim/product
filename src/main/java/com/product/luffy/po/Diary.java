@@ -1,8 +1,5 @@
 package com.product.luffy.po;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 public class Diary {
 	private String diaryId;
 	private String title;
@@ -21,7 +18,7 @@ public class Diary {
 	private String shitDesc;
 	private String sleepStartTime;
 	private String sleepEndTime;
-	private Timestamp regDtm;
+	private String regDtm;
 	private String chgRegDtm;
 	private String headerTitle;
 	
@@ -268,14 +265,16 @@ public class Diary {
 
 
 
-	public Timestamp getRegDtm() {
+
+
+	public String getRegDtm() {
 		return regDtm;
 	}
 
 
 
 
-	public void setRegDtm(Timestamp regDtm) {
+	public void setRegDtm(String regDtm) {
 		this.regDtm = regDtm;
 	}
 
