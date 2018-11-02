@@ -1,0 +1,46 @@
+package com.product.luffy.service.impl;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.product.luffy.mapper.FileMapper;
+import com.product.luffy.po.File;
+import com.product.luffy.service.FileService;
+
+@Service("com.product.luffy.service.impl.FileService")
+public class FileServiceImpl implements FileService{
+
+	@Resource(name="com.product.luffy.mapper.FileMapper")
+	private FileMapper fileMapper;
+	
+	public File insertFile(MultipartFile multipartFile) {
+		FileOutputStream fos = null;
+		
+		try {
+			
+			byte fileData [] = multipartFile.getBytes();
+			
+			fos = new FileOutputStream("D:\\01.dev\\98.기타\\05.개인프로젝트\\test\\"+multipartFile.getOriginalFilename());
+			fos.write(fileData);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		File file = null;
+		fileMapper.insertFile(file);
+		
+		return file;
+	}
+}
