@@ -1,0 +1,10 @@
+package com.product.luffy.mapper;
+
+import org.springframework.stereotype.Repository;
+
+import com.product.luffy.po.File;
+
+@Repository("com.product.luffy.mapper.FileMapper")
+public interface FileMapper {
+	public int insertFile(File file);
+}
