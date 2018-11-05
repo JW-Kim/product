@@ -2,7 +2,9 @@ package com.product.luffy.service.impl;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -37,9 +39,23 @@ public class FileServiceImpl implements FileService{
 			java.io.File f = new java.io.File(path);
 			f.mkdirs();
 			
+			//동일 파일 체크
+			f = new java.io.File(path+"\\"+multipartFile.getOriginalFilename());
+			
+			//동일 파일이 존재하면
+			if(f.exists()) {
+				long time = System.currentTimeMillis(); 
+				SimpleDateFormat dayTime = new SimpleDateFormat("yyyymmddhhmmss");
+				String str = dayTime.format(new Date(time));
+
+				path = path+"\\"+ str + multipartFile.getOriginalFilename();
+			}else {
+				path = 	path+"\\"+multipartFile.getOriginalFilename();
+			}
+			
 			byte fileData [] = multipartFile.getBytes();
 			
-			fos = new FileOutputStream(path+"\\"+multipartFile.getOriginalFilename());
+			fos = new FileOutputStream(path);
 			fos.write(fileData);
 			
 		}catch(Exception e) {
@@ -51,6 +67,7 @@ public class FileServiceImpl implements FileService{
 				e.printStackTrace();
 			}
 		}
+		
 		LOGGER.debug("multipartFile.getOriginalFilename() : "+ multipartFile.getOriginalFilename());
 		File file = new File();
 		file.setFileId(IdGen.getNextId());
