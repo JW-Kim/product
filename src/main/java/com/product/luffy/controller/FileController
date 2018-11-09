@@ -25,7 +25,7 @@ public class FileController {
 	private FileService fileService;
 	
 	@RequestMapping(value="/upload", method = RequestMethod.POST)
-	public @ResponseBody ResponseObject<File> uploadFile(@RequestParam("file") MultipartFile multipartFile){
+	public @ResponseBody ResponseObject<File> uploadFile(@RequestParam("image") MultipartFile multipartFile){
 		ResponseObject<File> responseObject = new ResponseObject<File>();
 		LOGGER.debug(">>>>>>>>>> uploadFile 시작 "+ multipartFile.getName()+", "+ multipartFile.getOriginalFilename());
 		
