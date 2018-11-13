@@ -26,8 +26,10 @@ public class FileServiceImpl implements FileService{
 	private FileMapper fileMapper;
 	
 	public File insertFile(MultipartFile multipartFile) {
+		LOGGER.debug("multipartFile : "+ multipartFile.getOriginalFilename() );
 		FileOutputStream fos = null;
 		String path = "";
+		String str ="";
 		try {
 			Calendar cal = Calendar.getInstance();
 
@@ -39,19 +41,10 @@ public class FileServiceImpl implements FileService{
 			java.io.File f = new java.io.File(path);
 			f.mkdirs();
 			
-			//동일 파일 체크
-			f = new java.io.File(path+"\\"+multipartFile.getOriginalFilename());
-			
-			//동일 파일이 존재하면
-			if(f.exists()) {
-				long time = System.currentTimeMillis(); 
-				SimpleDateFormat dayTime = new SimpleDateFormat("yyyymmddhhmmss");
-				String str = dayTime.format(new Date(time));
-
-				path = path+"\\"+ str + multipartFile.getOriginalFilename();
-			}else {
-				path = 	path+"\\"+multipartFile.getOriginalFilename();
-			}
+			long time = System.currentTimeMillis(); 
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyymmddhhmmss");
+			str = dayTime.format(new Date(time));
+			path = path+"\\"+ str + ".jpg";
 			
 			byte fileData [] = multipartFile.getBytes();
 			
@@ -71,8 +64,8 @@ public class FileServiceImpl implements FileService{
 		LOGGER.debug("multipartFile.getOriginalFilename() : "+ multipartFile.getOriginalFilename());
 		File file = new File();
 		file.setFileId(IdGen.getNextId());
-		file.setFileNm(multipartFile.getOriginalFilename().split("\\.")[0]);
-		file.setFileExtNm(multipartFile.getOriginalFilename().split("\\.")[1]);
+		file.setFileNm(str);
+		file.setFileExtNm("jpg");
 		file.setFileSize(multipartFile.getSize()+"");
 		file.setFilePath(path);
 		LOGGER.debug("file : "+ file.toString());
