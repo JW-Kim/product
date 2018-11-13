@@ -90,6 +90,7 @@ public class DiaryController {
 		diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
 		String title = params.get("title") == null ? null : (String) params.get("title");
 		String content = params.get("content") == null ? null : (String) params.get("content");
+		String fileId = params.get("fileId") == null ? null : (String) params.get("fileId");
 		String feelingCd = params.get("feelingCd") == null ? "" : (String) params.get("feelingCd");
 		String healthCd = params.get("healthCd") == null ? "" : (String) params.get("healthCd");
 		String feverCd = params.get("feverCd") == null ? "" : (String) params.get("feverCd");
@@ -109,8 +110,7 @@ public class DiaryController {
 		diary.setContent(content);
 		//TODO Session 처리
 		diary.setRegUserId("1");
-		//TODO File upload 처리
-		diary.setFileId(null);
+		diary.setFileId(fileId);
 		diary.setStateId(IdGen.getNextId());
 		diary.setFeelingCd(feelingCd);
 		diary.setHealthCd(healthCd);
