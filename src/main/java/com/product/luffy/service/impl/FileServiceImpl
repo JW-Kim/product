@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -72,5 +73,9 @@ public class FileServiceImpl implements FileService{
 		int rtn = fileMapper.insertFile(file);
 		
 		return file;
+	}
+	
+	public File selectFile(Map<String, Object> paramMap) {
+		return fileMapper.selectFile(paramMap);
 	}
 }
