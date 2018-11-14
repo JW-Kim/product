@@ -1,9 +1,17 @@
 package com.product.luffy.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,5 +42,30 @@ public class FileController {
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		
 		return responseObject;
+	}
+	
+	@RequestMapping(value="/download", method= RequestMethod.GET)
+	public HttpEntity<byte[]> downloadFile(@RequestParam("fileId") String fileId){
+		
+		java.io.File file;
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("fileId", fileId);
+		File fileInfo = fileService.selectFile(paramMap);
+		file = new java.io.File(fileInfo.getFilePath());
+		
+		byte[] fileContent = null;
+		
+		try {
+			fileContent = Files.readAllBytes(file.toPath());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		HttpHeaders header = new HttpHeaders();
+	    header.setContentType(MediaType.IMAGE_JPEG);
+	    header.setContentLength(fileContent.length);
+
+	    return new HttpEntity<byte[]>(fileContent, header);
 	}
 }
