@@ -25,4 +25,14 @@
 		        NOW());
 	</insert>
 	
+	<select id="selectFile" parameterType="map" resultMap="FileMap">
+		SELECT FILE_ID,
+		       FILE_NM,
+		       FILE_EXT_NM,
+		       FILE_SIZE,
+		       FILE_PATH,
+		       REG_DTM
+		  FROM FILE_F
+		  WHERE FILE_ID = #{fileId}
+	</select>
 </mapper>
