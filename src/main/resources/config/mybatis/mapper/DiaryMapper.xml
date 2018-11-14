@@ -140,7 +140,8 @@
   <update id="updateDiary" parameterType="com.product.luffy.po.Diary">
 	UPDATE DIARY_F
 	   SET TITLE = #{title}, 
-	   CONTENT = #{content}
+	   CONTENT = #{content},
+	   FILE_ID = #{fileId}
 	 WHERE DIARY_ID = #{diaryId}
   </update>
   
