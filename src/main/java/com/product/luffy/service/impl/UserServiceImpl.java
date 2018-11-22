@@ -1,6 +1,7 @@
 package com.product.luffy.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -25,5 +26,9 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return userList;
+	}
+	
+	public User selectUser(Map<String, String> paramMap) {
+		return userMapper.selectUser(paramMap);
 	}
 }
