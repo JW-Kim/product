@@ -22,6 +22,7 @@ import com.product.luffy.utils.Exception.ProductRuntimeException;
 import com.product.luffy.utils.response.GridResponseObject;
 import com.product.luffy.utils.response.HttpResultCode;
 import com.product.luffy.utils.response.ResponseObject;
+import com.product.luffy.utils.UserContext;
 
 @Controller
 @RequestMapping("/diary")
@@ -108,8 +109,7 @@ public class DiaryController {
 		diary.setDiaryId(diaryId);
 		diary.setTitle(title);
 		diary.setContent(content);
-		//TODO Session 처리
-		diary.setRegUserId("1");
+		diary.setRegUserId(UserContext.getUserId());
 		diary.setFileId(fileId);
 		diary.setStateId(IdGen.getNextId());
 		diary.setFeelingCd(feelingCd);
