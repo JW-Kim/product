@@ -6,59 +6,15 @@ public class User {
 	
 	private String userId;
 	
+	private String userLoginId;
+	
+	private String userPwd;
+	
 	private String userNm;
 	
-	private Date regDtm;
+	private String userRole;
 	
-    private Integer id;
-
-    private String username;
-
-    private String sex;
-
-    private Date birthday;
-
-    private String address;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
+	private Date regDtm;
 
 	public String getUserId() {
 		return userId;
@@ -68,12 +24,36 @@ public class User {
 		this.userId = userId;
 	}
 
+	public String getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
+	}
+
+	public String getUserPwd() {
+		return userPwd;
+	}
+
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
+	}
+
 	public String getUserNm() {
 		return userNm;
 	}
 
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	public Date getRegDtm() {
@@ -86,8 +66,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userNm=" + userNm + ", regDtm=" + regDtm + ", id=" + id + ", username="
-				+ username + ", sex=" + sex + ", birthday=" + birthday + ", address=" + address + "]";
+		return "User [userId=" + userId + ", userLoginId=" + userLoginId + ", userPwd=" + userPwd + ", userNm=" + userNm
+				+ ", userRole=" + userRole + ", regDtm=" + regDtm + "]";
 	}
+	
+
+  
     
 }
