@@ -3,13 +3,27 @@
 <mapper namespace="com.product.luffy.mapper.UserMapper" >
   
   <resultMap id="UserResultMap" type="com.product.luffy.po.User">
-  	<id 	column="USER_ID" 	property="userId"/>
-  	<result column="USER_NM"	property="userNm"/>
-  	<result column="REG_DTM"    property="regDtm"/>
+  	<id 	column="USER_ID" 		property="userId"/>
+  	<result	column="USER_LOGIN_ID" 	property="userLoginId"/>
+  	<result	column="USER_PWD"	 	property="userPwd"/>
+  	<result column="USER_NM"		property="userNm"/>
+  	<result column="USER_ROLE"		property="userRole"/>
+  	<result column="REG_DTM"    	property="regDtm"/>
   </resultMap>
   
   <select id="selectUserList" resultMap="UserResultMap">
   	SELECT * FROM USER_F
+  </select>
+  
+  <select id="selectUser" resultMap="UserResultMap">
+  	SELECT USER_ID,
+	       USER_LOGIN_ID,
+	       USER_PWD,
+	       USER_NM,
+	       USER_ROLE,
+	       REG_DTM
+	  FROM USER_F
+	 WHERE USER_LOGIN_ID = #{userLoginId}
   </select>
  
 </mapper>
