@@ -51,11 +51,10 @@
 
 	<bean id="ProductExceptionHandler" class="com.product.luffy.utils.Exception.ProductExceptionHandler" />
 
-
-<!--     <mvc:interceptors>
+    <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.product.luffy.interceptor.LoginInterceptor" />
         </mvc:interceptor>
-    </mvc:interceptors> -->
+    </mvc:interceptors>  
 </beans>
