@@ -1,9 +1,8 @@
 package com.product.luffy.service.impl;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.product.luffy.mapper.DiaryMapper;
 import com.product.luffy.po.Diary;
 import com.product.luffy.service.DiaryService;
+import com.product.luffy.utils.UserContext;
 
 @Service("com.product.luffy.service.impl.DiaryService")
 public class DiaryServiceImpl implements DiaryService {
@@ -25,14 +25,20 @@ public class DiaryServiceImpl implements DiaryService {
 	
 	public List<Diary> selectDiaryList() {
 		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 시작 {} : ");
-		List<Diary> diaryList = diaryMapper.selectDiaryList();
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("regUserId", UserContext.getUserId());
+		List<Diary> diaryList = diaryMapper.selectDiaryList(paramMap);
 
 		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 끝 {} : ", diaryList);
 		return diaryList;
 	}
 	
 	public Diary selectDiary(String diaryId) {
-		Diary diary = diaryMapper.selectDiary(diaryId);
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("regUserId", UserContext.getUserId());
+		paramMap.put("diaryId", diaryId);
+		
+		Diary diary = diaryMapper.selectDiary(paramMap);
 	
 		return diary;
 	}
