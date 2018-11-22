@@ -25,7 +25,7 @@
  	<result column="HEADER_TITLE"       property="headerTitle"/>
   </resultMap>
   
-  <select id="selectDiaryList" resultMap="DiaryResultMap">
+  <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
 		SELECT A.DIARY_ID,
 		       A.TITLE,
 		       A.CONTENT,
@@ -54,7 +54,7 @@
 		          WHEN '7' THEN '(토)'
 		       END) AS HEADER_TITLE
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
-		 WHERE A.REG_USER_ID = '1'
+		 WHERE A.REG_USER_ID = #{regUserId}
 		ORDER BY A.REG_DTM DESC
   </select>
   
@@ -87,7 +87,7 @@
 		          WHEN '7' THEN '(토)'
 		       END) AS CHG_REG_DTM
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
-		 WHERE A.REG_USER_ID = '1' 
+		 WHERE A.REG_USER_ID = #{regUserId} 
 		   AND A.DIARY_ID = #{diaryId}
   </select>
  
