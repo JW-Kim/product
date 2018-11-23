@@ -2,6 +2,7 @@ package com.product.luffy.po;
 
 public class Diary {
 	private String diaryId;
+	private String noteId;
 	private String title;
 	private String content;
 	private String regUserId;
@@ -32,6 +33,20 @@ public class Diary {
 
 	public void setDiaryId(String diaryId) {
 		this.diaryId = diaryId;
+	}
+
+
+
+
+	public String getNoteId() {
+		return noteId;
+	}
+
+
+
+
+	public void setNoteId(String noteId) {
+		this.noteId = noteId;
 	}
 
 
