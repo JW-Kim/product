@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.product.luffy.po.Diary;
@@ -34,10 +35,10 @@ public class DiaryController {
 	private DiaryService diaryService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody GridResponseObject<Diary> selectDiaryList(){
+	public @ResponseBody GridResponseObject<Diary> selectDiaryList(@RequestParam("noteId") String noteId){
 		GridResponseObject<Diary> gridResponseObject = new GridResponseObject<Diary>();
-		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 시작 {} : ");
-		List<Diary> diaryList = diaryService.selectDiaryList();
+		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 시작 {} : "+ noteId);
+		List<Diary> diaryList = diaryService.selectDiaryList(noteId);
 
 		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 끝 {} : "+ diaryList);
 		
@@ -90,6 +91,7 @@ public class DiaryController {
 		Diary diary = new Diary();
 		diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
 		String title = params.get("title") == null ? null : (String) params.get("title");
+		String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
 		String content = params.get("content") == null ? null : (String) params.get("content");
 		String fileId = params.get("fileId") == null ? null : (String) params.get("fileId");
 		String feelingCd = params.get("feelingCd") == null ? "" : (String) params.get("feelingCd");
@@ -107,6 +109,7 @@ public class DiaryController {
 		if(title == null || content == null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "타이틀, 내용에 등록된 내용이 없습니다.");
 		
 		diary.setDiaryId(diaryId);
+		diary.setNoteId(noteId);
 		diary.setTitle(title);
 		diary.setContent(content);
 		diary.setRegUserId(UserContext.getUserId());
