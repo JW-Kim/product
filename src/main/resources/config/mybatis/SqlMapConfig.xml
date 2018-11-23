@@ -12,5 +12,6 @@
         <mapper resource="config/mybatis/mapper/DiaryMapper.xml"/>
         <mapper resource="config/mybatis/mapper/CodeMapper.xml"/>
         <mapper resource="config/mybatis/mapper/FileMapper.xml"/>
+        <mapper resource="config/mybatis/mapper/NoteMapper.xml"/>
     </mappers>
 </configuration>
