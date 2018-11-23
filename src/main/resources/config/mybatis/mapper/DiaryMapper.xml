@@ -4,6 +4,7 @@
   
   <resultMap id="DiaryResultMap" type="com.product.luffy.po.Diary">
   	<id 	column="DIARY_ID" 			property="diaryId"/>
+  	<result column="NOTE_ID"			property="noteId"/>
   	<result column="TITLE"				property="title"/>
   	<result column="CONTENT"    		property="content"/>
   	<result column="REG_USER_ID"    	property="regUserId"/>
@@ -27,6 +28,7 @@
   
   <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
 		SELECT A.DIARY_ID,
+			   A.NOTE_ID,	
 		       A.TITLE,
 		       A.CONTENT,
 		       A.REG_USER_ID,
@@ -54,12 +56,13 @@
 		          WHEN '7' THEN '(토)'
 		       END) AS HEADER_TITLE
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
-		 WHERE A.REG_USER_ID = #{regUserId}
+		 WHERE A.NOTE_ID = #{noteId}
 		ORDER BY A.REG_DTM DESC
   </select>
   
   <select id="selectDiary" parameterType="map" resultMap="DiaryResultMap">  
 		SELECT A.DIARY_ID,
+			   A.NOTE_ID,	
 		       A.TITLE,
 		       A.CONTENT,
 		       A.REG_USER_ID,
@@ -87,18 +90,19 @@
 		          WHEN '7' THEN '(토)'
 		       END) AS CHG_REG_DTM
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
-		 WHERE A.REG_USER_ID = #{regUserId} 
-		   AND A.DIARY_ID = #{diaryId}
+		 WHERE A.DIARY_ID = #{diaryId}
   </select>
  
   <insert id="insertDiary" parameterType="com.product.luffy.po.Diary">
 	  INSERT INTO `DIARY_F`(`DIARY_ID`,
+	  					  `NOTE_ID`,
 	                      `TITLE`,
 	                      `CONTENT`,
 	                      `REG_USER_ID`,
 	                      `FILE_ID`,
 	                      `REG_DTM`)
 		VALUES (#{diaryId},
+				#{noteId},
 		        #{title},
 		        #{content},
 		        #{regUserId},
