@@ -23,10 +23,10 @@ public class DiaryServiceImpl implements DiaryService {
 	@Resource(name="com.product.luffy.mapper.DiaryMapper")
 	private DiaryMapper diaryMapper;
 	
-	public List<Diary> selectDiaryList() {
+	public List<Diary> selectDiaryList(String noteId) {
 		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 시작 {} : ");
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("regUserId", UserContext.getUserId());
+		paramMap.put("noteId", noteId);
 		List<Diary> diaryList = diaryMapper.selectDiaryList(paramMap);
 
 		LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 끝 {} : ", diaryList);
@@ -35,7 +35,6 @@ public class DiaryServiceImpl implements DiaryService {
 	
 	public Diary selectDiary(String diaryId) {
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("regUserId", UserContext.getUserId());
 		paramMap.put("diaryId", diaryId);
 		
 		Diary diary = diaryMapper.selectDiary(paramMap);
