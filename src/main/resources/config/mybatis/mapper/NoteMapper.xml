@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.product.luffy.mapper.NoteMapper" >
+  
+  <resultMap id="NoteResultMap" type="com.product.luffy.po.Note">
+  	<id 	column="NOTE_ID" 		property="noteId"/>
+  	<result	column="NOTE_NM" 		property="noteNm"/>
+  	<result	column="REG_USER_ID"	property="regUserId"/>
+  	<result column="REG_DTM"		property="regDtm"/>
+  </resultMap>
+  
+	<select id="selectNoteListByUserId" parameterType="map" resultMap="NoteResultMap">
+		SELECT N.NOTE_ID,
+		       N.NOTE_NM,
+		       N.REG_USER_ID,
+		       N.REG_DTM
+		  FROM    NOTE_F N
+		       INNER JOIN
+		          USER_NOTE_R R
+		       ON (N.NOTE_ID = R.NOTE_ID AND R.USER_ID = #{userId})
+	</select>
+  
+</mapper>
