@@ -11,6 +11,9 @@ import com.product.luffy.po.Diary;
 public interface DiaryMapper {
 	public List<Diary> selectDiaryList(Map<String, String> paramMap);
 	
+	public List<Diary> selectMonthDiaryList(Map<String, String> paramMap);
+	
+	
 	public Diary selectDiary(Map<String, String> paramMap );
 	
 	public int insertDiary(Diary diary);
