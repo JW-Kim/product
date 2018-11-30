@@ -33,6 +33,10 @@ public class DiaryServiceImpl implements DiaryService {
 		return diaryList;
 	}
 	
+	public List<Diary> selectMonthDiaryList(Map<String, String> paramMap){
+		return diaryMapper.selectMonthDiaryList(paramMap);
+	}
+	
 	public Diary selectDiary(String diaryId) {
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("diaryId", diaryId);
@@ -44,7 +48,7 @@ public class DiaryServiceImpl implements DiaryService {
 	
 	public int insertDiary(Diary diary) {
 		int rtn = 0;
-		
+		LOGGER.debug(">>>>>>>>>>>>>> DiaryService Diary  {} : ", diary.toString());
 		//insert DIARY_F
 		rtn = diaryMapper.insertDiary(diary);
 		
