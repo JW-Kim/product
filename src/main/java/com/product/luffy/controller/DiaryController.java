@@ -1,6 +1,8 @@
 package com.product.luffy.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.product.luffy.po.Diary;
 import com.product.luffy.service.DiaryService;
 import com.product.luffy.utils.IdGen;
+import com.product.luffy.utils.UserContext;
 import com.product.luffy.utils.Exception.ProductRuntimeException;
 import com.product.luffy.utils.response.GridResponseObject;
 import com.product.luffy.utils.response.HttpResultCode;
 import com.product.luffy.utils.response.ResponseObject;
-import com.product.luffy.utils.UserContext;
 
 @Controller
 @RequestMapping("/diary")
@@ -41,6 +43,23 @@ public class DiaryController {
 		List<Diary> diaryList = diaryService.selectDiaryList(noteId);
 
 		LOGGER.debug(">>>>>>>>>>>>>> selectDiaryList 끝 {} : "+ diaryList);
+		
+		gridResponseObject.setData(diaryList);
+		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		
+		return gridResponseObject;
+	}
+	
+	@RequestMapping(value="/month", method = RequestMethod.GET)
+	public @ResponseBody GridResponseObject<Diary> selectMonthDiaryList(@RequestParam("diaryMonth") String diaryMonth,
+																		@RequestParam("noteId") String noteId){
+		
+		GridResponseObject<Diary> gridResponseObject = new GridResponseObject<Diary>();
+		
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("diaryMonth", diaryMonth);
+		paramMap.put("noteId", noteId);
+		List<Diary> diaryList = diaryService.selectMonthDiaryList(paramMap);
 		
 		gridResponseObject.setData(diaryList);
 		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
@@ -94,6 +113,7 @@ public class DiaryController {
 		String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
 		String content = params.get("content") == null ? null : (String) params.get("content");
 		String fileId = params.get("fileId") == null ? null : (String) params.get("fileId");
+		String diaryDt = "";
 		String feelingCd = params.get("feelingCd") == null ? "" : (String) params.get("feelingCd");
 		String healthCd = params.get("healthCd") == null ? "" : (String) params.get("healthCd");
 		String feverCd = params.get("feverCd") == null ? "" : (String) params.get("feverCd");
@@ -106,6 +126,13 @@ public class DiaryController {
 		String sleepStartTime = params.get("sleepStartTime") == null ? null : (String) params.get("sleepStartTime");
 		String sleepEndTime = params.get("sleepEndTime") == null ? null : (String) params.get("sleepEndTime");
 		
+		if(params.get("diaryDt") == null) {
+			Date date = new Date();
+			diaryDt= new SimpleDateFormat("yyyy-MM-dd").format(date);
+		}else {
+			diaryDt =  (String) params.get("diaryDt");
+		}
+		
 		if(title == null || content == null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "타이틀, 내용에 등록된 내용이 없습니다.");
 		
 		diary.setDiaryId(diaryId);
@@ -114,6 +141,7 @@ public class DiaryController {
 		diary.setContent(content);
 		diary.setRegUserId(UserContext.getUserId());
 		diary.setFileId(fileId);
+		diary.setDiaryDt(diaryDt);
 		diary.setStateId(IdGen.getNextId());
 		diary.setFeelingCd(feelingCd);
 		diary.setHealthCd(healthCd);
