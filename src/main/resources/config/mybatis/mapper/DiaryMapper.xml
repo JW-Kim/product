@@ -9,6 +9,7 @@
   	<result column="CONTENT"    		property="content"/>
   	<result column="REG_USER_ID"    	property="regUserId"/>
   	<result column="FILE_ID"    		property="fileId"/>
+  	<result column="DIARY_DT"    		property="diaryDt"/>
   	<result column="STATE_ID"    		property="stateId"/>
   	<result column="FEELING_CD"     	property="feelingCd"/>
   	<result column="HEALTH_CD"    		property="healthCd"/>
@@ -33,6 +34,7 @@
 		       A.CONTENT,
 		       A.REG_USER_ID,
 		       A.FILE_ID,
+		       A.DIARY_DT,
 		       B.STATE_ID,
 		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEELING_CD = C.CD_DTL_ID)   AS FEELING_CD,
 		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.HEALTH_CD = C.CD_DTL_ID)    AS HEALTH_CD,
@@ -57,7 +59,22 @@
 		       END) AS HEADER_TITLE
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.NOTE_ID = #{noteId}
-		ORDER BY A.REG_DTM DESC
+		ORDER BY A.DIARY_DT DESC
+  </select>
+  
+  <select id="selectMonthDiaryList" parameterType="map" resultMap="DiaryResultMap">
+  	SELECT DIARY_ID,
+	       NOTE_ID,
+	       TITLE,
+	       CONTENT,
+	       REG_USER_ID,
+	       FILE_ID,
+	       DIARY_DT,
+	       REG_DTM
+	  FROM DIARY_F
+	 WHERE NOTE_ID = #{noteId}
+	   AND DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
+	 ORDER BY DIARY_DT ASC
   </select>
   
   <select id="selectDiary" parameterType="map" resultMap="DiaryResultMap">  
@@ -67,6 +84,7 @@
 		       A.CONTENT,
 		       A.REG_USER_ID,
 		       A.FILE_ID,
+		       A.DIARY_DT,
 		       B.STATE_ID,
 		       B.FEELING_CD,
 		       B.HEALTH_CD,
@@ -100,6 +118,7 @@
 	                      `CONTENT`,
 	                      `REG_USER_ID`,
 	                      `FILE_ID`,
+	                      `DIARY_DT`,
 	                      `REG_DTM`)
 		VALUES (#{diaryId},
 				#{noteId},
@@ -107,6 +126,7 @@
 		        #{content},
 		        #{regUserId},
 		        #{fileId},
+		        #{diaryDt},
 		        NOW())
   </insert> 	
   
