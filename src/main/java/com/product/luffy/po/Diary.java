@@ -1,5 +1,7 @@
 package com.product.luffy.po;
 
+import java.sql.Date;
+
 public class Diary {
 	private String diaryId;
 	private String noteId;
@@ -7,6 +9,7 @@ public class Diary {
 	private String content;
 	private String regUserId;
 	private String fileId;
+	private String diaryDt;
 	private String stateId;
 	private String feelingCd;
 	private String healthCd;
@@ -75,6 +78,22 @@ public class Diary {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	
+
+
+
+
+	public String getDiaryDt() {
+		return diaryDt;
+	}
+
+
+
+
+	public void setDiaryDt(String diaryDt) {
+		this.diaryDt = diaryDt;
 	}
 
 
@@ -326,21 +345,13 @@ public class Diary {
 
 	@Override
 	public String toString() {
-		return "Diary [diaryId=" + diaryId + ", title=" + title + ", content=" + content + ", regUserId=" + regUserId
-				+ ", fileId=" + fileId + ", stateId=" + stateId + ", feelingCd=" + feelingCd + ", healthCd=" + healthCd
-				+ ", feverCd=" + feverCd + ", breakfastCd=" + breakfastCd + ", lunchCd=" + lunchCd + ", dinnerCd="
-				+ dinnerCd + ", shitCd=" + shitCd + ", shitCnt=" + shitCnt + ", shitDesc=" + shitDesc
-				+ ", sleepStartTime=" + sleepStartTime + ", sleepEndTime=" + sleepEndTime + ", regDtm=" + regDtm
-				+ ", chgRegDtm=" + chgRegDtm + ", headerTitle=" + headerTitle + ", getDiaryId()=" + getDiaryId()
-				+ ", getTitle()=" + getTitle() + ", getContent()=" + getContent() + ", getRegUserId()=" + getRegUserId()
-				+ ", getFileId()=" + getFileId() + ", getStateId()=" + getStateId() + ", getFeelingCd()="
-				+ getFeelingCd() + ", getHealthCd()=" + getHealthCd() + ", getFeverCd()=" + getFeverCd()
-				+ ", getBreakfastCd()=" + getBreakfastCd() + ", getLunchCd()=" + getLunchCd() + ", getDinnerCd()="
-				+ getDinnerCd() + ", getShitCd()=" + getShitCd() + ", getShitCnt()=" + getShitCnt() + ", getShitDesc()="
-				+ getShitDesc() + ", getSleepStartTime()=" + getSleepStartTime() + ", getSleepEndTime()="
-				+ getSleepEndTime() + ", getRegDtm()=" + getRegDtm() + ", getChgRegDtm()=" + getChgRegDtm()
-				+ ", getHeaderTitle()=" + getHeaderTitle() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Diary [diaryId=" + diaryId + ", noteId=" + noteId + ", title=" + title + ", content=" + content
+				+ ", regUserId=" + regUserId + ", fileId=" + fileId + ", diaryDt=" + diaryDt + ", stateId=" + stateId
+				+ ", feelingCd=" + feelingCd + ", healthCd=" + healthCd + ", feverCd=" + feverCd + ", breakfastCd="
+				+ breakfastCd + ", lunchCd=" + lunchCd + ", dinnerCd=" + dinnerCd + ", shitCd=" + shitCd + ", shitCnt="
+				+ shitCnt + ", shitDesc=" + shitDesc + ", sleepStartTime=" + sleepStartTime + ", sleepEndTime="
+				+ sleepEndTime + ", regDtm=" + regDtm + ", chgRegDtm=" + chgRegDtm + ", headerTitle=" + headerTitle
+				+ "]";
 	}
 
 	
