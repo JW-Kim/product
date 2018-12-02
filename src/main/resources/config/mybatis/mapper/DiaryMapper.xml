@@ -48,7 +48,7 @@
 		       B.SLEEP_START_TIME,
 		       B.SLEEP_END_TIME,
 		       CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
-		       CONCAT(CAST(DATE_FORMAT(A.REG_DTM, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.REG_DTM)
+		       CONCAT(CAST(DATE_FORMAT(A.DIARY_DT, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.DIARY_DT)
 		          WHEN '1' THEN '(일)'
 		          WHEN '2' THEN '(월)'
 		          WHEN '3' THEN '(화)'
