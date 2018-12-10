@@ -25,6 +25,8 @@ public class Diary {
 	private String regDtm;
 	private String chgRegDtm;
 	private String headerTitle;
+	private String height;
+	private float weight;
 	
 	
 	public String getDiaryId() {
@@ -343,6 +345,34 @@ public class Diary {
 
 
 
+	public String getHeight() {
+		return height;
+	}
+
+
+
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+
+
+
+	public float getWeight() {
+		return weight;
+	}
+
+
+
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Diary [diaryId=" + diaryId + ", noteId=" + noteId + ", title=" + title + ", content=" + content
@@ -351,8 +381,21 @@ public class Diary {
 				+ breakfastCd + ", lunchCd=" + lunchCd + ", dinnerCd=" + dinnerCd + ", shitCd=" + shitCd + ", shitCnt="
 				+ shitCnt + ", shitDesc=" + shitDesc + ", sleepStartTime=" + sleepStartTime + ", sleepEndTime="
 				+ sleepEndTime + ", regDtm=" + regDtm + ", chgRegDtm=" + chgRegDtm + ", headerTitle=" + headerTitle
-				+ "]";
+				+ ", height=" + height + ", weight=" + weight + ", getDiaryId()=" + getDiaryId() + ", getNoteId()="
+				+ getNoteId() + ", getTitle()=" + getTitle() + ", getContent()=" + getContent() + ", getDiaryDt()="
+				+ getDiaryDt() + ", getRegUserId()=" + getRegUserId() + ", getFileId()=" + getFileId()
+				+ ", getStateId()=" + getStateId() + ", getFeelingCd()=" + getFeelingCd() + ", getHealthCd()="
+				+ getHealthCd() + ", getFeverCd()=" + getFeverCd() + ", getBreakfastCd()=" + getBreakfastCd()
+				+ ", getLunchCd()=" + getLunchCd() + ", getDinnerCd()=" + getDinnerCd() + ", getShitCd()=" + getShitCd()
+				+ ", getShitCnt()=" + getShitCnt() + ", getShitDesc()=" + getShitDesc() + ", getSleepStartTime()="
+				+ getSleepStartTime() + ", getSleepEndTime()=" + getSleepEndTime() + ", getRegDtm()=" + getRegDtm()
+				+ ", getChgRegDtm()=" + getChgRegDtm() + ", getHeaderTitle()=" + getHeaderTitle() + ", getHeight()="
+				+ getHeight() + ", getWeight()=" + getWeight() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
+
+
+
 
 	
 	
