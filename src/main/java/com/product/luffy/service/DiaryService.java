@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.product.luffy.po.Diary;
+import com.product.luffy.po.Disease;
 
 public interface DiaryService {
 	
@@ -16,4 +17,8 @@ public interface DiaryService {
 	public int insertDiary(Diary diary);
 	
 	public int updateDiary(Diary diary);
+	
+	public int insertDisease(Disease disease);
+	
+	public int updateDisease(Disease disease);
 }
