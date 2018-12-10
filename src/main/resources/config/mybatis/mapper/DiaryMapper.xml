@@ -25,6 +25,17 @@
   	<result column="REG_DTM"    		property="regDtm"/>
  	<result column="CHG_REG_DTM"        property="chgRegDtm"/>
  	<result column="HEADER_TITLE"       property="headerTitle"/>
+ 	<result column="HEIGHT"       		property="height"/>
+ 	<result column="WEIGHT"       		property="weight"/>
+  </resultMap>
+  
+  <resultMap id="diseaseMap" type="com.product.luffy.po.Disease">
+  	<id 	column="DISEASE_ID" 		property="diseaseId"/>
+ 	<result column="DIARY_ID"       	property="diaryId"/>
+ 	<result column="DISEASE_NM"       	property="diseaseNm"/>
+ 	<result column="SYMPTOM"       		property="symptom"/>
+ 	<result column="HOSPITAL_NM"       	property="hospitalNm"/>
+ 	<result column="PRESCRIPTION"       property="prescription"/>
   </resultMap>
   
   <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
@@ -56,7 +67,9 @@
 		          WHEN '5' THEN '(목)'
 		          WHEN '6' THEN '(금)'
 		          WHEN '7' THEN '(토)'
-		       END) AS HEADER_TITLE
+		       END) AS HEADER_TITLE,
+		       B.HEIGHT,
+		       B.WEIGHT
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.NOTE_ID = #{noteId}
 		ORDER BY A.DIARY_DT DESC
@@ -106,7 +119,9 @@
 		          WHEN '5' THEN '(목)'
 		          WHEN '6' THEN '(금)'
 		          WHEN '7' THEN '(토)'
-		       END) AS CHG_REG_DTM
+		       END) AS CHG_REG_DTM,
+		       B.HEIGHT,
+		       B.WEIGHT
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.DIARY_ID = #{diaryId}
   </select>
@@ -144,6 +159,8 @@
 	                      `SHIT_DESC`,
 	                      `SLEEP_START_TIME`,
 	                      `SLEEP_END_TIME`,
+	                      `HEIGHT`,
+	                      `WEIGHT`,
 	                      `REG_DTM`)
 		VALUES (#{stateId},
 		        #{diaryId},
@@ -158,7 +175,24 @@
 		        #{shitDesc},
 		        #{sleepStartTime},
 		        #{sleepEndTime},
+     		    #{height},
+		        #{weight},
 		        NOW())
+  </insert>
+  
+  <insert id="insertDisease" parameterType="com.product.luffy.po.Disease">
+	  INSERT INTO DISEASE_F(DISEASE_ID,
+	                      DIARY_ID,
+	                      DISEASE_NM,
+	                      SYMPTOM,
+	                      HOSPITAL_NM,
+	                      PRESCRIPTION)
+		VALUES (#{diseaseId},
+		        #{diaryId},
+		        #{diseaseNm},
+		        #{symptom},
+		        #{hospitalNm},
+		        #{prescription})
   </insert>
   
   <update id="updateDiary" parameterType="com.product.luffy.po.Diary">
@@ -181,8 +215,19 @@
 	       SHIT_CNT = #{shitCnt},
 	       SHIT_DESC = #{shitDesc},
 	       SLEEP_START_TIME = #{sleepStartTime},
-	       SLEEP_END_TIME = #{sleepEndTime}
+	       SLEEP_END_TIME = #{sleepEndTime},
+	       HEIGHT = #{height},
+	       WEIGHT = #{weight}
 	 WHERE DIARY_ID = #{diaryId};
+  </update>
+  
+  <update id="updateDisease" parameterType="com.product.luffy.po.Disease">
+  	UPDATE DISEASE_F
+  	   SET DISEASE_NM = #{diseaseNm},
+  	       SYMPTOM = #{symptom},
+  	       HOSPITAL_NM = #{hospitalNm},
+  	       PRESCRIPTION = #{prescription}
+  	 WHERE DISEASE_ID = #{diseaseId}  
   </update>
   
 </mapper>
