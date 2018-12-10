@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.product.luffy.po.Disease;
 import com.product.luffy.po.Diary;
 import com.product.luffy.service.DiaryService;
 import com.product.luffy.utils.IdGen;
@@ -106,6 +107,34 @@ public class DiaryController {
 		return responseObject;
 	}
 	
+	@RequestMapping(value="/{diaryId}/disease", method=RequestMethod.POST)
+	public @ResponseBody ResponseObject<String> insertDisease(@PathVariable("diaryId") String diaryId,
+															  @RequestBody Map<String, Object> requestParams){
+		LOGGER.debug(">>>>>>>>>>> insertDisease 시작 :"+ requestParams);
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		
+		Disease disease = setDisease(diaryId, null, requestParams);		
+		
+		int rtn = diaryService.insertDisease(disease);
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return responseObject;
+	}
+	
+	@RequestMapping(value="/disease/{diseaseId}", method=RequestMethod.POST)
+	public @ResponseBody ResponseObject<String> updateDisease(@PathVariable("diseaseId") String diseaseId,
+														    @RequestBody Map<String, Object> requestParams){
+		LOGGER.debug(">>>>>>>>>>> updateDisease 시작 :"+ diseaseId+ " : "+requestParams);
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		
+		Disease disease = setDisease(null, diseaseId, requestParams);
+		
+		int rtn = diaryService.updateDisease(disease);
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return responseObject;
+	}
+	
 	private Diary setDiary(String diaryId, Map<String, Object> params) {
 		Diary diary = new Diary();
 		diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
@@ -125,6 +154,8 @@ public class DiaryController {
 		String shitDesc = params.get("shitDesc") == null ? "" : (String) params.get("shitDesc");
 		String sleepStartTime = params.get("sleepStartTime") == null ? null : (String) params.get("sleepStartTime");
 		String sleepEndTime = params.get("sleepEndTime") == null ? null : (String) params.get("sleepEndTime");
+		String height = params.get("height") == null ? null : (String) params.get("height");
+		float weight = params.get("weight") == null ? null : Float.valueOf(params.get("weight")+"");
 		
 		if(params.get("diaryDt") == null) {
 			Date date = new Date();
@@ -154,7 +185,28 @@ public class DiaryController {
 		diary.setShitDesc(shitDesc);
 		diary.setSleepStartTime(sleepStartTime);
 		diary.setSleepEndTime(sleepEndTime);
+		diary.setHeight(height);
+		diary.setWeight(weight);
 		
 		return diary;
+	}
+	
+	private Disease setDisease(String diaryId, String diseaseId, Map<String, Object> params) {
+		Disease disease = new Disease();
+		
+		diseaseId = diseaseId == null ? IdGen.getNextId() : diseaseId;
+		String diseaseNm = params.get("diseaseNm") == null ? null : (String) params.get("diseaseNm");
+		String symptom = params.get("symptom") == null ? null : (String) params.get("symptom");
+		String hospitalNm = params.get("hospitalNm") == null ? null : (String) params.get("hospitalNm");
+		String prescription = params.get("prescription") == null ? null : (String) params.get("prescription");
+		
+		disease.setDiseaseId(diseaseId);
+		disease.setDiaryId(diaryId);
+		disease.setDiseaseNm(diseaseNm);
+		disease.setSymptom(symptom);
+		disease.setHospitalNm(hospitalNm);
+		disease.setPrescription(prescription);
+		
+		return disease;
 	}
 }
