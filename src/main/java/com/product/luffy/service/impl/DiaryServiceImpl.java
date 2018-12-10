@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.product.luffy.mapper.DiaryMapper;
 import com.product.luffy.po.Diary;
+import com.product.luffy.po.Disease;
 import com.product.luffy.service.DiaryService;
-import com.product.luffy.utils.UserContext;
 
 @Service("com.product.luffy.service.impl.DiaryService")
 public class DiaryServiceImpl implements DiaryService {
@@ -64,6 +64,22 @@ public class DiaryServiceImpl implements DiaryService {
 		rtn = diaryMapper.updateDiary(diary);
 		
 		rtn = diaryMapper.updateState(diary);
+		
+		return rtn;
+	}
+	
+	public int insertDisease(Disease disease) {
+		int rtn=0;
+		
+		rtn = diaryMapper.insertDisease(disease);
+		
+		return rtn;
+	}
+	
+	public int updateDisease(Disease disease) {
+		int rtn=0;
+		
+		rtn = diaryMapper.updateDisease(disease);
 		
 		return rtn;
 	}
