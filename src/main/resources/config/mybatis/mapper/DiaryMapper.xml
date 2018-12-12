@@ -27,6 +27,11 @@
  	<result column="HEADER_TITLE"       property="headerTitle"/>
  	<result column="HEIGHT"       		property="height"/>
  	<result column="WEIGHT"       		property="weight"/>
+ 	<result column="DISEASE_ID"       	property="diseaseId"/>
+ 	<result column="DISEASE_NM"       	property="diseaseNm"/>
+ 	<result column="SYMPTOM"       		property="symptom"/>
+ 	<result column="HOSPITAL_NM"       	property="hospitalNm"/>
+ 	<result column="PRESCRIPTION"       property="prescription"/>
   </resultMap>
   
   <resultMap id="diseaseMap" type="com.product.luffy.po.Disease">
@@ -76,18 +81,25 @@
   </select>
   
   <select id="selectMonthDiaryList" parameterType="map" resultMap="DiaryResultMap">
-  	SELECT DIARY_ID,
-	       NOTE_ID,
-	       TITLE,
-	       CONTENT,
-	       REG_USER_ID,
-	       FILE_ID,
-	       DIARY_DT,
-	       REG_DTM
-	  FROM DIARY_F
-	 WHERE NOTE_ID = #{noteId}
-	   AND DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
-	 ORDER BY DIARY_DT ASC
+  	SELECT A.DIARY_ID,
+	       A.NOTE_ID,
+	       A.TITLE,
+	       A.CONTENT,
+	       A.REG_USER_ID,
+	       A.FILE_ID,
+	       A.DIARY_DT,
+	       B.DISEASE_ID,
+	       B.DISEASE_NM,
+	       B.SYMPTOM,
+	       B.HOSPITAL_NM,
+	       B.PRESCRIPTION,
+	       A.REG_DTM
+	  FROM DIARY_F A 
+	  LEFT JOIN DISEASE_F B 
+	    ON A.DIARY_ID = B.DIARY_ID
+	 WHERE  A.NOTE_ID = #{noteId}
+	   AND A.DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
+	 ORDER BY A.DIARY_DT ASC
   </select>
   
   <select id="selectDiary" parameterType="map" resultMap="DiaryResultMap">  
