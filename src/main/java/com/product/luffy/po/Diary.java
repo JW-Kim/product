@@ -27,7 +27,11 @@ public class Diary {
 	private String headerTitle;
 	private String height;
 	private float weight;
-	
+	private String diseaseId;
+	private String diseaseNm;
+	private String symptom;
+	private String hospitalNm;
+	private String prescription;
 	
 	public String getDiaryId() {
 		return diaryId;
@@ -368,6 +372,76 @@ public class Diary {
 
 	public void setWeight(float weight) {
 		this.weight = weight;
+	}
+
+
+
+
+	public String getDiseaseId() {
+		return diseaseId;
+	}
+
+
+
+
+	public void setDiseaseId(String diseaseId) {
+		this.diseaseId = diseaseId;
+	}
+
+
+
+
+	public String getDiseaseNm() {
+		return diseaseNm;
+	}
+
+
+
+
+	public void setDiseaseNm(String diseaseNm) {
+		this.diseaseNm = diseaseNm;
+	}
+
+
+
+
+	public String getSymptom() {
+		return symptom;
+	}
+
+
+
+
+	public void setSymptom(String symptom) {
+		this.symptom = symptom;
+	}
+
+
+
+
+	public String getHospitalNm() {
+		return hospitalNm;
+	}
+
+
+
+
+	public void setHospitalNm(String hospitalNm) {
+		this.hospitalNm = hospitalNm;
+	}
+
+
+
+
+	public String getPrescription() {
+		return prescription;
+	}
+
+
+
+
+	public void setPrescription(String prescription) {
+		this.prescription = prescription;
 	}
 
 
