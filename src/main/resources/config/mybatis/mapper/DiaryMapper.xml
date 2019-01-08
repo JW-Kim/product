@@ -27,20 +27,16 @@
  	<result column="HEADER_TITLE"       property="headerTitle"/>
  	<result column="HEIGHT"       		property="height"/>
  	<result column="WEIGHT"       		property="weight"/>
- 	<result column="DISEASE_ID"       	property="diseaseId"/>
- 	<result column="DISEASE_NM"       	property="diseaseNm"/>
- 	<result column="SYMPTOM"       		property="symptom"/>
- 	<result column="HOSPITAL_NM"       	property="hospitalNm"/>
- 	<result column="PRESCRIPTION"       property="prescription"/>
   </resultMap>
   
   <resultMap id="diseaseMap" type="com.product.luffy.po.Disease">
   	<id 	column="DISEASE_ID" 		property="diseaseId"/>
- 	<result column="DIARY_ID"       	property="diaryId"/>
+    <result column="NOTE_ID"       	    property="noteId"/>
  	<result column="DISEASE_NM"       	property="diseaseNm"/>
  	<result column="SYMPTOM"       		property="symptom"/>
  	<result column="HOSPITAL_NM"       	property="hospitalNm"/>
  	<result column="PRESCRIPTION"       property="prescription"/>
+	<result column="DISEASE_DT"			property="diseaseDt"/>
   </resultMap>
   
   <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
@@ -88,15 +84,8 @@
 	       A.REG_USER_ID,
 	       A.FILE_ID,
 	       A.DIARY_DT,
-	       B.DISEASE_ID,
-	       B.DISEASE_NM,
-	       B.SYMPTOM,
-	       B.HOSPITAL_NM,
-	       B.PRESCRIPTION,
 	       A.REG_DTM
-	  FROM DIARY_F A 
-	  LEFT JOIN DISEASE_F B 
-	    ON A.DIARY_ID = B.DIARY_ID
+	  FROM DIARY_F A
 	 WHERE  A.NOTE_ID = #{noteId}
 	   AND A.DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
 	 ORDER BY A.DIARY_DT ASC
@@ -194,13 +183,15 @@
   
   <insert id="insertDisease" parameterType="com.product.luffy.po.Disease">
 	  INSERT INTO DISEASE_F(DISEASE_ID,
-	                      DIARY_ID,
+	                      NOTE_ID,
+	                      DISEASE_DT,
 	                      DISEASE_NM,
 	                      SYMPTOM,
 	                      HOSPITAL_NM,
 	                      PRESCRIPTION)
 		VALUES (#{diseaseId},
-		        #{diaryId},
+		        #{noteId},
+		        #{diseaseDt},
 		        #{diseaseNm},
 		        #{symptom},
 		        #{hospitalNm},
@@ -241,5 +232,18 @@
   	       PRESCRIPTION = #{prescription}
   	 WHERE DISEASE_ID = #{diseaseId}  
   </update>
+
+	<select id="selectDiseaseMonth" parameterType="map" resultMap="diseaseMap">
+		SELECT DISEASE_ID,
+			   NOTE_ID,
+			   DISEASE_DT,
+			   DISEASE_NM,
+			   SYMPTOM,
+			   HOSPITAL_NM,
+			   PRESCRIPTION
+		  FROM DISEASE_F
+		 WHERE NOTE_ID = #{noteId}
+		   AND DISEASE_DT LIKE CONCAT(#{diseaseMonth}, '-%');
+	</select>
   
 </mapper>

@@ -98,22 +98,37 @@ public class DiaryController {
 														    @RequestBody Map<String, Object> requestParams){
 		LOGGER.debug(">>>>>>>>>>> updateDiary 시작 :"+ diaryId+ " : "+requestParams);
 		ResponseObject<String> responseObject = new ResponseObject<String>();
-		
+
 		Diary diary = setDiary(diaryId, requestParams);
-		
+
 		int rtn = diaryService.updateDiary(diary);
 		responseObject.setData(rtn);
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		return responseObject;
 	}
-	
-	@RequestMapping(value="/{diaryId}/disease", method=RequestMethod.POST)
-	public @ResponseBody ResponseObject<String> insertDisease(@PathVariable("diaryId") String diaryId,
-															  @RequestBody Map<String, Object> requestParams){
+
+	@RequestMapping(value = "/diseaseMonth", method = RequestMethod.GET)
+	public @ResponseBody GridResponseObject<Disease> selectDiseaseMonth(@RequestParam("diseaseMonth") String diseaseMonth,
+																		@RequestParam("noteId") String noteId){
+		LOGGER.debug(">>>>>>>>>>>>>> getDiseaseMonth 시작 :"+ diseaseMonth);
+		GridResponseObject<Disease> gridResponseObject = new GridResponseObject<Disease>();
+
+		if(diseaseMonth == null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "질병일 파라미터가 없습니다.");
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("diseaseMonth", diseaseMonth);
+		paramMap.put("noteId", noteId);
+
+		gridResponseObject.setData(diaryService.selectDiseaseMonth(paramMap));
+		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return gridResponseObject;
+	}
+
+	@RequestMapping(value="/disease", method=RequestMethod.POST)
+	public @ResponseBody ResponseObject<String> insertDisease(@RequestBody Map<String, Object> requestParams){
 		LOGGER.debug(">>>>>>>>>>> insertDisease 시작 :"+ requestParams);
 		ResponseObject<String> responseObject = new ResponseObject<String>();
 		
-		Disease disease = setDisease(diaryId, null, requestParams);		
+		Disease disease = setDisease(null, requestParams);
 		
 		int rtn = diaryService.insertDisease(disease);
 		responseObject.setData(rtn);
@@ -127,7 +142,7 @@ public class DiaryController {
 		LOGGER.debug(">>>>>>>>>>> updateDisease 시작 :"+ diseaseId+ " : "+requestParams);
 		ResponseObject<String> responseObject = new ResponseObject<String>();
 		
-		Disease disease = setDisease(null, diseaseId, requestParams);
+		Disease disease = setDisease(diseaseId, requestParams);
 		
 		int rtn = diaryService.updateDisease(disease);
 		responseObject.setData(rtn);
@@ -191,7 +206,7 @@ public class DiaryController {
 		return diary;
 	}
 	
-	private Disease setDisease(String diaryId, String diseaseId, Map<String, Object> params) {
+	private Disease setDisease(String diseaseId, Map<String, Object> params) {
 		Disease disease = new Disease();
 		
 		diseaseId = diseaseId == null ? IdGen.getNextId() : diseaseId;
@@ -199,12 +214,24 @@ public class DiaryController {
 		String symptom = params.get("symptom") == null ? null : (String) params.get("symptom");
 		String hospitalNm = params.get("hospitalNm") == null ? null : (String) params.get("hospitalNm");
 		String prescription = params.get("prescription") == null ? null : (String) params.get("prescription");
-		
+		String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
+
+		String diseaseDt = "";
+		if(params.get("diseaseDt") == null) {
+			Date date = new Date();
+			diseaseDt= new SimpleDateFormat("yyyy-MM-dd").format(date);
+		}else {
+			diseaseDt =  (String) params.get("diseaseDt");
+		}
+
+		if(noteId == null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "noteId 정보가 올바르지 않습니다.");
+
 		disease.setDiseaseId(diseaseId);
-		disease.setDiaryId(diaryId);
+		disease.setNoteId(noteId);
 		disease.setDiseaseNm(diseaseNm);
 		disease.setSymptom(symptom);
 		disease.setHospitalNm(hospitalNm);
+		disease.setDiseaseDt(diseaseDt);
 		disease.setPrescription(prescription);
 		
 		return disease;

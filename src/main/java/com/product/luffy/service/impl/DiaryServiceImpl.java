@@ -84,4 +84,8 @@ public class DiaryServiceImpl implements DiaryService {
 		return rtn;
 	}
 
+	public List<Disease> selectDiseaseMonth(Map<String, String> paramMap){
+		return diaryMapper.selectDiseaseMonth(paramMap);
+	}
+
 }

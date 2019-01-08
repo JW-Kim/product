@@ -21,4 +21,6 @@ public interface DiaryService {
 	public int insertDisease(Disease disease);
 	
 	public int updateDisease(Disease disease);
+
+	public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
 }

@@ -27,4 +27,6 @@ public interface DiaryMapper {
 	public int updateState(Diary diary);
 	
 	public int updateDisease(Disease disease);
+
+	public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
 }
