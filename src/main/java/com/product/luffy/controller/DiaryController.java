@@ -169,10 +169,10 @@ public class DiaryController {
 		String shitDesc = params.get("shitDesc") == null ? "" : (String) params.get("shitDesc");
 		String sleepStartTime = params.get("sleepStartTime") == null ? null : (String) params.get("sleepStartTime");
 		String sleepEndTime = params.get("sleepEndTime") == null ? null : (String) params.get("sleepEndTime");
-		String height = params.get("height") == null ? null : (String) params.get("height");
-		float weight = params.get("weight") == null ? null : Float.valueOf(params.get("weight")+"");
+		int height = params.get("height") == null ? null : Integer.parseInt(params.get("height")+"");
+		float weight = params.get("weight") == null ? (float) 0 : Float.valueOf(params.get("weight")+"");
 		
-		if(params.get("diaryDt") == null) {
+		if(params.get("diaryDt") == null || "".equals("diaryDt")) {
 			Date date = new Date();
 			diaryDt= new SimpleDateFormat("yyyy-MM-dd").format(date);
 		}else {

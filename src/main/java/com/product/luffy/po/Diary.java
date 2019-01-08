@@ -25,7 +25,7 @@ public class Diary {
 	private String regDtm;
 	private String chgRegDtm;
 	private String headerTitle;
-	private String height;
+	private int height;
 	private float weight;
 
 	
@@ -344,15 +344,11 @@ public class Diary {
 
 
 
-
-	public String getHeight() {
+	public int getHeight() {
 		return height;
 	}
 
-
-
-
-	public void setHeight(String height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 
