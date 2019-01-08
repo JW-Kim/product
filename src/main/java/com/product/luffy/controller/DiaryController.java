@@ -149,6 +149,19 @@ public class DiaryController {
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		return responseObject;
 	}
+
+	@RequestMapping(value="/disease/{diseaseId}", method=RequestMethod.DELETE)
+	public @ResponseBody ResponseObject<String> deleteDisease(@PathVariable("diseaseId") String diseaseId){
+		LOGGER.debug(">>>>>>>>>>> deleteDisease 시작 :"+ diseaseId);
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("diseaseId", diseaseId);
+
+		int rtn = diaryService.deleteDisease(paramMap);
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return responseObject;
+	}
 	
 	private Diary setDiary(String diaryId, Map<String, Object> params) {
 		Diary diary = new Diary();

@@ -84,6 +84,14 @@ public class DiaryServiceImpl implements DiaryService {
 		return rtn;
 	}
 
+	public int deleteDisease(Map<String, String> paramMap){
+		int rtn = 0;
+
+		rtn = diaryMapper.deleteDisease(paramMap);
+
+		return rtn;
+	}
+
 	public List<Disease> selectDiseaseMonth(Map<String, String> paramMap){
 		return diaryMapper.selectDiseaseMonth(paramMap);
 	}
