@@ -17,6 +17,8 @@ public interface DiaryService {
 	public int insertDiary(Diary diary);
 	
 	public int updateDiary(Diary diary);
+
+	public int deleteDiary(Map<String, String> paramMap);
 	
 	public int insertDisease(Disease disease);
 	

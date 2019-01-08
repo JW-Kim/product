@@ -67,6 +67,16 @@ public class DiaryServiceImpl implements DiaryService {
 		
 		return rtn;
 	}
+
+	public int deleteDiary(Map<String, String> paramMap){
+		int rtn = 0;
+
+		diaryMapper.deleteState(paramMap);
+
+		rtn = diaryMapper.deleteDiary(paramMap);
+
+		return rtn;
+	}
 	
 	public int insertDisease(Disease disease) {
 		int rtn=0;

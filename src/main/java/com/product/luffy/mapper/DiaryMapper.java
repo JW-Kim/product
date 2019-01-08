@@ -19,6 +19,10 @@ public interface DiaryMapper {
 	public int insertDiary(Diary diary);
 	
 	public int insertState(Diary diary);
+
+	public int deleteDiary(Map<String, String> paramMap);
+
+	public int deleteState(Map<String, String> paramMap);
 	
 	public int insertDisease(Disease disease);
 	

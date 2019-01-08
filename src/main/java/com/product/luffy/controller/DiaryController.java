@@ -107,6 +107,19 @@ public class DiaryController {
 		return responseObject;
 	}
 
+	@RequestMapping(value="/{diaryId}", method=RequestMethod.DELETE)
+	public @ResponseBody ResponseObject<String> deleteDiary(@PathVariable("diaryId") String diaryId){
+		LOGGER.debug(">>>>>>>>>>> updateDiary 시작 :"+ diaryId);
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("diaryId", diaryId);
+
+		int rtn = diaryService.deleteDiary(paramMap);
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return responseObject;
+	}
+
 	@RequestMapping(value = "/diseaseMonth", method = RequestMethod.GET)
 	public @ResponseBody GridResponseObject<Disease> selectDiseaseMonth(@RequestParam("diseaseMonth") String diseaseMonth,
 																		@RequestParam("noteId") String noteId){

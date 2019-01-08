@@ -250,4 +250,14 @@
 		DELETE FROM DISEASE_F
 		WHERE DISEASE_ID = #{diseaseId}
 	</delete>
+
+	<delete id="deleteState" parameterType="map">
+		DELETE FROM STATE_F
+		WHERE DIARY_ID = #{diaryId}
+	</delete>
+
+	<delete id="deleteDiary" parameterType="map">
+		DELETE FROM DIARY_F
+		WHERE DIARY_ID = #{diaryId}
+	</delete>
 </mapper>
