@@ -135,6 +135,19 @@ public class DiaryController {
 		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		return gridResponseObject;
 	}
+	
+	@RequestMapping(value="/disease/{diseaseId}", method=RequestMethod.GET)
+	public @ResponseBody ResponseObject<String> selectDisease(@PathVariable("diseaseId") String diseaseId){
+		LOGGER.debug(">>>>>>>>>>> selectDisease 시작 :"+ diseaseId);
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("diseaseId", diseaseId);
+
+		int rtn = diaryService. selectDisease(paramMap);
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return responseObject;
+	}
 
 	@RequestMapping(value="/disease", method=RequestMethod.POST)
 	public @ResponseBody ResponseObject<String> insertDisease(@RequestBody Map<String, Object> requestParams){

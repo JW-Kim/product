@@ -246,6 +246,18 @@
 		   AND DISEASE_DT LIKE CONCAT(#{diseaseMonth}, '-%');
 	</select>
 
+	<select id="selectDisease" parameterType="map" resultMap="diseaseMap">
+		SELECT DISEASE_ID,
+			   NOTE_ID,
+			   DISEASE_DT,
+			   DISEASE_NM,
+			   SYMPTOM,
+			   HOSPITAL_NM,
+			   PRESCRIPTION
+		  FROM DISEASE_F
+		 WHERE DISEASE_ID = #{diseaseId}
+	</select>
+
 	<delete id="deleteDisease" parameterType="map">
 		DELETE FROM DISEASE_F
 		WHERE DISEASE_ID = #{diseaseId}
