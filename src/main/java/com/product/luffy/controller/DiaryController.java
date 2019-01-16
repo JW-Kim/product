@@ -143,8 +143,7 @@ public class DiaryController {
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("diseaseId", diseaseId);
 
-		int rtn = diaryService. selectDisease(paramMap);
-		responseObject.setData(rtn);
+		responseObject.setData(diaryService.selectDisease(paramMap));
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		return responseObject;
 	}
