@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService{
 	public User selectUser(Map<String, String> paramMap) {
 		return userMapper.selectUser(paramMap);
 	}
+
+	public int insertUser(Map<String, String> paramMap) {
+		return userMapper.insertUser(paramMap);
+	}
+
 }

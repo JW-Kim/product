@@ -9,4 +9,6 @@ public interface UserService {
 	public List<User> selectUserList();
 	
 	public User selectUser(Map<String, String> paramMap);
+
+	public int insertUser(Map<String, String> paramMap);
 }

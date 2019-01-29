@@ -24,6 +24,24 @@
 	       REG_DTM
 	  FROM USER_F
 	 WHERE USER_LOGIN_ID = #{userLoginId}
+	  <if test="insertUser">
+		OR EMAIL = #{email}	
+	  </if>	
   </select>
- 
+
+  <insert id= "insertUser">		
+	INSERT INTO USER_F (USER_ID,
+						  USER_LOGIN_ID,	
+						  EMAIL,	
+						  USER_PWD,	 
+						  USER_ROLE,
+						  REG_DTM )
+	VALUES (#{userId},	
+			 #{userLoginId},	
+			 #{email},	
+			 #{userPwd},	
+			 #{userNm},
+			 #{userRole},
+			 NOW())	
+  </insert>	
 </mapper>
