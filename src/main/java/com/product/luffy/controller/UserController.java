@@ -92,7 +92,7 @@ public class UserController {
 		}
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodigPw = passwordEncoder(userPw);
+		String encodigPw = passwordEncoder(userPwd);
 
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("userId",IdGen.getNextId());
@@ -100,7 +100,7 @@ public class UserController {
 		paramMap.put("email",email);
 		paramMap.put("userPwd", userPwd);
 		paramMap.put("userNm", userNm);
-		paramMap.put("userRole", userRole);
+		paramMap.put("userRole", "USER");
 	
 		int rtn = userService.insertUser(paramMap);
 
