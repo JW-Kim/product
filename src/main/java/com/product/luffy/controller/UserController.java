@@ -51,8 +51,9 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET, value= "/selectUserExist")
 	public @ResponseBody ResponseObject<Boolean> selectUserExist(@RequestParam("userLoginId") String userLoginId,
-		@RequestParam("email", String email)) {
-		ResponseObject<Boolean> responseObject = new ResponseObject<Boolean>();
+		@RequestParam("email") String email) {
+		ResponseObject
+<Boolean> responseObject = new ResponseObject<Boolean>();
 		LOGGER.debug(">>>> selectUserExist 시작");
 		Boolean result = false;
 
@@ -78,10 +79,10 @@ public class UserController {
 		ResponseObject<String> responseObject = new ResponseObject<String>();
 		LOGGER.debug(">>>> insertUser 시작"+ requestParams);
 		
-		String userLoginId = requestParams.get("userLoginId");
-		String email = requestParams.get("email");
-		String userPwd = requestParams.get("userPwd");
-		String userNm = requestParams.get("userNm");
+		String userLoginId = requestParams.get("userLoginId")+ "";
+		String email = requestParams.get("email")+ "";
+		String userPwd = requestParams.get("userPwd")+ "";
+		String userNm = requestParams.get("userNm") + "";
 
 		if(userLoginId == null || "".equals(userLoginId) || email == null || "".equals(email) ||
 		   userPwd = null || "".equals(userpwd) ||userNm == null || "".equals(userNm) 
