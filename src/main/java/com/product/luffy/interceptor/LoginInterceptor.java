@@ -29,7 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		System.out.println(">>>>>>>>>>>>>>>>>>>> LoginInterceptor preHandle...");
 		String requestURL = request.getRequestURI();
 
-		if("/product/login".equals(requestURL)) {
+		if("/product/login".equals(requestURL) || "/product/user".equals(requestURL) || "/product/user/selectUserExist".equals(requestURL)) {
 			
 		}else {
 			String authorization = request.getHeader("authorization");
