@@ -19,5 +19,31 @@
 		          USER_NOTE_R R
 		       ON (N.NOTE_ID = R.NOTE_ID AND R.USER_ID = #{userId})
 	</select>
+
+	<insert id="insertNote" parameterType="map">
+		INSERT INTO NOTE_F ( NOTE_ID,
+								NOTE_NM,
+								SEX,
+								BIRTH_DT,
+								REG_USER_ID,
+								REG_DTM )
+		VALUES (#{noteId},
+				 #{noteNm},	
+				 #{sex},	
+				 #{birthDt},
+				 #{userId},
+				 NOW() )
+	</insert>	 			
+
+	<insert id="insertUserNote" parameterType="map">
+		INSERT INTO USER_NOTE_R ( USER_ID,
+									 NOTE_ID,
+									 REG_USER_ID,
+									 REG_DTM
+		VALUES (#{userId},		
+				 #{noteId},				
+				 #{userId},
+				 NOW() )		
+	</insert>
   
 </mapper>

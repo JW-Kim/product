@@ -11,4 +11,8 @@ public interface NoteMapper {
 	
 	public List<Note> selectNoteListByUserId(Map<String, String> paramMap);
 	
+	public int insertNote(Map<String, String> paramMap);
+
+	public int insertUserNote(Map<String, String> paramMap);
+
 }
