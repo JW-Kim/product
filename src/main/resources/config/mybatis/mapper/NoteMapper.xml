@@ -39,7 +39,7 @@
 		INSERT INTO USER_NOTE_R ( USER_ID,
 									 NOTE_ID,
 									 REG_USER_ID,
-									 REG_DTM
+									 REG_DTM)
 		VALUES (#{userId},		
 				 #{noteId},				
 				 #{userId},
