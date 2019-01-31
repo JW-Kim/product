@@ -101,7 +101,11 @@ public class UserController {
 		paramMap.put("userPwd", encodingPw);
 		paramMap.put("userNm", userNm);
 		paramMap.put("userRole", "USER");
-	
+
+		User user = userService.selectUser(paramMap);
+
+		if(user != null) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "중복된 사용자가 있습니다.");
+
 		int rtn = userService.insertUser(paramMap);
 
 		if(rtn != 	1) 			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 등록에 실패했습니다.");
