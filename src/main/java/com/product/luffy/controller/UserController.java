@@ -92,7 +92,7 @@ public class UserController {
 		}
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodigPw = passwordEncoder.encode(userPwd);
+		String encodingPw = passwordEncoder.encode(userPwd);
 
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("userId",IdGen.getNextId());
