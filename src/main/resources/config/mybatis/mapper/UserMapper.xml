@@ -33,7 +33,8 @@
 	INSERT INTO USER_F (USER_ID,
 						  USER_LOGIN_ID,	
 						  EMAIL,	
-						  USER_PWD,	 
+						  USER_PWD,
+						  USER_NM,		 
 						  USER_ROLE,
 						  REG_DTM )
 	VALUES (#{userId},	
