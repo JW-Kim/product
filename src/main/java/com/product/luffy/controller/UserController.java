@@ -124,7 +124,7 @@ public class UserController {
 		ResponseObject<String> responseObject = new ResponseObject<String>();
 		LOGGER.debug(">>>> updateUser 시작"+ requestParams);
 				
-		int = 0;
+		int rtn = 0;
 		
 		String userPwd = requestParams.get("userPwd") == null ? null : requestParams.get("userPwd")+ "";
 		String userNm = requestParams.get("userNm") == null ? null : requestParams.get("userNm") + "";
