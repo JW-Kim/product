@@ -44,5 +44,13 @@
 			 #{userNm},
 			 #{userRole},
 			 NOW())	
-  </insert>	
+  </insert>
+
+  <update id="updateUser">
+	UPDATE USER_F
+		<trim prefix="SET" suffixOverrides=",">  			<if test="userNm != null">USER_NM = #{userNm},</if>
+			<if test="userPwd != null">USER_PWD = #{userPwd}</if>
+	 WHERE USER_ID = #{userId}  
+  </update>
+	
 </mapper>

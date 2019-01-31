@@ -21,6 +21,8 @@ import com.product.luffy.utils.Exception.ProductRuntimeException;
 import com.product.luffy.utils.response.GridResponseObject;
 import com.product.luffy.utils.response.HttpResultCode;
 import com.product.luffy.utils.response.ResponseObject;
+import com.product.luffy.utils.UserContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,6 +111,44 @@ public class UserController {
 		int rtn = userService.insertUser(paramMap);
 
 		if(rtn != 	1) 			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 등록에 실패했습니다.");
+
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		
+		return responseObject;
+	}
+
+
+	@RequestMapping(method = RequestMethod.POST, value="/{userId}")
+	public @ResponseBody ResponseObject<String> updatetUser(@RequestBody Map<String, Object> requestParams) {
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		LOGGER.debug(">>>> updateUser 시작"+ requestParams);
+				
+		int = 0;
+		
+		String userPwd = requestParams.get("userPwd") == null ? null : requestParams.get("userPwd")+ "";
+		String userNm = requestParams.get("userNm") == null ? null : requestParams.get("userNm") + "";
+
+		if(userPwd == null || "".equals(userPwd) || userNm == null || "".equals(userNm)){
+			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "파라미터 정보가 올바르지 않습니다.");
+		}
+	
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", UserContext.getUserId());
+					
+		if(!(userPwd == null || "".equals(userPwd))){
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodingPw = passwordEncoder.encode(userPwd);
+			paramMap.put("userPwd", encodingPw);			
+		}
+
+		if(!(userNm == null || "".equals(userNm)){
+			paramMap.put("userNm", userNm);
+		}
+
+		rtn = userService.updateUser(paramMap);
+
+		if(rtn != 1) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 정보수정에 실패하였습니다.");
 
 		responseObject.setData(rtn);
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
