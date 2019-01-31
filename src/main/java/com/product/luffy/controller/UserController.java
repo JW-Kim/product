@@ -142,7 +142,7 @@ public class UserController {
 			paramMap.put("userPwd", encodingPw);			
 		}
 
-		if(!(userNm == null || "".equals(userNm)){
+		if(!(userNm == null || "".equals(userNm))){
 			paramMap.put("userNm", userNm);
 		}
 
