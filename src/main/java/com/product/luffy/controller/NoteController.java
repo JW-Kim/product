@@ -1,7 +1,7 @@
 package com.product.luffy.controller;
 
 
-import java.util.Map
+import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -39,8 +39,8 @@ public class NoteController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public @ResponseBody ResponseObject<int>insertNote(@RequestBody Map<String, String> requestParams){
-		ResponseObject<int> responseObject = new ResponseObject<int>();
+	public @ResponseBody ResponseObject<String>insertNote(@RequestBody Map<String, String> requestParams){
+		ResponseObject<String> responseObject = new ResponseObject<String>();
 		int rtn = 0;
 		
 		Map<String, String> paramMap = checkInsertNoteParam(requestParams);
@@ -60,7 +60,9 @@ public class NoteController {
 			
 		params.put("noteId", IdGen.getNextId());
 		params.put("userId", UserContext.getUserId());
-
+		
+		return params;
+	
 	}
 
 }
