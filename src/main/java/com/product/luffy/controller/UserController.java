@@ -129,7 +129,7 @@ public class UserController {
 		String userPwd = requestParams.get("userPwd") == null ? null : requestParams.get("userPwd")+ "";
 		String userNm = requestParams.get("userNm") == null ? null : requestParams.get("userNm") + "";
 
-		if(userPwd == null || "".equals(userPwd) || userNm == null || "".equals(userNm)){
+		if((userPwd == null || "".equals(userPwd)) && (userNm == null || "".equals(userNm))){
 			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "파라미터 정보가 올바르지 않습니다.");
 		}
 	
