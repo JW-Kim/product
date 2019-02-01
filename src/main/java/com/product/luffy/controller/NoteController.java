@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.product.luffy.po.Note;
 import com.product.luffy.service.NoteService;
@@ -59,9 +59,9 @@ public class NoteController {
 		ResponseObject<String> responseObject = new ResponseObject<String>();
 		int rtn = 0;
 			
-		if( (requestparams.get("noteNm") == null || "".equals(requestparams.get("noteNm")) && 
-			(requestparams.get("sex") == null || "".equals(requestparams.get("sex")) && 
-			(requestparams.get("birthDt") == null || "".equals(requestparams.get("birthDt"))  
+		if( (requestParams.get("noteNm") == null || "".equals(requestParams.get("noteNm"))) && 
+			(requestParams.get("sex") == null || "".equals(requestParams.get("sex"))) && 
+			(requestParams.get("birthDt") == null || "".equals(requestParams.get("birthDt")))  
 		){
 			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
 		}		
