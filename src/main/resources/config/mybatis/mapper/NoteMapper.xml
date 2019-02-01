@@ -45,5 +45,13 @@
 				 #{userId},
 				 NOW() )		
 	</insert>
+
+	<update id="updateNote">
+		UPDATE NOTE_F
+		<trim prefix="SET" suffixOverrides=",">  			<if test="noteNm != null">NOTE_NM = #{noteNm},</if>
+			<if test="sex != null">SEX = #{sex},</if>
+			<if test="birthDt != null">BIRTH_DT = #{birthDt},</if>		</trim>
+	 	 WHERE NOTE_ID = #{noteId}  
+  	</update>
   
 </mapper>

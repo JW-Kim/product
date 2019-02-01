@@ -42,4 +42,8 @@ public class NoteServiceImpl implements NoteService{
 	
 	}
 	
+	public int updateNote(Map<String, String> paramMap){
+		return noteMapper.updateNote(paramMap);
+	}
+
 }

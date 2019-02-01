@@ -15,4 +15,6 @@ public interface NoteMapper {
 
 	public int insertUserNote(Map<String, String> paramMap);
 
+	public int updateNote(Map<String, String> paramMap);
+
 }

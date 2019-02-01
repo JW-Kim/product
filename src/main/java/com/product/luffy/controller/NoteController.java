@@ -53,6 +53,29 @@ public class NoteController {
 		return responseObject;
 	}
 
+	@RequestMapping(method=RequestMethod.POST, value="/{noteId}")
+	public @ResponseBody ResponseObject<String>updateNote(@PathVariable("noteId") String noteId,
+												@RequestBody Map<String, String> requestParams){
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		int rtn = 0;
+			
+		if( (requestparams.get("noteNm") == null || "".equals(requestparams.get("noteNm")) && 
+			(requestparams.get("sex") == null || "".equals(requestparams.get("sex")) && 
+			(requestparams.get("birthDt") == null || "".equals(requestparams.get("birthDt"))  
+		){
+			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
+		}		
+		requestParams.put("noteId", noteId);
+
+		rtn = noteService.insertNote(paramMap);
+
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		
+		return responseObject;
+	}
+
+
 	private Map<String, String> checkInsertNoteParam(Map<String, String> params){
 		if(params.get("noteNm") == null || params.get("sex") == null || params.get("birthDt") == null ){
 			throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
