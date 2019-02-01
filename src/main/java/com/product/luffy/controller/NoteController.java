@@ -67,7 +67,7 @@ public class NoteController {
 		}		
 		requestParams.put("noteId", noteId);
 
-		rtn = noteService.insertNote(paramMap);
+		rtn = noteService.updateNote(requestParams);
 
 		responseObject.setData(rtn);
 		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
