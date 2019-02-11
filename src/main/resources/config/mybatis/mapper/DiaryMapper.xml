@@ -73,6 +73,7 @@
 		       B.WEIGHT
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.NOTE_ID = #{noteId}
+		   AND A.DIARY_STAT_CD = '001'
 		ORDER BY A.DIARY_DT DESC
   </select>
   
@@ -88,6 +89,7 @@
 	  FROM DIARY_F A
 	 WHERE  A.NOTE_ID = #{noteId}
 	   AND A.DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
+	   AND A.DIARY_STAT_CD = '001'	
 	 ORDER BY A.DIARY_DT ASC
   </select>
   
@@ -125,11 +127,14 @@
 		       B.WEIGHT
 		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
 		 WHERE A.DIARY_ID = #{diaryId}
+		   AND A.DIARY_STAT_CD = '001'
+
   </select>
  
   <insert id="insertDiary" parameterType="com.product.luffy.po.Diary">
 	  INSERT INTO `DIARY_F`(`DIARY_ID`,
-	  					  `NOTE_ID`,
+	  					    `NOTE_ID`,
+							`DIARY_STAT_CD`, 
 	                      `TITLE`,
 	                      `CONTENT`,
 	                      `REG_USER_ID`,
@@ -138,6 +143,7 @@
 	                      `REG_DTM`)
 		VALUES (#{diaryId},
 				#{noteId},
+				'001',
 		        #{title},
 		        #{content},
 		        #{regUserId},
@@ -268,8 +274,9 @@
 		WHERE DIARY_ID = #{diaryId}
 	</delete>
 
-	<delete id="deleteDiary" parameterType="map">
-		DELETE FROM DIARY_F
+	<update id="deleteDiary" parameterType="map">
+		UPDATE DIARY_F
+		   SET DIARY_STAT_CD = '002'
 		WHERE DIARY_ID = #{diaryId}
-	</delete>
+	</update>
 </mapper>

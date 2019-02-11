@@ -109,7 +109,7 @@ public class DiaryController {
 
 	@RequestMapping(value="/{diaryId}", method=RequestMethod.DELETE)
 	public @ResponseBody ResponseObject<String> deleteDiary(@PathVariable("diaryId") String diaryId){
-		LOGGER.debug(">>>>>>>>>>> updateDiary 시작 :"+ diaryId);
+		LOGGER.debug(">>>>>>>>>>> deleteDiary 시작 :"+ diaryId);
 		ResponseObject<String> responseObject = new ResponseObject<String>();
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("diaryId", diaryId);

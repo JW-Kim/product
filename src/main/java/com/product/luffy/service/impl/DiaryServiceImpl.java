@@ -71,8 +71,6 @@ public class DiaryServiceImpl implements DiaryService {
 	public int deleteDiary(Map<String, String> paramMap){
 		int rtn = 0;
 
-		diaryMapper.deleteState(paramMap);
-
 		rtn = diaryMapper.deleteDiary(paramMap);
 
 		return rtn;
