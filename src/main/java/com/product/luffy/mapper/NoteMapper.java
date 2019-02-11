@@ -17,4 +17,6 @@ public interface NoteMapper {
 
 	public int updateNote(Map<String, String> paramMap);
 
+	public int deleteNote(Map<String, String> paramMap);
+
 }

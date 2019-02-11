@@ -2,6 +2,7 @@ package com.product.luffy.controller;
 
 
 import java.util.Map;
+import java.util.HashMap;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -75,6 +76,21 @@ public class NoteController {
 		return responseObject;
 	}
 
+	@RequestMapping(method=RequestMethod.DELETE, value="/{noteId}")
+	public @ResponseBody ResponseObject<String>deleteNote(@PathVariable("noteId") String noteId ){
+		ResponseObject<String> responseObject = new ResponseObject<String>();
+		int rtn = 0;
+		
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("noteId", noteId);
+
+		rtn = noteService.deleteNote(paramMap);
+
+		responseObject.setData(rtn);
+		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		
+		return responseObject;
+	}
 
 	private Map<String, String> checkInsertNoteParam(Map<String, String> params){
 		if(params.get("noteNm") == null || params.get("sex") == null || params.get("birthDt") == null ){

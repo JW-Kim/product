@@ -46,4 +46,8 @@ public class NoteServiceImpl implements NoteService{
 		return noteMapper.updateNote(paramMap);
 	}
 
+	public int deleteNote(Map<String, String> paramMap){
+		return noteMapper.deletNote(paramMap);
+	}
+
 }

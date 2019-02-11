@@ -18,6 +18,8 @@
 		       INNER JOIN
 		          USER_NOTE_R R
 		       ON (N.NOTE_ID = R.NOTE_ID AND R.USER_ID = #{userId})
+		 WHERE N.NOTE_STAT_CD = '001'   		 
+
 	</select>
 
 	<insert id="insertNote" parameterType="map">
@@ -53,5 +55,10 @@
 			<if test="birthDt != null">BIRTH_DT = #{birthDt},</if>		</trim>
 	 	 WHERE NOTE_ID = #{noteId}  
   	</update>
-  
+
+	<update id="deleteNote">
+		UPDATE NOTE_F
+		   SET NOTE_STAT_CD = '002'
+		 WHERE NOTE_ID = #{noteId}
+    </update>
 </mapper>
