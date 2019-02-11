@@ -25,12 +25,14 @@
 	<insert id="insertNote" parameterType="map">
 		INSERT INTO NOTE_F ( NOTE_ID,
 								NOTE_NM,
+								NOTE_STAT_CD,
 								SEX,
 								BIRTH_DT,
 								REG_USER_ID,
 								REG_DTM )
 		VALUES (#{noteId},
 				 #{noteNm},	
+				 '001',
 				 #{sex},	
 				 #{birthDt},
 				 #{userId},
