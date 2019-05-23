@@ -3,8 +3,36 @@ package com.product.luffy.po;
 public class Note {
 	public String noteId;
 	public String noteNm;
+	public String noteStatCd;
+	public String sex;
+	public String birthDt;
 	public String regUserId;
 	public String regDtm;
+
+	public String getNoteStatCd() {
+		return noteStatCd;
+	}
+
+	public void setNoteStatCd(String noteStatCd) {
+		this.noteStatCd = noteStatCd;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getBirthDt() {
+		return birthDt;
+	}
+
+	public void setBirthDt(String birthDt) {
+		this.birthDt = birthDt;
+	}
+
 	public String getNoteId() {
 		return noteId;
 	}

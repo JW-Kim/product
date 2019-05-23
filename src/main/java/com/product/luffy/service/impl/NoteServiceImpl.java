@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.product.luffy.po.User;
 import org.springframework.stereotype.Service;
 
 import com.product.luffy.mapper.NoteMapper;
@@ -50,4 +51,23 @@ public class NoteServiceImpl implements NoteService{
 		return noteMapper.deleteNote(paramMap);
 	}
 
+	public Note selectNote(String noteId){
+		return noteMapper.selectNote(noteId);
+	}
+
+	public List<User> selectShareUserList(String noteId) {
+		return noteMapper.selectShareUserList(UserContext.getUserId(), noteId);
+	}
+
+	public int insertShareUser(Map<String, String> paramMap){
+		return noteMapper.insertShareUser(paramMap);
+	}
+
+	public int deleteShareUser(String noteId, String userId){
+		return noteMapper.deleteShareUser(noteId, userId);
+	}
+
+	public List<Note> selectShareNoteList(){
+		return noteMapper.selectShareNoteList(UserContext.getUserId());
+	}
 }

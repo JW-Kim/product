@@ -5,9 +5,21 @@
   <resultMap id="NoteResultMap" type="com.product.luffy.po.Note">
   	<id 	column="NOTE_ID" 		property="noteId"/>
   	<result	column="NOTE_NM" 		property="noteNm"/>
+	<result	column="NOTE_STAT_CD" 	property="noteStatCd"/>
+	<result	column="SEX" 		    property="sex"/>
+	<result	column="BIRTH_DT" 		property="birthDt"/>
   	<result	column="REG_USER_ID"	property="regUserId"/>
   	<result column="REG_DTM"		property="regDtm"/>
   </resultMap>
+
+	<resultMap id="UserResultMap" type="com.product.luffy.po.User">
+		<result column="USER_ID"             property="userId" />
+		<result column="USER_LOGIN_ID"       property="userLoginId" />
+		<result column="USER_PWD"       property="userPwd" />
+		<result column="USER_NM"       property="userNm" />
+		<result column="USER_ROLE"       property="userRole" />
+		<result column="REG_DTM"       property="regDtm" />
+	</resultMap>
   
 	<select id="selectNoteListByUserId" parameterType="map" resultMap="NoteResultMap">
 		SELECT N.NOTE_ID,
@@ -63,4 +75,56 @@
 		   SET NOTE_STAT_CD = '002'
 		 WHERE NOTE_ID = #{noteId}
     </update>
+
+    <select id="selectNote" parameterType="String" resultMap="NoteResultMap">
+		SELECT NOTE_ID,
+			    NOTE_NM,
+			    NOTE_STAT_CD,
+			    SEX,
+			    BIRTH_DT,
+			    REG_USER_ID,
+			    REG_DTM
+		  FROM NOTE_F
+	 	 WHERE NOTE_ID = #{noteId}
+	</select>
+
+	<select id="selectShareUserList" parameterType="String" resultMap="UserResultMap">
+		SELECT U.USER_ID,
+			    U.USER_LOGIN_ID,
+			    U.EMAIL,
+			    U.USER_NM
+		  FROM USER_NOTE_R UN
+		INNER JOIN USER_F U ON (UN.USER_ID = U.USER_ID)
+		 WHERE UN.NOTE_ID = #{noteId}
+		   AND UN.USER_ID != #{userId}
+	</select>
+
+	<insert id="insertShareUser" parameterType="Map">
+		INSERT INTO USER_NOTE_R ( USER_ID,
+		                           NOTE_ID,
+		                           REG_USER_ID,
+			                       REG_DTM )
+				VALUE (#{userId},
+		                #{noteId},
+		                #{regUserId),
+		                NOW())
+	</insert>
+
+	<delete id="deleteShareUser" parameterType="Map">
+		DELETE FROM USER_NOTE_R
+		 WHERE USER_ID = #{userId}
+		   AND NOTE_ID = #{noteId}
+	</delete>
+
+	<select id="selectShareNoteList" parameterType="String" resultMap="NoteResultMap">
+		SELECT N.NOTE_ID,
+			    N.NOTE_NM,
+			    N.NOTE_STAT_CD,
+			    N.SEX,
+			    N.BIRTH_DT
+		   FROM USER_NOTE_R UN
+		 INNER JOIN NOTE_F N
+		  ON (UN.NOTE_ID = N.NOTE_ID AND N.REG_USER_ID != #{userId} AND N.NOTE_STAT_CD = 001)
+		 WHERE USER_ID = #{userId}
+	</select>
 </mapper>
