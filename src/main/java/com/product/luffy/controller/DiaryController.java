@@ -135,7 +135,7 @@ public class DiaryController {
 		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 		return gridResponseObject;
 	}
-	
+
 	@RequestMapping(value="/disease/{diseaseId}", method=RequestMethod.GET)
 	public @ResponseBody ResponseObject<String> selectDisease(@PathVariable("diseaseId") String diseaseId){
 		LOGGER.debug(">>>>>>>>>>> selectDisease 시작 :"+ diseaseId);
@@ -192,9 +192,9 @@ public class DiaryController {
 		Diary diary = new Diary();
 		diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
 		String title = params.get("title") == null ? null : (String) params.get("title");
-		String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
 		String content = params.get("content") == null ? null : (String) params.get("content");
 		String fileId = params.get("fileId") == null ? null : (String) params.get("fileId");
+		String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
 		String diaryDt = "";
 		String feelingCd = params.get("feelingCd") == null ? "" : (String) params.get("feelingCd");
 		String healthCd = params.get("healthCd") == null ? "" : (String) params.get("healthCd");
