@@ -14,4 +14,5 @@ public interface UserService {
 
 	public int updateUser(Map<String, String> paramMap);
 
+	public List<User> selectSearchUser(String searchVal);
 }

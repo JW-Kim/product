@@ -76,6 +76,16 @@ public class UserController {
 		return responseObject;
 	}
 
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+	public @ResponseBody GridResponseObject<User> selectSearchUser(@RequestParam("searchVal") String searchVal){
+		GridResponseObject<User> gridResponseObject = new GridResponseObject<User>();
+
+		//To-do: searchVal cross-side script
+		gridResponseObject.setData(userService.selectSearchUser(searchVal));
+		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+		return gridResponseObject;
+	}
+
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody ResponseObject<String> insertUser(@RequestBody Map<String, Object> requestParams) {
 		ResponseObject<String> responseObject = new ResponseObject<String>();

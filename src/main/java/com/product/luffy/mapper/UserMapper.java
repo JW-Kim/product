@@ -16,4 +16,8 @@ public interface UserMapper {
 	int insertUser(Map<String, String> paramMap);
 
 	int updateUser(Map<String, String> paramMap);
+
+    List<User> selectSearchUser(String searchVal);
 }
+
+

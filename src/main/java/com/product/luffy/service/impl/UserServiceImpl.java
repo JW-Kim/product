@@ -40,4 +40,7 @@ public class UserServiceImpl implements UserService{
 		return userMapper.updateUser(paramMap);
 	}
 
+	public List<User> selectSearchUser(String searchVal) {
+		return userMapper.selectSearchUser(searchVal);
+	}
 }
