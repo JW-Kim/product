@@ -34,6 +34,17 @@
 
 	</select>
 
+	<select id="selectMyNoteListByUserId" parameterType="map" resultMap="NoteResultMap">
+		SELECT N.NOTE_ID,
+	        	N.NOTE_NM,
+		        N.REG_USER_ID,
+	        	N.REG_DTM
+		FROM    NOTE_F N
+	 	WHERE N.NOTE_STAT_CD = '001'
+           AND N.REG_USER_ID = #{userId}
+	 ORDER BY N.REG_DTM DESC
+	</select>
+
 	<insert id="insertNote" parameterType="map">
 		INSERT INTO NOTE_F ( NOTE_ID,
 								NOTE_NM,

@@ -38,6 +38,17 @@ public class NoteController {
 		return gridResponseObject;
 	}
 
+	@RequestMapping(method = RequestMethod.GET)
+	public @ResponseBody
+	GridResponseObject<Note> selectMyNoteListByUserId() {
+		GridResponseObject<Note> gridResponseObject = new GridResponseObject<Note>();
+
+		gridResponseObject.setData(noteService.selectMyNoteListByUserId());
+		gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+
+		return gridResponseObject;
+	}
+
 	@RequestMapping(value = "/{noteId}", method = RequestMethod.GET)
 	public @ResponseBody ResponseObject<Note> selectNote(@PathVariable("noteId") String noteId) {
 		ResponseObject<Note> responseObject = new ResponseObject<Note>();

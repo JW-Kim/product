@@ -30,6 +30,13 @@ public class NoteServiceImpl implements NoteService{
 		return noteMapper.selectNoteListByUserId(paramMap);
 	}
 
+	public List<Note> selectMyNoteListByUserId(){
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("userId", UserContext.getUserId());
+
+		return noteMapper.selectMyNoteListByUserId(paramMap);
+	}
+
 	public int insertNote(Map<String, String> paramMap){
 		int rtn = 0;
 		

@@ -12,6 +12,8 @@ import com.product.luffy.po.Note;
 public interface NoteMapper {
 	
 	public List<Note> selectNoteListByUserId(Map<String, String> paramMap);
+
+	public List<Note> selectMyNoteListByUserId(Map<String, String> paramMap);
 	
 	public int insertNote(Map<String, String> paramMap);
 
