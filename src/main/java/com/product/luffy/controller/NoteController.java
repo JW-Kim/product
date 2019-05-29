@@ -38,7 +38,7 @@ public class NoteController {
 		return gridResponseObject;
 	}
 
-	@RequestMapping(value = "my", method = RequestMethod.GET)
+	@RequestMapping(value = "/my", method = RequestMethod.GET)
 	public @ResponseBody
 	GridResponseObject<Note> selectMyNoteListByUserId() {
 		GridResponseObject<Note> gridResponseObject = new GridResponseObject<Note>();
