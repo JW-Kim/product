@@ -10,31 +10,31 @@ import com.product.luffy.po.Disease;
 
 @Repository("com.product.luffy.mapper.DiaryMapper")
 public interface DiaryMapper {
-	public List<Diary> selectDiaryList(Map<String, String> paramMap);
-	
-	public List<Diary> selectMonthDiaryList(Map<String, String> paramMap);
-	
-	public Diary selectDiary(Map<String, String> paramMap );
-	
-	public int insertDiary(Diary diary);
-	
-	public int insertState(Diary diary);
+    public List<Diary> selectDiaryList(Map<String, String> paramMap);
 
-	public int deleteDiary(Map<String, String> paramMap);
+    public List<Diary> selectMonthDiaryList(Map<String, String> paramMap);
 
-	public int deleteState(Map<String, String> paramMap);
-	
-	public int insertDisease(Disease disease);
-	
-	public int updateDiary(Diary diary);
-	
-	public int updateState(Diary diary);
-	
-	public int updateDisease(Disease disease);
+    public Diary selectDiary(Map<String, String> paramMap);
 
-	public int deleteDisease(Map<String, String> paramMap);
+    public int insertDiary(Diary diary);
 
-	public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
+    public int insertState(Diary diary);
 
-	public Disease selectDisease(Map<String, String> paramMap);
+    public int deleteDiary(Map<String, String> paramMap);
+
+    public int deleteState(Map<String, String> paramMap);
+
+    public int insertDisease(Disease disease);
+
+    public int updateDiary(Diary diary);
+
+    public int updateState(Diary diary);
+
+    public int updateDisease(Disease disease);
+
+    public int deleteDisease(Map<String, String> paramMap);
+
+    public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
+
+    public Disease selectDisease(Map<String, String> paramMap);
 }

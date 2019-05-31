@@ -8,24 +8,24 @@ import com.product.luffy.po.Note;
 import com.product.luffy.po.User;
 
 public interface NoteService {
-	public List<Note> selectNoteListByUserId();
+    public List<Note> selectNoteListByUserId();
 
-	public List<Note> selectMyNoteListByUserId();
+    public List<Note> selectMyNoteListByUserId();
 
-	public int insertNote(Map<String, String> paramMap);
+    public int insertNote(Map<String, String> paramMap);
 
-	public int updateNote(Map<String, String> paramMap);
+    public int updateNote(Map<String, String> paramMap);
 
-	public int deleteNote(Map<String, String> paramMap);
+    public int deleteNote(Map<String, String> paramMap);
 
-	public Note selectNote(String noteId);
+    public Note selectNote(String noteId);
 
-	public List<User> selectShareUserList(String noteId);
+    public List<User> selectShareUserList(String noteId);
 
-	public int insertShareUser(Map<String, String> paramMap);
+    public int insertShareUser(Map<String, String> paramMap);
 
-	public int deleteShareUser(String noteId, String userId);
+    public int deleteShareUser(String noteId, String userId);
 
-	public List<Note> selectShareNoteList();
-	
+    public List<Note> selectShareNoteList();
+
 }

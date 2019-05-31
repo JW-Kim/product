@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.product.luffy.po.File;
 
 public interface FileService {
-	public File insertFile(MultipartFile file);
-	
-	public File selectFile(Map<String, Object> paramMap);
+    public File insertFile(MultipartFile file);
+
+    public File selectFile(Map<String, Object> paramMap);
 }

@@ -42,14 +42,14 @@ public enum HttpResultCode implements ResultCode {
     }
 
     public static HttpResultCode get(int code) {
-        return (HttpResultCode)LOOKUP.get(code);
+        return (HttpResultCode) LOOKUP.get(code);
     }
 
     static {
         Iterator var0 = EnumSet.allOf(HttpResultCode.class).iterator();
 
-        while(var0.hasNext()) {
-            HttpResultCode type = (HttpResultCode)var0.next();
+        while (var0.hasNext()) {
+            HttpResultCode type = (HttpResultCode) var0.next();
             LOOKUP.put(type.getCode(), type);
         }
 

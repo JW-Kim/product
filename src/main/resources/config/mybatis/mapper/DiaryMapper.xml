@@ -1,282 +1,282 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.product.luffy.mapper.DiaryMapper" >
-  
-  <resultMap id="DiaryResultMap" type="com.product.luffy.po.Diary">
-  	<id 	column="DIARY_ID" 			property="diaryId"/>
-  	<result column="NOTE_ID"			property="noteId"/>
-  	<result column="TITLE"				property="title"/>
-  	<result column="CONTENT"    		property="content"/>
-  	<result column="REG_USER_ID"    	property="regUserId"/>
-  	<result column="FILE_ID"    		property="fileId"/>
-  	<result column="DIARY_DT"    		property="diaryDt"/>
-  	<result column="STATE_ID"    		property="stateId"/>
-  	<result column="FEELING_CD"     	property="feelingCd"/>
-  	<result column="HEALTH_CD"    		property="healthCd"/>
-  	<result column="FEVER_CD"    		property="feverCd"/>
-  	<result column="BREAKFAST_CD"   	property="breakfastCd"/>
-  	<result column="LUNCH_CD"    		property="lunchCd"/>
-  	<result column="DINNER_CD"    		property="dinnerCd"/>
-  	<result column="SHIT_CD"    		property="shitCd"/>
-  	<result column="SHIT_CNT"    		property="shitCnt"/>
-  	<result column="SHIT_DESC"    		property="shitDesc"/>
-  	<result column="SLEEP_START_TIME"   property="sleepStartTime"/>
-  	<result column="SLEEP_END_TIME"    	property="sleepEndTime"/>
-  	<result column="REG_DTM"    		property="regDtm"/>
- 	<result column="CHG_REG_DTM"        property="chgRegDtm"/>
- 	<result column="HEADER_TITLE"       property="headerTitle"/>
- 	<result column="HEIGHT"       		property="height"/>
- 	<result column="WEIGHT"       		property="weight"/>
-  </resultMap>
-  
-  <resultMap id="diseaseMap" type="com.product.luffy.po.Disease">
-  	<id 	column="DISEASE_ID" 		property="diseaseId"/>
-    <result column="NOTE_ID"       	    property="noteId"/>
- 	<result column="DISEASE_NM"       	property="diseaseNm"/>
- 	<result column="SYMPTOM"       		property="symptom"/>
- 	<result column="HOSPITAL_NM"       	property="hospitalNm"/>
- 	<result column="PRESCRIPTION"       property="prescription"/>
-	<result column="DISEASE_DT"			property="diseaseDt"/>
-  </resultMap>
-  
-  <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
-		SELECT A.DIARY_ID,
-			   A.NOTE_ID,	
-		       A.TITLE,
-		       A.CONTENT,
-		       A.REG_USER_ID,
-		       A.FILE_ID,
-		       A.DIARY_DT,
-		       B.STATE_ID,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEELING_CD = C.CD_DTL_ID)   AS FEELING_CD,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.HEALTH_CD = C.CD_DTL_ID)    AS HEALTH_CD,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEVER_CD = C.CD_DTL_ID)     AS FEVER_CD,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.BREAKFAST_CD = C.CD_DTL_ID) AS BREAKFAST_CD,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.LUNCH_CD = C.CD_DTL_ID)     AS LUNCH_CD,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.DINNER_CD = C.CD_DTL_ID)    AS DINNER_CD,
-		       (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.SHIT_CD = C.CD_DTL_ID)      AS SHIT_CD,
-		       B.SHIT_CNT,
-		       B.SHIT_DESC,
-		       B.SLEEP_START_TIME,
-		       B.SLEEP_END_TIME,
-		       CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
-		       CONCAT(CAST(DATE_FORMAT(A.DIARY_DT, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.DIARY_DT)
-		          WHEN '1' THEN '(일)'
-		          WHEN '2' THEN '(월)'
-		          WHEN '3' THEN '(화)'
-		          WHEN '4' THEN '(수)'
-		          WHEN '5' THEN '(목)'
-		          WHEN '6' THEN '(금)'
-		          WHEN '7' THEN '(토)'
-		       END) AS HEADER_TITLE,
-		       B.HEIGHT,
-		       B.WEIGHT
-		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
-		 WHERE A.NOTE_ID = #{noteId}
-		   AND A.DIARY_STAT_CD = '001'
-		ORDER BY A.DIARY_DT DESC
-  </select>
-  
-  <select id="selectMonthDiaryList" parameterType="map" resultMap="DiaryResultMap">
-  	SELECT A.DIARY_ID,
-	       A.NOTE_ID,
-	       A.TITLE,
-	       A.CONTENT,
-	       A.REG_USER_ID,
-	       A.FILE_ID,
-	       A.DIARY_DT,
-	       A.REG_DTM
-	  FROM DIARY_F A
-	 WHERE  A.NOTE_ID = #{noteId}
-	   AND A.DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
-	   AND A.DIARY_STAT_CD = '001'	
-	 ORDER BY A.DIARY_DT ASC
-  </select>
-  
-  <select id="selectDiary" parameterType="map" resultMap="DiaryResultMap">  
-		SELECT A.DIARY_ID,
-			   A.NOTE_ID,	
-		       A.TITLE,
-		       A.CONTENT,
-		       A.REG_USER_ID,
-		       A.FILE_ID,
-		       A.DIARY_DT,
-		       B.STATE_ID,
-		       B.FEELING_CD,
-		       B.HEALTH_CD,
-		       B.FEVER_CD,
-		       B.BREAKFAST_CD,
-		       B.LUNCH_CD,
-		       B.DINNER_CD,
-		       B.SHIT_CD,
-		       B.SHIT_CNT,
-		       B.SHIT_DESC,
-		       B.SLEEP_START_TIME,
-		       B.SLEEP_END_TIME,
-		       CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
-		       CONCAT(CAST(DATE_FORMAT(A.REG_DTM, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.REG_DTM)
-		          WHEN '1' THEN '(일)'
-		          WHEN '2' THEN '(월)'
-		          WHEN '3' THEN '(화)'
-		          WHEN '4' THEN '(수)'
-		          WHEN '5' THEN '(목)'
-		          WHEN '6' THEN '(금)'
-		          WHEN '7' THEN '(토)'
-		       END) AS CHG_REG_DTM,
-		       B.HEIGHT,
-		       B.WEIGHT
-		  FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
-		 WHERE A.DIARY_ID = #{diaryId}
-		   AND A.DIARY_STAT_CD = '001'
+<mapper namespace="com.product.luffy.mapper.DiaryMapper">
 
-  </select>
- 
-  <insert id="insertDiary" parameterType="com.product.luffy.po.Diary">
-	  INSERT INTO `DIARY_F`(`DIARY_ID`,
-	  					    `NOTE_ID`,
-							`DIARY_STAT_CD`, 
-	                      `TITLE`,
-	                      `CONTENT`,
-	                      `REG_USER_ID`,
-	                      `FILE_ID`,
-	                      `DIARY_DT`,
-	                      `REG_DTM`)
-		VALUES (#{diaryId},
-				#{noteId},
-				'001',
-		        #{title},
-		        #{content},
-		        #{regUserId},
-		        #{fileId},
-		        #{diaryDt},
-		        NOW())
-  </insert> 	
-  
-  <insert id="insertState" parameterType="com.product.luffy.po.Diary">
-	  INSERT INTO `STATE_F`(`STATE_ID`,
-	                      `DIARY_ID`,
-	                      `FEELING_CD`,
-	                      `HEALTH_CD`,
-	                      `FEVER_CD`,
-	                      `BREAKFAST_CD`,
-	                      `LUNCH_CD`,
-	                      `DINNER_CD`,
-	                      `SHIT_CD`,
-	                      `SHIT_CNT`,
-	                      `SHIT_DESC`,
-	                      `SLEEP_START_TIME`,
-	                      `SLEEP_END_TIME`,
-	                      `HEIGHT`,
-	                      `WEIGHT`,
-	                      `REG_DTM`)
-		VALUES (#{stateId},
-		        #{diaryId},
-		        #{feelingCd},
-		        #{healthCd},
-		        #{feverCd},
-		        #{breakfastCd},
-		        #{lunchCd},
-		        #{dinnerCd},
-		        #{shitCd},
-		        #{shitCnt},
-		        #{shitDesc},
-		        #{sleepStartTime},
-		        #{sleepEndTime},
-     		    #{height},
-		        #{weight},
-		        NOW())
-  </insert>
-  
-  <insert id="insertDisease" parameterType="com.product.luffy.po.Disease">
-	  INSERT INTO DISEASE_F(DISEASE_ID,
-	                      NOTE_ID,
-	                      DISEASE_DT,
-	                      DISEASE_NM,
-	                      SYMPTOM,
-	                      HOSPITAL_NM,
-	                      PRESCRIPTION)
-		VALUES (#{diseaseId},
-		        #{noteId},
-		        #{diseaseDt},
-		        #{diseaseNm},
-		        #{symptom},
-		        #{hospitalNm},
-		        #{prescription})
-  </insert>
-  
-  <update id="updateDiary" parameterType="com.product.luffy.po.Diary">
-	UPDATE DIARY_F
-	   SET TITLE = #{title}, 
-	   CONTENT = #{content},
-	   FILE_ID = #{fileId}
-	 WHERE DIARY_ID = #{diaryId}
-  </update>
-  
-  <update id="updateState" parameterType="com.product.luffy.po.Diary">
-	  UPDATE STATE_F
-	   SET FEELING_CD = #{feelingCd},
-	       HEALTH_CD = #{healthCd},
-	       FEVER_CD = #{feverCd},
-	       BREAKFAST_CD = #{breakfastCd},
-	       LUNCH_CD = #{lunchCd},
-	       DINNER_CD = #{dinnerCd},
-	       SHIT_CD = #{shitCd},
-	       SHIT_CNT = #{shitCnt},
-	       SHIT_DESC = #{shitDesc},
-	       SLEEP_START_TIME = #{sleepStartTime},
-	       SLEEP_END_TIME = #{sleepEndTime},
-	       HEIGHT = #{height},
-	       WEIGHT = #{weight}
-	 WHERE DIARY_ID = #{diaryId};
-  </update>
-  
-  <update id="updateDisease" parameterType="com.product.luffy.po.Disease">
-  	UPDATE DISEASE_F
-  	   SET DISEASE_NM = #{diseaseNm},
-  	       SYMPTOM = #{symptom},
-  	       HOSPITAL_NM = #{hospitalNm},
-  	       PRESCRIPTION = #{prescription}
-  	 WHERE DISEASE_ID = #{diseaseId}  
-  </update>
+    <resultMap id="DiaryResultMap" type="com.product.luffy.po.Diary">
+        <id column="DIARY_ID" property="diaryId"/>
+        <result column="NOTE_ID" property="noteId"/>
+        <result column="TITLE" property="title"/>
+        <result column="CONTENT" property="content"/>
+        <result column="REG_USER_ID" property="regUserId"/>
+        <result column="FILE_ID" property="fileId"/>
+        <result column="DIARY_DT" property="diaryDt"/>
+        <result column="STATE_ID" property="stateId"/>
+        <result column="FEELING_CD" property="feelingCd"/>
+        <result column="HEALTH_CD" property="healthCd"/>
+        <result column="FEVER_CD" property="feverCd"/>
+        <result column="BREAKFAST_CD" property="breakfastCd"/>
+        <result column="LUNCH_CD" property="lunchCd"/>
+        <result column="DINNER_CD" property="dinnerCd"/>
+        <result column="SHIT_CD" property="shitCd"/>
+        <result column="SHIT_CNT" property="shitCnt"/>
+        <result column="SHIT_DESC" property="shitDesc"/>
+        <result column="SLEEP_START_TIME" property="sleepStartTime"/>
+        <result column="SLEEP_END_TIME" property="sleepEndTime"/>
+        <result column="REG_DTM" property="regDtm"/>
+        <result column="CHG_REG_DTM" property="chgRegDtm"/>
+        <result column="HEADER_TITLE" property="headerTitle"/>
+        <result column="HEIGHT" property="height"/>
+        <result column="WEIGHT" property="weight"/>
+    </resultMap>
 
-	<select id="selectDiseaseMonth" parameterType="map" resultMap="diseaseMap">
-		SELECT DISEASE_ID,
-			   NOTE_ID,
-			   DISEASE_DT,
-			   DISEASE_NM,
-			   SYMPTOM,
-			   HOSPITAL_NM,
-			   PRESCRIPTION
-		  FROM DISEASE_F
-		 WHERE NOTE_ID = #{noteId}
-		   AND DISEASE_DT LIKE CONCAT(#{diseaseMonth}, '-%');
-	</select>
+    <resultMap id="diseaseMap" type="com.product.luffy.po.Disease">
+        <id column="DISEASE_ID" property="diseaseId"/>
+        <result column="NOTE_ID" property="noteId"/>
+        <result column="DISEASE_NM" property="diseaseNm"/>
+        <result column="SYMPTOM" property="symptom"/>
+        <result column="HOSPITAL_NM" property="hospitalNm"/>
+        <result column="PRESCRIPTION" property="prescription"/>
+        <result column="DISEASE_DT" property="diseaseDt"/>
+    </resultMap>
 
-	<select id="selectDisease" parameterType="map" resultMap="diseaseMap">
-		SELECT DISEASE_ID,
-			   NOTE_ID,
-			   DISEASE_DT,
-			   DISEASE_NM,
-			   SYMPTOM,
-			   HOSPITAL_NM,
-			   PRESCRIPTION
-		  FROM DISEASE_F
-		 WHERE DISEASE_ID = #{diseaseId}
-	</select>
+    <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
+        SELECT A.DIARY_ID,
+        A.NOTE_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.REG_USER_ID,
+        A.FILE_ID,
+        A.DIARY_DT,
+        B.STATE_ID,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEELING_CD = C.CD_DTL_ID) AS FEELING_CD,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.HEALTH_CD = C.CD_DTL_ID) AS HEALTH_CD,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEVER_CD = C.CD_DTL_ID) AS FEVER_CD,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.BREAKFAST_CD = C.CD_DTL_ID) AS BREAKFAST_CD,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.LUNCH_CD = C.CD_DTL_ID) AS LUNCH_CD,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.DINNER_CD = C.CD_DTL_ID) AS DINNER_CD,
+        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.SHIT_CD = C.CD_DTL_ID) AS SHIT_CD,
+        B.SHIT_CNT,
+        B.SHIT_DESC,
+        B.SLEEP_START_TIME,
+        B.SLEEP_END_TIME,
+        CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
+        CONCAT(CAST(DATE_FORMAT(A.DIARY_DT, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.DIARY_DT)
+        WHEN '1' THEN '(일)'
+        WHEN '2' THEN '(월)'
+        WHEN '3' THEN '(화)'
+        WHEN '4' THEN '(수)'
+        WHEN '5' THEN '(목)'
+        WHEN '6' THEN '(금)'
+        WHEN '7' THEN '(토)'
+        END) AS HEADER_TITLE,
+        B.HEIGHT,
+        B.WEIGHT
+        FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
+        WHERE A.NOTE_ID = #{noteId}
+        AND A.DIARY_STAT_CD = '001'
+        ORDER BY A.DIARY_DT DESC
+    </select>
 
-	<delete id="deleteDisease" parameterType="map">
-		DELETE FROM DISEASE_F
-		WHERE DISEASE_ID = #{diseaseId}
-	</delete>
+    <select id="selectMonthDiaryList" parameterType="map" resultMap="DiaryResultMap">
+        SELECT A.DIARY_ID,
+        A.NOTE_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.REG_USER_ID,
+        A.FILE_ID,
+        A.DIARY_DT,
+        A.REG_DTM
+        FROM DIARY_F A
+        WHERE A.NOTE_ID = #{noteId}
+        AND A.DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
+        AND A.DIARY_STAT_CD = '001'
+        ORDER BY A.DIARY_DT ASC
+    </select>
 
-	<delete id="deleteState" parameterType="map">
-		DELETE FROM STATE_F
-		WHERE DIARY_ID = #{diaryId}
-	</delete>
+    <select id="selectDiary" parameterType="map" resultMap="DiaryResultMap">
+        SELECT A.DIARY_ID,
+        A.NOTE_ID,
+        A.TITLE,
+        A.CONTENT,
+        A.REG_USER_ID,
+        A.FILE_ID,
+        A.DIARY_DT,
+        B.STATE_ID,
+        B.FEELING_CD,
+        B.HEALTH_CD,
+        B.FEVER_CD,
+        B.BREAKFAST_CD,
+        B.LUNCH_CD,
+        B.DINNER_CD,
+        B.SHIT_CD,
+        B.SHIT_CNT,
+        B.SHIT_DESC,
+        B.SLEEP_START_TIME,
+        B.SLEEP_END_TIME,
+        CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
+        CONCAT(CAST(DATE_FORMAT(A.REG_DTM, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.REG_DTM)
+        WHEN '1' THEN '(일)'
+        WHEN '2' THEN '(월)'
+        WHEN '3' THEN '(화)'
+        WHEN '4' THEN '(수)'
+        WHEN '5' THEN '(목)'
+        WHEN '6' THEN '(금)'
+        WHEN '7' THEN '(토)'
+        END) AS CHG_REG_DTM,
+        B.HEIGHT,
+        B.WEIGHT
+        FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
+        WHERE A.DIARY_ID = #{diaryId}
+        AND A.DIARY_STAT_CD = '001'
 
-	<update id="deleteDiary" parameterType="map">
-		UPDATE DIARY_F
-		   SET DIARY_STAT_CD = '002'
-		WHERE DIARY_ID = #{diaryId}
-	</update>
+    </select>
+
+    <insert id="insertDiary" parameterType="com.product.luffy.po.Diary">
+        INSERT INTO `DIARY_F`(`DIARY_ID`,
+        `NOTE_ID`,
+        `DIARY_STAT_CD`,
+        `TITLE`,
+        `CONTENT`,
+        `REG_USER_ID`,
+        `FILE_ID`,
+        `DIARY_DT`,
+        `REG_DTM`)
+        VALUES (#{diaryId},
+        #{noteId},
+        '001',
+        #{title},
+        #{content},
+        #{regUserId},
+        #{fileId},
+        #{diaryDt},
+        NOW())
+    </insert>
+
+    <insert id="insertState" parameterType="com.product.luffy.po.Diary">
+        INSERT INTO `STATE_F`(`STATE_ID`,
+        `DIARY_ID`,
+        `FEELING_CD`,
+        `HEALTH_CD`,
+        `FEVER_CD`,
+        `BREAKFAST_CD`,
+        `LUNCH_CD`,
+        `DINNER_CD`,
+        `SHIT_CD`,
+        `SHIT_CNT`,
+        `SHIT_DESC`,
+        `SLEEP_START_TIME`,
+        `SLEEP_END_TIME`,
+        `HEIGHT`,
+        `WEIGHT`,
+        `REG_DTM`)
+        VALUES (#{stateId},
+        #{diaryId},
+        #{feelingCd},
+        #{healthCd},
+        #{feverCd},
+        #{breakfastCd},
+        #{lunchCd},
+        #{dinnerCd},
+        #{shitCd},
+        #{shitCnt},
+        #{shitDesc},
+        #{sleepStartTime},
+        #{sleepEndTime},
+        #{height},
+        #{weight},
+        NOW())
+    </insert>
+
+    <insert id="insertDisease" parameterType="com.product.luffy.po.Disease">
+        INSERT INTO DISEASE_F(DISEASE_ID,
+        NOTE_ID,
+        DISEASE_DT,
+        DISEASE_NM,
+        SYMPTOM,
+        HOSPITAL_NM,
+        PRESCRIPTION)
+        VALUES (#{diseaseId},
+        #{noteId},
+        #{diseaseDt},
+        #{diseaseNm},
+        #{symptom},
+        #{hospitalNm},
+        #{prescription})
+    </insert>
+
+    <update id="updateDiary" parameterType="com.product.luffy.po.Diary">
+        UPDATE DIARY_F
+        SET TITLE = #{title},
+        CONTENT = #{content},
+        FILE_ID = #{fileId}
+        WHERE DIARY_ID = #{diaryId}
+    </update>
+
+    <update id="updateState" parameterType="com.product.luffy.po.Diary">
+        UPDATE STATE_F
+        SET FEELING_CD = #{feelingCd},
+        HEALTH_CD = #{healthCd},
+        FEVER_CD = #{feverCd},
+        BREAKFAST_CD = #{breakfastCd},
+        LUNCH_CD = #{lunchCd},
+        DINNER_CD = #{dinnerCd},
+        SHIT_CD = #{shitCd},
+        SHIT_CNT = #{shitCnt},
+        SHIT_DESC = #{shitDesc},
+        SLEEP_START_TIME = #{sleepStartTime},
+        SLEEP_END_TIME = #{sleepEndTime},
+        HEIGHT = #{height},
+        WEIGHT = #{weight}
+        WHERE DIARY_ID = #{diaryId};
+    </update>
+
+    <update id="updateDisease" parameterType="com.product.luffy.po.Disease">
+        UPDATE DISEASE_F
+        SET DISEASE_NM = #{diseaseNm},
+        SYMPTOM = #{symptom},
+        HOSPITAL_NM = #{hospitalNm},
+        PRESCRIPTION = #{prescription}
+        WHERE DISEASE_ID = #{diseaseId}
+    </update>
+
+    <select id="selectDiseaseMonth" parameterType="map" resultMap="diseaseMap">
+        SELECT DISEASE_ID,
+        NOTE_ID,
+        DISEASE_DT,
+        DISEASE_NM,
+        SYMPTOM,
+        HOSPITAL_NM,
+        PRESCRIPTION
+        FROM DISEASE_F
+        WHERE NOTE_ID = #{noteId}
+        AND DISEASE_DT LIKE CONCAT(#{diseaseMonth}, '-%');
+    </select>
+
+    <select id="selectDisease" parameterType="map" resultMap="diseaseMap">
+        SELECT DISEASE_ID,
+        NOTE_ID,
+        DISEASE_DT,
+        DISEASE_NM,
+        SYMPTOM,
+        HOSPITAL_NM,
+        PRESCRIPTION
+        FROM DISEASE_F
+        WHERE DISEASE_ID = #{diseaseId}
+    </select>
+
+    <delete id="deleteDisease" parameterType="map">
+        DELETE FROM DISEASE_F
+        WHERE DISEASE_ID = #{diseaseId}
+    </delete>
+
+    <delete id="deleteState" parameterType="map">
+        DELETE FROM STATE_F
+        WHERE DIARY_ID = #{diaryId}
+    </delete>
+
+    <update id="deleteDiary" parameterType="map">
+        UPDATE DIARY_F
+        SET DIARY_STAT_CD = '002'
+        WHERE DIARY_ID = #{diaryId}
+    </update>
 </mapper>

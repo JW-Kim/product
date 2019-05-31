@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.product.luffy.mapper.FileMapper" >
-	<resultMap id="FileMap" type="com.product.luffy.po.File">
-  		<id 	column="FILE_ID" 					property="fileId"/>
-  		<result column="FILE_NM"					property="fileNm"/>
-  		<result column="FILE_EXT_NM"				property="fileExtNm"/>
-  		<result column="FILE_SIZE"					property="fileSize"/>
-  		<result column="FILE_PATH"					property="filePath"/>
-  		<result column="REG_DTM"					property="regDtm"/>
-	</resultMap>
-	
-	<insert id="insertFile" parameterType="com.product.luffy.po.File">
-		INSERT INTO `FILE_F`(`FILE_ID`,
-		                     `FILE_NM`,
-		                     `FILE_EXT_NM`,
-		                     `FILE_SIZE`,
-		                     `FILE_PATH`,
-		                     `REG_DTM`)
-		VALUES (#{fileId},
-		        #{fileNm},
-		        #{fileExtNm},
-		        #{fileSize},
-		        #{filePath},
-		        NOW());
-	</insert>
-	
-	<select id="selectFile" parameterType="map" resultMap="FileMap">
-		SELECT FILE_ID,
-		       FILE_NM,
-		       FILE_EXT_NM,
-		       FILE_SIZE,
-		       FILE_PATH,
-		       REG_DTM
-		  FROM FILE_F
-		  WHERE FILE_ID = #{fileId}
-	</select>
+<mapper namespace="com.product.luffy.mapper.FileMapper">
+    <resultMap id="FileMap" type="com.product.luffy.po.File">
+        <id column="FILE_ID" property="fileId"/>
+        <result column="FILE_NM" property="fileNm"/>
+        <result column="FILE_EXT_NM" property="fileExtNm"/>
+        <result column="FILE_SIZE" property="fileSize"/>
+        <result column="FILE_PATH" property="filePath"/>
+        <result column="REG_DTM" property="regDtm"/>
+    </resultMap>
+
+    <insert id="insertFile" parameterType="com.product.luffy.po.File">
+        INSERT INTO `FILE_F`(`FILE_ID`,
+        `FILE_NM`,
+        `FILE_EXT_NM`,
+        `FILE_SIZE`,
+        `FILE_PATH`,
+        `REG_DTM`)
+        VALUES (#{fileId},
+        #{fileNm},
+        #{fileExtNm},
+        #{fileSize},
+        #{filePath},
+        NOW());
+    </insert>
+
+    <select id="selectFile" parameterType="map" resultMap="FileMap">
+        SELECT FILE_ID,
+        FILE_NM,
+        FILE_EXT_NM,
+        FILE_SIZE,
+        FILE_PATH,
+        REG_DTM
+        FROM FILE_F
+        WHERE FILE_ID = #{fileId}
+    </select>
 </mapper>

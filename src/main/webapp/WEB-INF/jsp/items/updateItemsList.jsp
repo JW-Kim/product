@@ -10,6 +10,7 @@
             document.itemsForm.action = "${pageContext.request.contextPath}/items/query_items";
             document.itemsForm.submit();
         }
+
         function batch_update_items() {
             document.itemsForm.action = "${pageContext.request.contextPath}/items/batch_update_items";
             document.itemsForm.submit();
@@ -56,7 +57,9 @@
                 <td><input type="text" name="itemsCustomMap['name']" value="${itemsCustom.name}"></td>
                 <td><input type="text" name="itemsCustomMap['price']" value="${itemsCustom.price}"></td>
                 <td><input type="text" name="itemsCustomMap['picture']" value="${itemsCustom.picture}"></td>
-                <td><input type="text" name="itemsCustomMap['createtime']" value="<fmt:formatDate value="${itemsCustom.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>"></td>
+                <td><input type="text" name="itemsCustomMap['createtime']"
+                           value="<fmt:formatDate value="${itemsCustom.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>">
+                </td>
                 <td><input type="text" name="itemsCustomMap['detail']" value="${itemsCustom.detail}"></td>
             </tr>
         </c:forEach>

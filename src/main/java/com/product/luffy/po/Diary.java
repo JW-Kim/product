@@ -3,398 +3,299 @@ package com.product.luffy.po;
 import java.sql.Date;
 
 public class Diary {
-	private String diaryId;
-	private String noteId;
-	private String title;
-	private String content;
-	private String regUserId;
-	private String fileId;
-	private String diaryDt;
-	private String stateId;
-	private String feelingCd;
-	private String healthCd;
-	private String feverCd;
-	private String breakfastCd;
-	private String lunchCd;
-	private String dinnerCd;
-	private String shitCd;
-	private String shitCnt;
-	private String shitDesc;
-	private String sleepStartTime;
-	private String sleepEndTime;
-	private String regDtm;
-	private String chgRegDtm;
-	private String headerTitle;
-	private int height;
-	private float weight;
+    private String diaryId;
+    private String noteId;
+    private String title;
+    private String content;
+    private String regUserId;
+    private String fileId;
+    private String diaryDt;
+    private String stateId;
+    private String feelingCd;
+    private String healthCd;
+    private String feverCd;
+    private String breakfastCd;
+    private String lunchCd;
+    private String dinnerCd;
+    private String shitCd;
+    private String shitCnt;
+    private String shitDesc;
+    private String sleepStartTime;
+    private String sleepEndTime;
+    private String regDtm;
+    private String chgRegDtm;
+    private String headerTitle;
+    private int height;
+    private float weight;
 
-	
-	public String getDiaryId() {
-		return diaryId;
-	}
 
+    public String getDiaryId() {
+        return diaryId;
+    }
 
 
+    public void setDiaryId(String diaryId) {
+        this.diaryId = diaryId;
+    }
 
-	public void setDiaryId(String diaryId) {
-		this.diaryId = diaryId;
-	}
 
+    public String getNoteId() {
+        return noteId;
+    }
 
 
+    public void setNoteId(String noteId) {
+        this.noteId = noteId;
+    }
 
-	public String getNoteId() {
-		return noteId;
-	}
 
+    public String getTitle() {
+        return title;
+    }
 
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setNoteId(String noteId) {
-		this.noteId = noteId;
-	}
 
+    public String getContent() {
+        return content;
+    }
 
 
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getTitle() {
-		return title;
-	}
 
+    public String getDiaryDt() {
+        return diaryDt;
+    }
 
 
+    public void setDiaryDt(String diaryDt) {
+        this.diaryDt = diaryDt;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
 
+    public String getRegUserId() {
+        return regUserId;
+    }
 
 
+    public void setRegUserId(String regUserId) {
+        this.regUserId = regUserId;
+    }
 
-	public String getContent() {
-		return content;
-	}
 
+    public String getFileId() {
+        return fileId;
+    }
 
 
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
 
-	
+    public String getStateId() {
+        return stateId;
+    }
 
 
+    public void setStateId(String stateId) {
+        this.stateId = stateId;
+    }
 
 
-	public String getDiaryDt() {
-		return diaryDt;
-	}
+    public String getFeelingCd() {
+        return feelingCd;
+    }
 
 
+    public void setFeelingCd(String feelingCd) {
+        this.feelingCd = feelingCd;
+    }
 
 
-	public void setDiaryDt(String diaryDt) {
-		this.diaryDt = diaryDt;
-	}
+    public String getHealthCd() {
+        return healthCd;
+    }
 
 
+    public void setHealthCd(String healthCd) {
+        this.healthCd = healthCd;
+    }
 
 
-	public String getRegUserId() {
-		return regUserId;
-	}
+    public String getFeverCd() {
+        return feverCd;
+    }
 
 
+    public void setFeverCd(String feverCd) {
+        this.feverCd = feverCd;
+    }
 
 
-	public void setRegUserId(String regUserId) {
-		this.regUserId = regUserId;
-	}
+    public String getBreakfastCd() {
+        return breakfastCd;
+    }
 
 
+    public void setBreakfastCd(String breakfastCd) {
+        this.breakfastCd = breakfastCd;
+    }
 
 
-	public String getFileId() {
-		return fileId;
-	}
+    public String getLunchCd() {
+        return lunchCd;
+    }
 
 
+    public void setLunchCd(String lunchCd) {
+        this.lunchCd = lunchCd;
+    }
 
 
-	public void setFileId(String fileId) {
-		this.fileId = fileId;
-	}
+    public String getDinnerCd() {
+        return dinnerCd;
+    }
 
 
+    public void setDinnerCd(String dinnerCd) {
+        this.dinnerCd = dinnerCd;
+    }
 
 
-	public String getStateId() {
-		return stateId;
-	}
+    public String getShitCd() {
+        return shitCd;
+    }
 
 
+    public void setShitCd(String shitCd) {
+        this.shitCd = shitCd;
+    }
 
 
-	public void setStateId(String stateId) {
-		this.stateId = stateId;
-	}
+    public String getShitCnt() {
+        return shitCnt;
+    }
 
 
+    public void setShitCnt(String shitCnt) {
+        this.shitCnt = shitCnt;
+    }
 
 
-	public String getFeelingCd() {
-		return feelingCd;
-	}
+    public String getShitDesc() {
+        return shitDesc;
+    }
 
 
+    public void setShitDesc(String shitDesc) {
+        this.shitDesc = shitDesc;
+    }
 
 
-	public void setFeelingCd(String feelingCd) {
-		this.feelingCd = feelingCd;
-	}
+    public String getSleepStartTime() {
+        return sleepStartTime;
+    }
 
 
+    public void setSleepStartTime(String sleepStartTime) {
+        this.sleepStartTime = sleepStartTime;
+    }
 
 
-	public String getHealthCd() {
-		return healthCd;
-	}
+    public String getSleepEndTime() {
+        return sleepEndTime;
+    }
 
 
+    public void setSleepEndTime(String sleepEndTime) {
+        this.sleepEndTime = sleepEndTime;
+    }
 
 
-	public void setHealthCd(String healthCd) {
-		this.healthCd = healthCd;
-	}
+    public String getRegDtm() {
+        return regDtm;
+    }
 
 
+    public void setRegDtm(String regDtm) {
+        this.regDtm = regDtm;
+    }
 
 
-	public String getFeverCd() {
-		return feverCd;
-	}
+    public String getChgRegDtm() {
+        return chgRegDtm;
+    }
 
 
+    public void setChgRegDtm(String chgRegDtm) {
+        this.chgRegDtm = chgRegDtm;
+    }
 
 
-	public void setFeverCd(String feverCd) {
-		this.feverCd = feverCd;
-	}
+    public String getHeaderTitle() {
+        return headerTitle;
+    }
 
 
+    public void setHeaderTitle(String headerTitle) {
+        this.headerTitle = headerTitle;
+    }
 
 
-	public String getBreakfastCd() {
-		return breakfastCd;
-	}
+    public int getHeight() {
+        return height;
+    }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
 
+    public float getWeight() {
+        return weight;
+    }
 
-	public void setBreakfastCd(String breakfastCd) {
-		this.breakfastCd = breakfastCd;
-	}
 
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
 
-
-
-	public String getLunchCd() {
-		return lunchCd;
-	}
-
-
-
-
-	public void setLunchCd(String lunchCd) {
-		this.lunchCd = lunchCd;
-	}
-
-
-
-
-	public String getDinnerCd() {
-		return dinnerCd;
-	}
-
-
-
-
-	public void setDinnerCd(String dinnerCd) {
-		this.dinnerCd = dinnerCd;
-	}
-
-
-
-
-	public String getShitCd() {
-		return shitCd;
-	}
-
-
-
-
-	public void setShitCd(String shitCd) {
-		this.shitCd = shitCd;
-	}
-
-
-
-
-
-	public String getShitCnt() {
-		return shitCnt;
-	}
-
-
-
-
-	public void setShitCnt(String shitCnt) {
-		this.shitCnt = shitCnt;
-	}
-
-
-
-
-	public String getShitDesc() {
-		return shitDesc;
-	}
-
-
-
-
-	public void setShitDesc(String shitDesc) {
-		this.shitDesc = shitDesc;
-	}
-
-
-
-
-
-
-
-	public String getSleepStartTime() {
-		return sleepStartTime;
-	}
-
-
-
-
-	public void setSleepStartTime(String sleepStartTime) {
-		this.sleepStartTime = sleepStartTime;
-	}
-
-
-
-
-	public String getSleepEndTime() {
-		return sleepEndTime;
-	}
-
-
-
-
-	public void setSleepEndTime(String sleepEndTime) {
-		this.sleepEndTime = sleepEndTime;
-	}
-
-
-
-
-
-
-	public String getRegDtm() {
-		return regDtm;
-	}
-
-
-
-
-	public void setRegDtm(String regDtm) {
-		this.regDtm = regDtm;
-	}
-
-
-
-
-	public String getChgRegDtm() {
-		return chgRegDtm;
-	}
-
-
-
-
-	public void setChgRegDtm(String chgRegDtm) {
-		this.chgRegDtm = chgRegDtm;
-	}
-
-
-
-
-	public String getHeaderTitle() {
-		return headerTitle;
-	}
-
-
-
-
-	public void setHeaderTitle(String headerTitle) {
-		this.headerTitle = headerTitle;
-	}
-
-
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-
-
-
-	public float getWeight() {
-		return weight;
-	}
-
-
-
-
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
-
-	@Override
-	public String toString() {
-		return "Diary{" +
-				"diaryId='" + diaryId + '\'' +
-				", noteId='" + noteId + '\'' +
-				", title='" + title + '\'' +
-				", content='" + content + '\'' +
-				", regUserId='" + regUserId + '\'' +
-				", fileId='" + fileId + '\'' +
-				", diaryDt='" + diaryDt + '\'' +
-				", stateId='" + stateId + '\'' +
-				", feelingCd='" + feelingCd + '\'' +
-				", healthCd='" + healthCd + '\'' +
-				", feverCd='" + feverCd + '\'' +
-				", breakfastCd='" + breakfastCd + '\'' +
-				", lunchCd='" + lunchCd + '\'' +
-				", dinnerCd='" + dinnerCd + '\'' +
-				", shitCd='" + shitCd + '\'' +
-				", shitCnt='" + shitCnt + '\'' +
-				", shitDesc='" + shitDesc + '\'' +
-				", sleepStartTime='" + sleepStartTime + '\'' +
-				", sleepEndTime='" + sleepEndTime + '\'' +
-				", regDtm='" + regDtm + '\'' +
-				", chgRegDtm='" + chgRegDtm + '\'' +
-				", headerTitle='" + headerTitle + '\'' +
-				", height='" + height + '\'' +
-				", weight=" + weight +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Diary{" +
+                "diaryId='" + diaryId + '\'' +
+                ", noteId='" + noteId + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", regUserId='" + regUserId + '\'' +
+                ", fileId='" + fileId + '\'' +
+                ", diaryDt='" + diaryDt + '\'' +
+                ", stateId='" + stateId + '\'' +
+                ", feelingCd='" + feelingCd + '\'' +
+                ", healthCd='" + healthCd + '\'' +
+                ", feverCd='" + feverCd + '\'' +
+                ", breakfastCd='" + breakfastCd + '\'' +
+                ", lunchCd='" + lunchCd + '\'' +
+                ", dinnerCd='" + dinnerCd + '\'' +
+                ", shitCd='" + shitCd + '\'' +
+                ", shitCnt='" + shitCnt + '\'' +
+                ", shitDesc='" + shitDesc + '\'' +
+                ", sleepStartTime='" + sleepStartTime + '\'' +
+                ", sleepEndTime='" + sleepEndTime + '\'' +
+                ", regDtm='" + regDtm + '\'' +
+                ", chgRegDtm='" + chgRegDtm + '\'' +
+                ", headerTitle='" + headerTitle + '\'' +
+                ", height='" + height + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 
 
 }

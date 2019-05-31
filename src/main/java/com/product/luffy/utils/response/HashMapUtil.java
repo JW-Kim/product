@@ -7,6 +7,6 @@ public final class HashMapUtil {
     }
 
     public static int getCapacity(int size) {
-        return (int)((float)size / 0.75F) + 1;
+        return (int) ((float) size / 0.75F) + 1;
     }
 }

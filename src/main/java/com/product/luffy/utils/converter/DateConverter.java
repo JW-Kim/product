@@ -14,18 +14,18 @@ import java.util.Date;
  */
 public class DateConverter implements Converter<String, Date> {
 
-	/**
-	 * 从字符串类型的日期转换成 Date 类型的日期
-	 */
-	public Date convert(String source) {
+    /**
+     * 从字符串类型的日期转换成 Date 类型的日期
+     */
+    public Date convert(String source) {
 
-		String pattern = "yyyy-MM-dd HH:mm:ss";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		try {
-			return simpleDateFormat.parse(source);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        try {
+            return simpleDateFormat.parse(source);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -12,35 +12,35 @@ import com.product.luffy.po.User;
 import com.product.luffy.service.UserService;
 
 @Service("com.product.luffy.service.impl.UserService")
-public class UserServiceImpl implements UserService{
-	
-	@Resource(name="com.product.luffy.mapper.UserMapper")
-	private UserMapper userMapper;
-	
-	public List<User> selectUserList(){
-		
-		List<User> userList = userMapper.selectUserList();
-		
-		for(int i=0; i<userList.size(); i++) {
-			System.out.println(">>>>>>>>>>"+userList.get(i).toString());
-		}
-		
-		return userList;
-	}
-	
-	public User selectUser(Map<String, String> paramMap) {
-		return userMapper.selectUser(paramMap);
-	}
+public class UserServiceImpl implements UserService {
 
-	public int insertUser(Map<String, String> paramMap) {
-		return userMapper.insertUser(paramMap);
-	}
+    @Resource(name = "com.product.luffy.mapper.UserMapper")
+    private UserMapper userMapper;
 
-	public int updateUser(Map<String, String> paramMap) {
-		return userMapper.updateUser(paramMap);
-	}
+    public List<User> selectUserList() {
 
-	public List<User> selectSearchUser(String searchVal) {
-		return userMapper.selectSearchUser(searchVal);
-	}
+        List<User> userList = userMapper.selectUserList();
+
+        for (int i = 0; i < userList.size(); i++) {
+            System.out.println(">>>>>>>>>>" + userList.get(i).toString());
+        }
+
+        return userList;
+    }
+
+    public User selectUser(Map<String, String> paramMap) {
+        return userMapper.selectUser(paramMap);
+    }
+
+    public int insertUser(Map<String, String> paramMap) {
+        return userMapper.insertUser(paramMap);
+    }
+
+    public int updateUser(Map<String, String> paramMap) {
+        return userMapper.updateUser(paramMap);
+    }
+
+    public List<User> selectSearchUser(String searchVal) {
+        return userMapper.selectSearchUser(searchVal);
+    }
 }

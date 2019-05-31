@@ -8,7 +8,7 @@ import com.product.luffy.po.File;
 
 @Repository("com.product.luffy.mapper.FileMapper")
 public interface FileMapper {
-	public int insertFile(File file);
-	
-	public File selectFile(Map<String, Object> paramMap);
+    public int insertFile(File file);
+
+    public File selectFile(Map<String, Object> paramMap);
 }

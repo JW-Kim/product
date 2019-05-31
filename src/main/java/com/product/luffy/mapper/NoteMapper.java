@@ -10,26 +10,26 @@ import com.product.luffy.po.Note;
 
 @Repository("com.product.luffy.mapper.NoteMapper")
 public interface NoteMapper {
-	
-	public List<Note> selectNoteListByUserId(Map<String, String> paramMap);
 
-	public List<Note> selectMyNoteListByUserId(Map<String, String> paramMap);
-	
-	public int insertNote(Map<String, String> paramMap);
+    public List<Note> selectNoteListByUserId(Map<String, String> paramMap);
 
-	public int insertUserNote(Map<String, String> paramMap);
+    public List<Note> selectMyNoteListByUserId(Map<String, String> paramMap);
 
-	public int updateNote(Map<String, String> paramMap);
+    public int insertNote(Map<String, String> paramMap);
 
-	public int deleteNote(Map<String, String> paramMap);
+    public int insertUserNote(Map<String, String> paramMap);
 
-	public Note selectNote(@Param("noteId") String noteId);
+    public int updateNote(Map<String, String> paramMap);
 
-	public List<User> selectShareUserList(@Param("userId") String UserId, @Param("noteId") String noteId);
+    public int deleteNote(Map<String, String> paramMap);
 
-	public int insertShareUser(Map<String, String> paramMap);
+    public Note selectNote(@Param("noteId") String noteId);
 
-	public int deleteShareUser(@Param("noteId") String noteId, @Param("userId") String userId);
+    public List<User> selectShareUserList(@Param("userId") String UserId, @Param("noteId") String noteId);
 
-	public List<Note> selectShareNoteList(@Param("userId") String userId);
+    public int insertShareUser(Map<String, String> paramMap);
+
+    public int deleteShareUser(@Param("noteId") String noteId, @Param("userId") String userId);
+
+    public List<Note> selectShareNoteList(@Param("userId") String userId);
 }
