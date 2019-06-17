@@ -117,7 +117,7 @@
 			                       REG_DTM )
 				VALUE (#{userId},
 		                #{noteId},
-		                #{regUserId),
+		                #{regUserId},
 		                NOW())
 	</insert>
 
