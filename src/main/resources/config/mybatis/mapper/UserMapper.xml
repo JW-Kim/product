@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.product.luffy.mapper.UserMapper" >
-  
-  <resultMap id="UserResultMap" type="com.product.luffy.po.User">
-  	<id 	column="USER_ID" 		property="userId"/>
-  	<result	column="USER_LOGIN_ID" 	property="userLoginId"/>
-  	<result	column="USER_PWD"	 	property="userPwd"/>
-  	<result column="USER_NM"		property="userNm"/>
-  	<result column="USER_ROLE"		property="userRole"/>
-  	<result column="REG_DTM"    	property="regDtm"/>
-  </resultMap>
-  
-  <select id="selectUserList" resultMap="UserResultMap">
-  	SELECT * FROM USER_F
-  </select>
-  
-  <select id="selectUser" resultMap="UserResultMap">
-  	SELECT USER_ID,
-	       USER_LOGIN_ID,
-	       USER_PWD,
-	       USER_NM,
-	       USER_ROLE,
-	       REG_DTM
-	  FROM USER_F
-	 WHERE USER_LOGIN_ID = #{userLoginId}
-	  <if test="insertUser">
-		OR EMAIL = #{email}	
-	  </if>	
-  </select>
+<mapper namespace="com.product.luffy.mapper.UserMapper">
 
-  <insert id= "insertUser">		
-	INSERT INTO USER_F (USER_ID,
-						  USER_LOGIN_ID,	
-						  EMAIL,	
-						  USER_PWD,
-						  USER_NM,		 
-						  USER_ROLE,
-						  REG_DTM )
-	VALUES (#{userId},	
-			 #{userLoginId},	
-			 #{email},	
-			 #{userPwd},	
-			 #{userNm},
-			 #{userRole},
-			 NOW())	
-  </insert>
+    <resultMap id="UserResultMap" type="com.product.luffy.po.User">
+        <id column="USER_ID" property="userId"/>
+        <result column="USER_LOGIN_ID" property="userLoginId"/>
+        <result column="USER_PWD" property="userPwd"/>
+        <result column="USER_NM" property="userNm"/>
+        <result column="USER_ROLE" property="userRole"/>
+        <result column="REG_DTM" property="regDtm"/>
+    </resultMap>
 
-  <update id="updateUser">
-	UPDATE USER_F
-		<trim prefix="SET" suffixOverrides=",">  			<if test="userNm != null">USER_NM = #{userNm},</if>
-			<if test="userPwd != null">USER_PWD = #{userPwd}</if>
-		</trim>
-	 WHERE USER_ID = #{userId}  
-  </update>
+    <select id="selectUserList" resultMap="UserResultMap">
+        SELECT *
+        FROM USER_F
+    </select>
 
-	<select id="selectSearchUser" parameterType="String" resultMap="UserResultMap">
-		SELECT USER_ID,
-			    USER_LOGIN_ID,
-			    EMAIL,
-			    USER_PWD,
-			    USER_NM,
-			    USER_ROLE,
-			    REG_DTM
-		   FROM USER_F
-		  WHERE USER_LOGIN_ID LIKE CONCAT('%',#{searchVal}, '%')
-		     OR USER_NM LIKE CONCAT ('%', #{searchVal}, '%')
-	  ORDER BY USER_NM, USER_LOGIN_ID
-	</select>
+    <select id="selectUser" resultMap="UserResultMap">
+        SELECT USER_ID,
+        USER_LOGIN_ID,
+        USER_PWD,
+        USER_NM,
+        USER_ROLE,
+        REG_DTM
+        FROM USER_F
+        WHERE USER_LOGIN_ID = #{userLoginId}
+        <if test="insertUser">
+            OR EMAIL = #{email}
+        </if>
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO USER_F (USER_ID,
+                            USER_LOGIN_ID,
+                            EMAIL,
+                            USER_PWD,
+                            USER_NM,
+                            USER_ROLE,
+                            REG_DTM)
+        VALUES (#{userId},
+                #{userLoginId},
+                #{email},
+                #{userPwd},
+                #{userNm},
+                #{userRole},
+                NOW())
+    </insert>
+
+    <update id="updateUser">
+        UPDATE USER_F
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userNm != null">USER_NM = #{userNm},</if>
+            <if test="userPwd != null">USER_PWD = #{userPwd}</if>
+        </trim>
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <select id="selectSearchUser" parameterType="String" resultMap="UserResultMap">
+        SELECT
+            USER_ID,
+            USER_LOGIN_ID,
+            EMAIL,
+            USER_PWD,
+            USER_NM,
+            USER_ROLE,
+            REG_DTM
+        FROM USER_F
+        WHERE USER_LOGIN_ID LIKE CONCAT('%', #{searchVal}, '%')
+              OR USER_NM LIKE CONCAT('%', #{searchVal}, '%')
+        ORDER BY USER_NM, USER_LOGIN_ID
+    </select>
 </mapper>

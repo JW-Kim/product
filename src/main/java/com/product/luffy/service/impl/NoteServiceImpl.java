@@ -18,63 +18,65 @@ import com.product.luffy.utils.response.HttpResultCode;
 
 
 @Service("com.product.luffy.service.impl.NoteService")
-public class NoteServiceImpl implements NoteService{
-	
-	@Resource(name="com.product.luffy.mapper.NoteMapper")
-	private NoteMapper noteMapper;
-	
-	public List<Note> selectNoteListByUserId(){
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("userId", UserContext.getUserId());
-		
-		return noteMapper.selectNoteListByUserId(paramMap);
-	}
+public class NoteServiceImpl implements NoteService {
 
-	public List<Note> selectMyNoteListByUserId(){
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("userId", UserContext.getUserId());
+    @Resource(name = "com.product.luffy.mapper.NoteMapper")
+    private NoteMapper noteMapper;
 
-		return noteMapper.selectMyNoteListByUserId(paramMap);
-	}
+    public List<Note> selectNoteListByUserId() {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("userId", UserContext.getUserId());
 
-	public int insertNote(Map<String, String> paramMap){
-		int rtn = 0;
-		
-		rtn = noteMapper.insertNote(paramMap);
-		if(rtn != 1) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "노트 등록이 정상적으로 되지 않았습니다.");
+        return noteMapper.selectNoteListByUserId(paramMap);
+    }
 
-		rtn = noteMapper.insertUserNote(paramMap);
-		if(rtn != 1) throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 노트 등록이 정상적으로 되지 않았습니다.");
+    public List<Note> selectMyNoteListByUserId() {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("userId", UserContext.getUserId());
 
-		return rtn;
-	
-	}
-	
-	public int updateNote(Map<String, String> paramMap){
-		return noteMapper.updateNote(paramMap);
-	}
+        return noteMapper.selectMyNoteListByUserId(paramMap);
+    }
 
-	public int deleteNote(Map<String, String> paramMap){
-		return noteMapper.deleteNote(paramMap);
-	}
+    public int insertNote(Map<String, String> paramMap) {
+        int rtn = 0;
 
-	public Note selectNote(String noteId){
-		return noteMapper.selectNote(noteId);
-	}
+        rtn = noteMapper.insertNote(paramMap);
+        if (rtn != 1)
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "노트 등록이 정상적으로 되지 않았습니다.");
 
-	public List<User> selectShareUserList(String noteId) {
-		return noteMapper.selectShareUserList(UserContext.getUserId(), noteId);
-	}
+        rtn = noteMapper.insertUserNote(paramMap);
+        if (rtn != 1)
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 노트 등록이 정상적으로 되지 않았습니다.");
 
-	public int insertShareUser(Map<String, String> paramMap){
-		return noteMapper.insertShareUser(paramMap);
-	}
+        return rtn;
 
-	public int deleteShareUser(String noteId, String userId){
-		return noteMapper.deleteShareUser(noteId, userId);
-	}
+    }
 
-	public List<Note> selectShareNoteList(){
-		return noteMapper.selectShareNoteList(UserContext.getUserId());
-	}
+    public int updateNote(Map<String, String> paramMap) {
+        return noteMapper.updateNote(paramMap);
+    }
+
+    public int deleteNote(Map<String, String> paramMap) {
+        return noteMapper.deleteNote(paramMap);
+    }
+
+    public Note selectNote(String noteId) {
+        return noteMapper.selectNote(noteId);
+    }
+
+    public List<User> selectShareUserList(String noteId) {
+        return noteMapper.selectShareUserList(UserContext.getUserId(), noteId);
+    }
+
+    public int insertShareUser(Map<String, String> paramMap) {
+        return noteMapper.insertShareUser(paramMap);
+    }
+
+    public int deleteShareUser(String noteId, String userId) {
+        return noteMapper.deleteShareUser(noteId, userId);
+    }
+
+    public List<Note> selectShareNoteList() {
+        return noteMapper.selectShareNoteList(UserContext.getUserId());
+    }
 }

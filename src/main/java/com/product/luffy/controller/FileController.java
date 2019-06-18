@@ -27,45 +27,46 @@ import com.product.luffy.utils.response.ResponseObject;
 @Controller
 @RequestMapping("/file")
 public class FileController {
-	private static final Logger LOGGER = LoggerFactory.getLogger(FileController.class);
-	
-	@Resource(name = "com.product.luffy.service.impl.FileService")
-	private FileService fileService;
-	
-	@RequestMapping(value="/upload", method = RequestMethod.POST)
-	public @ResponseBody ResponseObject<File> uploadFile(@RequestParam("image") MultipartFile multipartFile){
-		ResponseObject<File> responseObject = new ResponseObject<File>();
-		LOGGER.debug(">>>>>>>>>> uploadFile 시작 "+ multipartFile.getName()+", "+ multipartFile.getOriginalFilename());
-		
-		File file = fileService.insertFile(multipartFile);
-		responseObject.setData(file);
-		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
-		
-		return responseObject;
-	}
-	
-	@RequestMapping(value="/download", method= RequestMethod.GET)
-	public HttpEntity<byte[]> downloadFile(@RequestParam("fileId") String fileId){
-		
-		java.io.File file;
-		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("fileId", fileId);
-		File fileInfo = fileService.selectFile(paramMap);
-		file = new java.io.File(fileInfo.getFilePath());
-		
-		byte[] fileContent = null;
-		
-		try {
-			fileContent = Files.readAllBytes(file.toPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		HttpHeaders header = new HttpHeaders();
-	    header.setContentType(MediaType.IMAGE_JPEG);
-	    header.setContentLength(fileContent.length);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileController.class);
 
-	    return new HttpEntity<byte[]>(fileContent, header);
-	}
+    @Resource(name = "com.product.luffy.service.impl.FileService")
+    private FileService fileService;
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseObject<File> uploadFile(@RequestParam("image") MultipartFile multipartFile) {
+        ResponseObject<File> responseObject = new ResponseObject<File>();
+        LOGGER.debug(">>>>>>>>>> uploadFile 시작 " + multipartFile.getName() + ", " + multipartFile.getOriginalFilename());
+
+        File file = fileService.insertFile(multipartFile);
+        responseObject.setData(file);
+        responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+
+        return responseObject;
+    }
+
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public HttpEntity<byte[]> downloadFile(@RequestParam("fileId") String fileId) {
+
+        java.io.File file;
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("fileId", fileId);
+        File fileInfo = fileService.selectFile(paramMap);
+        file = new java.io.File(fileInfo.getFilePath());
+
+        byte[] fileContent = null;
+
+        try {
+            fileContent = Files.readAllBytes(file.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.IMAGE_JPEG);
+        header.setContentLength(fileContent.length);
+
+        return new HttpEntity<byte[]>(fileContent, header);
+    }
 }

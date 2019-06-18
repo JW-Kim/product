@@ -3,74 +3,72 @@ package com.product.luffy.po;
 import java.util.Date;
 
 public class User {
-	
-	private String userId;
-	
-	private String userLoginId;
-	
-	private String userPwd;
-	
-	private String userNm;
-	
-	private String userRole;
-	
-	private Date regDtm;
 
-	public String getUserId() {
-		return userId;
-	}
+    private String userId;
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    private String userLoginId;
 
-	public String getUserLoginId() {
-		return userLoginId;
-	}
+    private String userPwd;
 
-	public void setUserLoginId(String userLoginId) {
-		this.userLoginId = userLoginId;
-	}
+    private String userNm;
 
-	public String getUserPwd() {
-		return userPwd;
-	}
+    private String userRole;
 
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
+    private Date regDtm;
 
-	public String getUserNm() {
-		return userNm;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public void setUserNm(String userNm) {
-		this.userNm = userNm;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public String getUserRole() {
-		return userRole;
-	}
+    public String getUserLoginId() {
+        return userLoginId;
+    }
 
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
+    public void setUserLoginId(String userLoginId) {
+        this.userLoginId = userLoginId;
+    }
 
-	public Date getRegDtm() {
-		return regDtm;
-	}
+    public String getUserPwd() {
+        return userPwd;
+    }
 
-	public void setRegDtm(Date regDtm) {
-		this.regDtm = regDtm;
-	}
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
+    }
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userLoginId=" + userLoginId + ", userPwd=" + userPwd + ", userNm=" + userNm
-				+ ", userRole=" + userRole + ", regDtm=" + regDtm + "]";
-	}
-	
+    public String getUserNm() {
+        return userNm;
+    }
 
-  
-    
+    public void setUserNm(String userNm) {
+        this.userNm = userNm;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public Date getRegDtm() {
+        return regDtm;
+    }
+
+    public void setRegDtm(Date regDtm) {
+        this.regDtm = regDtm;
+    }
+
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", userLoginId=" + userLoginId + ", userPwd=" + userPwd + ", userNm=" + userNm
+                + ", userRole=" + userRole + ", regDtm=" + regDtm + "]";
+    }
+
+
 }

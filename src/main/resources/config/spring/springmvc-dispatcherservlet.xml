@@ -47,12 +47,12 @@
         <property name="uploadTempDir" value="/WEB-INF/temp"/>
     </bean>
 
-	<bean id="ProductExceptionHandler" class="com.product.luffy.utils.Exception.ProductExceptionHandler" />
+    <bean id="ProductExceptionHandler" class="com.product.luffy.utils.Exception.ProductExceptionHandler"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.product.luffy.interceptor.LoginInterceptor" />
+            <bean class="com.product.luffy.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>  
+    </mvc:interceptors>
 </beans>

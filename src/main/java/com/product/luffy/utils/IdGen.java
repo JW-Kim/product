@@ -6,9 +6,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IdGen implements InitializingBean{
-	private static AtomicLong currentIdx = new AtomicLong(0L);
-    private static String siteCode="000";
+public class IdGen implements InitializingBean {
+    private static AtomicLong currentIdx = new AtomicLong(0L);
+    private static String siteCode = "000";
 
     public IdGen() {
     }
@@ -34,15 +34,15 @@ public class IdGen implements InitializingBean{
 
     private static Long getIdx() {
         Class var0 = IdGen.class;
-        synchronized(IdGen.class) {
+        synchronized (IdGen.class) {
             Long idx = 0L;
             idx = currentIdx.getAndIncrement();
             return idx;
         }
     }
-    
+
     public void afterPropertiesSet() throws Exception {
 
     }
-	
+
 }

@@ -19,23 +19,24 @@ import com.product.luffy.utils.response.ResponseObject;
 @Controller
 @RequestMapping("/code")
 public class CodeController {
-	
-	@Resource(name = "com.product.luffy.service.impl.CodeService")
-	private CodeService codeService;
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public @ResponseBody ResponseObject<Code> selectCode(@RequestParam("cdId") String cdId,
-														 @RequestParam("cdDtlId") String cdDtlId){
-		ResponseObject<Code> responseObject = new ResponseObject<Code>();
-		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("cdId", cdId);
-		paramMap.put("cdDtlId", cdDtlId);
-		
-		responseObject.setData(codeService.selectCode(paramMap));
-		responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
-		
-		return responseObject;
-	}
+
+    @Resource(name = "com.product.luffy.service.impl.CodeService")
+    private CodeService codeService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseObject<Code> selectCode(@RequestParam("cdId") String cdId,
+                                    @RequestParam("cdDtlId") String cdDtlId) {
+        ResponseObject<Code> responseObject = new ResponseObject<Code>();
+
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        paramMap.put("cdId", cdId);
+        paramMap.put("cdDtlId", cdDtlId);
+
+        responseObject.setData(codeService.selectCode(paramMap));
+        responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+
+        return responseObject;
+    }
 
 }

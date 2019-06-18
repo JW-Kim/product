@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <package name="com.product.luffy.po" />
+        <package name="com.product.luffy.po"/>
     </typeAliases>
 
     <mappers>
-        <mapper resource="config/mybatis/mapper/UserMapper.xml" />
+        <mapper resource="config/mybatis/mapper/UserMapper.xml"/>
         <mapper resource="config/mybatis/mapper/DiaryMapper.xml"/>
         <mapper resource="config/mybatis/mapper/CodeMapper.xml"/>
         <mapper resource="config/mybatis/mapper/FileMapper.xml"/>

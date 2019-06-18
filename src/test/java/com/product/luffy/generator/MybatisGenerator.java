@@ -20,25 +20,25 @@ import java.util.List;
  */
 public class MybatisGenerator {
 
-	// 加载 log4j 配置文件
-	static {
-		try {
-			String resource = "log4j.properties";
-			InputStream inputStream = Resources.getResourceAsStream(resource);
-			PropertyConfigurator.configure(inputStream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    // 加载 log4j 配置文件
+    static {
+        try {
+            String resource = "log4j.properties";
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            PropertyConfigurator.configure(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Test
-	public void generator() throws Exception {
-		List<String> warnings = new ArrayList<String>();
-		File configFile = new File("/media/markliu/Entertainment/Linux/SoftwareInformation/java/My_IntelliJ_projects/Spring-SpringMVC-Mybatis/src/test/resources/generatorConfig.xml");
-		ConfigurationParser cp = new ConfigurationParser(warnings);
-		Configuration config = cp.parseConfiguration(configFile);
-		DefaultShellCallback callback = new DefaultShellCallback(true);
-		MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
-		myBatisGenerator.generate(null);
-	}
+    @Test
+    public void generator() throws Exception {
+        List<String> warnings = new ArrayList<String>();
+        File configFile = new File("/media/markliu/Entertainment/Linux/SoftwareInformation/java/My_IntelliJ_projects/Spring-SpringMVC-Mybatis/src/test/resources/generatorConfig.xml");
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(true);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        myBatisGenerator.generate(null);
+    }
 }

@@ -19,6 +19,7 @@
                 }
             });
         }
+
         function requestKeyValueAndResponseJson() {
             $.ajax({
                 type: 'post',

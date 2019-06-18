@@ -10,6 +10,7 @@
             document.itemsForm.action = "${pageContext.request.contextPath}/items/query_items";
             document.itemsForm.submit();
         }
+
         function deleteItems() {
             document.itemsForm.action = "${pageContext.request.contextPath}/items/delete_items";
             document.itemsForm.submit();
@@ -20,7 +21,7 @@
 <jsp:useBean id="itemsCustomList" scope="request" type="java.util.List"/>
 <h1>Items List</h1>
 welcome ${username } !
-<c:if test="${username != null}" >
+<c:if test="${username != null}">
     <a href="${pageContext.request.contextPath}/logout">logout</a>
 </c:if>
 
