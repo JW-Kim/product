@@ -8,11 +8,13 @@
         <result column="USER_PWD" property="userPwd"/>
         <result column="USER_NM" property="userNm"/>
         <result column="USER_ROLE" property="userRole"/>
+        <result column="FILE_ID" property="fileId"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
     <select id="selectUserList" resultMap="UserResultMap">
-        SELECT * FROM USER_F
+        SELECT *
+        FROM USER_F
     </select>
 
     <select id="selectUser" resultMap="UserResultMap">
@@ -31,19 +33,19 @@
 
     <insert id="insertUser">
         INSERT INTO USER_F (USER_ID,
-        USER_LOGIN_ID,
-        EMAIL,
-        USER_PWD,
-        USER_NM,
-        USER_ROLE,
-        REG_DTM )
+                            USER_LOGIN_ID,
+                            EMAIL,
+                            USER_PWD,
+                            USER_NM,
+                            USER_ROLE,
+                            REG_DTM)
         VALUES (#{userId},
-        #{userLoginId},
-        #{email},
-        #{userPwd},
-        #{userNm},
-        #{userRole},
-        NOW())
+                #{userLoginId},
+                #{email},
+                #{userPwd},
+                #{userNm},
+                #{userRole},
+                NOW())
     </insert>
 
     <update id="updateUser">
@@ -56,16 +58,19 @@
     </update>
 
     <select id="selectSearchUser" parameterType="String" resultMap="UserResultMap">
-        SELECT USER_ID,
-        USER_LOGIN_ID,
-        EMAIL,
-        USER_PWD,
-        USER_NM,
-        USER_ROLE,
-        REG_DTM
+        SELECT
+            USER_ID,
+            USER_LOGIN_ID,
+            EMAIL,
+            USER_PWD,
+            USER_NM,
+            USER_ROLE,
+            FILE_ID,
+            REG_DTM
         FROM USER_F
-        WHERE USER_LOGIN_ID LIKE CONCAT('%',#{searchVal}, '%')
-        OR USER_NM LIKE CONCAT ('%', #{searchVal}, '%')
+        WHERE USER_LOGIN_ID LIKE CONCAT('%', #{searchVal}, '%')
+              OR USER_NM LIKE CONCAT('%', #{searchVal}, '%')
+          AND USER_ID != #{userId}
         ORDER BY USER_NM, USER_LOGIN_ID
     </select>
 </mapper>

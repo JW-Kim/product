@@ -8,12 +8,13 @@
     </resultMap>
 
     <select id="selectCode" parameterType="map" resultMap="CodeMap">
-        SELECT CD_ID,
-        CD_DTL_ID,
-        CD_VAL
+        SELECT
+            CD_ID,
+            CD_DTL_ID,
+            CD_VAL
         FROM CD_DTL_F
         WHERE CD_ID = #{cdId}
-        AND CD_DTL_ID = #{cdDtlId};
+              AND CD_DTL_ID = #{cdDtlId};
     </select>
 
 </mapper>

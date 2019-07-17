@@ -6,6 +6,7 @@ public class Note {
     public String noteStatCd;
     public String sex;
     public String birthDt;
+    public String fileId;
     public String regUserId;
     public String regDtm;
 
@@ -47,6 +48,14 @@ public class Note {
 
     public void setNoteNm(String noteNm) {
         this.noteNm = noteNm;
+    }
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 
     public String getRegUserId() {

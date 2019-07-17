@@ -1,12 +1,9 @@
 package com.product.luffy.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import com.product.luffy.po.File;
+import com.product.luffy.service.FileService;
+import com.product.luffy.utils.response.HttpResultCode;
+import com.product.luffy.utils.response.ResponseObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -19,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.product.luffy.po.File;
-import com.product.luffy.service.FileService;
-import com.product.luffy.utils.response.HttpResultCode;
-import com.product.luffy.utils.response.ResponseObject;
+import javax.annotation.Resource;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/file")

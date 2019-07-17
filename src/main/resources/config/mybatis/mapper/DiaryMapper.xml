@@ -40,116 +40,147 @@
     </resultMap>
 
     <select id="selectDiaryList" parameterType="map" resultMap="DiaryResultMap">
-        SELECT A.DIARY_ID,
-        A.NOTE_ID,
-        A.TITLE,
-        A.CONTENT,
-        A.REG_USER_ID,
-        A.FILE_ID,
-        A.DIARY_DT,
-        B.STATE_ID,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEELING_CD = C.CD_DTL_ID) AS FEELING_CD,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.HEALTH_CD = C.CD_DTL_ID) AS HEALTH_CD,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.FEVER_CD = C.CD_DTL_ID) AS FEVER_CD,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.BREAKFAST_CD = C.CD_DTL_ID) AS BREAKFAST_CD,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.LUNCH_CD = C.CD_DTL_ID) AS LUNCH_CD,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.DINNER_CD = C.CD_DTL_ID) AS DINNER_CD,
-        (SELECT C.CD_VAL FROM CD_DTL_F C WHERE B.SHIT_CD = C.CD_DTL_ID) AS SHIT_CD,
-        B.SHIT_CNT,
-        B.SHIT_DESC,
-        B.SLEEP_START_TIME,
-        B.SLEEP_END_TIME,
-        CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
-        CONCAT(CAST(DATE_FORMAT(A.DIARY_DT, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.DIARY_DT)
-        WHEN '1' THEN '(일)'
-        WHEN '2' THEN '(월)'
-        WHEN '3' THEN '(화)'
-        WHEN '4' THEN '(수)'
-        WHEN '5' THEN '(목)'
-        WHEN '6' THEN '(금)'
-        WHEN '7' THEN '(토)'
-        END) AS HEADER_TITLE,
-        B.HEIGHT,
-        B.WEIGHT
+        SELECT
+            A.DIARY_ID,
+            A.NOTE_ID,
+            A.TITLE,
+            A.CONTENT,
+            A.REG_USER_ID,
+            A.FILE_ID,
+            A.DIARY_DT,
+            B.STATE_ID,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.FEELING_CD = C.CD_DTL_ID)                              AS FEELING_CD,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.HEALTH_CD = C.CD_DTL_ID)                               AS HEALTH_CD,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.FEVER_CD = C.CD_DTL_ID)                                AS FEVER_CD,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.BREAKFAST_CD = C.CD_DTL_ID)                            AS BREAKFAST_CD,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.LUNCH_CD = C.CD_DTL_ID)                                AS LUNCH_CD,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.DINNER_CD = C.CD_DTL_ID)                               AS DINNER_CD,
+            (SELECT C.CD_VAL
+             FROM CD_DTL_F C
+             WHERE B.SHIT_CD = C.CD_DTL_ID)                                 AS SHIT_CD,
+            B.SHIT_CNT,
+            B.SHIT_DESC,
+            B.SLEEP_START_TIME,
+            B.SLEEP_END_TIME,
+            CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR)     AS REG_DTM,
+            CONCAT(CAST(DATE_FORMAT(A.DIARY_DT, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.DIARY_DT)
+                                                                       WHEN '1'
+                                                                           THEN '(일)'
+                                                                       WHEN '2'
+                                                                           THEN '(월)'
+                                                                       WHEN '3'
+                                                                           THEN '(화)'
+                                                                       WHEN '4'
+                                                                           THEN '(수)'
+                                                                       WHEN '5'
+                                                                           THEN '(목)'
+                                                                       WHEN '6'
+                                                                           THEN '(금)'
+                                                                       WHEN '7'
+                                                                           THEN '(토)'
+                                                                       END) AS HEADER_TITLE,
+            B.HEIGHT,
+            B.WEIGHT
         FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
         WHERE A.NOTE_ID = #{noteId}
-        AND A.DIARY_STAT_CD = '001'
+              AND A.DIARY_STAT_CD = '001'
         ORDER BY A.DIARY_DT DESC
     </select>
 
     <select id="selectMonthDiaryList" parameterType="map" resultMap="DiaryResultMap">
-        SELECT A.DIARY_ID,
-        A.NOTE_ID,
-        A.TITLE,
-        A.CONTENT,
-        A.REG_USER_ID,
-        A.FILE_ID,
-        A.DIARY_DT,
-        A.REG_DTM
+        SELECT
+            A.DIARY_ID,
+            A.NOTE_ID,
+            A.TITLE,
+            A.CONTENT,
+            A.REG_USER_ID,
+            A.FILE_ID,
+            A.DIARY_DT,
+            A.REG_DTM
         FROM DIARY_F A
         WHERE A.NOTE_ID = #{noteId}
-        AND A.DIARY_DT LIKE CONCAT(#{diaryMonth},'-%')
-        AND A.DIARY_STAT_CD = '001'
+              AND A.DIARY_DT LIKE CONCAT(#{diaryMonth}, '-%')
+              AND A.DIARY_STAT_CD = '001'
         ORDER BY A.DIARY_DT ASC
     </select>
 
     <select id="selectDiary" parameterType="map" resultMap="DiaryResultMap">
-        SELECT A.DIARY_ID,
-        A.NOTE_ID,
-        A.TITLE,
-        A.CONTENT,
-        A.REG_USER_ID,
-        A.FILE_ID,
-        A.DIARY_DT,
-        B.STATE_ID,
-        B.FEELING_CD,
-        B.HEALTH_CD,
-        B.FEVER_CD,
-        B.BREAKFAST_CD,
-        B.LUNCH_CD,
-        B.DINNER_CD,
-        B.SHIT_CD,
-        B.SHIT_CNT,
-        B.SHIT_DESC,
-        B.SLEEP_START_TIME,
-        B.SLEEP_END_TIME,
-        CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR) AS REG_DTM,
-        CONCAT(CAST(DATE_FORMAT(A.REG_DTM, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.REG_DTM)
-        WHEN '1' THEN '(일)'
-        WHEN '2' THEN '(월)'
-        WHEN '3' THEN '(화)'
-        WHEN '4' THEN '(수)'
-        WHEN '5' THEN '(목)'
-        WHEN '6' THEN '(금)'
-        WHEN '7' THEN '(토)'
-        END) AS CHG_REG_DTM,
-        B.HEIGHT,
-        B.WEIGHT
+        SELECT
+            A.DIARY_ID,
+            A.NOTE_ID,
+            A.TITLE,
+            A.CONTENT,
+            A.REG_USER_ID,
+            A.FILE_ID,
+            A.DIARY_DT,
+            B.STATE_ID,
+            B.FEELING_CD,
+            B.HEALTH_CD,
+            B.FEVER_CD,
+            B.BREAKFAST_CD,
+            B.LUNCH_CD,
+            B.DINNER_CD,
+            B.SHIT_CD,
+            B.SHIT_CNT,
+            B.SHIT_DESC,
+            B.SLEEP_START_TIME,
+            B.SLEEP_END_TIME,
+            CAST(DATE_FORMAT(A.REG_DTM, '%Y년 %c월 %e일 %k시 %i분') AS CHAR)    AS REG_DTM,
+            CONCAT(CAST(DATE_FORMAT(A.REG_DTM, '%Y.%c.%e ') AS CHAR), CASE DAYOFWEEK(A.REG_DTM)
+                                                                      WHEN '1'
+                                                                          THEN '(일)'
+                                                                      WHEN '2'
+                                                                          THEN '(월)'
+                                                                      WHEN '3'
+                                                                          THEN '(화)'
+                                                                      WHEN '4'
+                                                                          THEN '(수)'
+                                                                      WHEN '5'
+                                                                          THEN '(목)'
+                                                                      WHEN '6'
+                                                                          THEN '(금)'
+                                                                      WHEN '7'
+                                                                          THEN '(토)'
+                                                                      END) AS CHG_REG_DTM,
+            B.HEIGHT,
+            B.WEIGHT
         FROM DIARY_F A INNER JOIN STATE_F B ON A.DIARY_ID = B.DIARY_ID
         WHERE A.DIARY_ID = #{diaryId}
-        AND A.DIARY_STAT_CD = '001'
+              AND A.DIARY_STAT_CD = '001'
 
     </select>
 
     <insert id="insertDiary" parameterType="com.product.luffy.po.Diary">
-        INSERT INTO `DIARY_F`(`DIARY_ID`,
-        `NOTE_ID`,
-        `DIARY_STAT_CD`,
-        `TITLE`,
-        `CONTENT`,
-        `REG_USER_ID`,
-        `FILE_ID`,
-        `DIARY_DT`,
-        `REG_DTM`)
+        INSERT INTO `DIARY_F` (`DIARY_ID`,
+                               `NOTE_ID`,
+                               `DIARY_STAT_CD`,
+                               `TITLE`,
+                               `CONTENT`,
+                               `REG_USER_ID`,
+                               `FILE_ID`,
+                               `DIARY_DT`,
+                               `REG_DTM`)
         VALUES (#{diaryId},
-        #{noteId},
-        '001',
-        #{title},
-        #{content},
-        #{regUserId},
-        #{fileId},
-        #{diaryDt},
-        NOW())
+                #{noteId},
+                '001',
+                #{title},
+                #{content},
+                #{regUserId},
+                #{fileId},
+                #{diaryDt},
+                NOW())
     </insert>
 
     <insert id="insertState" parameterType="com.product.luffy.po.Diary">
@@ -188,27 +219,27 @@
     </insert>
 
     <insert id="insertDisease" parameterType="com.product.luffy.po.Disease">
-        INSERT INTO DISEASE_F(DISEASE_ID,
-        NOTE_ID,
-        DISEASE_DT,
-        DISEASE_NM,
-        SYMPTOM,
-        HOSPITAL_NM,
-        PRESCRIPTION)
+        INSERT INTO DISEASE_F (DISEASE_ID,
+                               NOTE_ID,
+                               DISEASE_DT,
+                               DISEASE_NM,
+                               SYMPTOM,
+                               HOSPITAL_NM,
+                               PRESCRIPTION)
         VALUES (#{diseaseId},
-        #{noteId},
-        #{diseaseDt},
-        #{diseaseNm},
-        #{symptom},
-        #{hospitalNm},
-        #{prescription})
+                #{noteId},
+                #{diseaseDt},
+                #{diseaseNm},
+                #{symptom},
+                #{hospitalNm},
+                #{prescription})
     </insert>
 
     <update id="updateDiary" parameterType="com.product.luffy.po.Diary">
         UPDATE DIARY_F
-        SET TITLE = #{title},
-        CONTENT = #{content},
-        FILE_ID = #{fileId}
+        SET TITLE   = #{title},
+            CONTENT = #{content},
+            FILE_ID = #{fileId}
         WHERE DIARY_ID = #{diaryId}
     </update>
 
@@ -232,34 +263,36 @@
 
     <update id="updateDisease" parameterType="com.product.luffy.po.Disease">
         UPDATE DISEASE_F
-        SET DISEASE_NM = #{diseaseNm},
-        SYMPTOM = #{symptom},
-        HOSPITAL_NM = #{hospitalNm},
-        PRESCRIPTION = #{prescription}
+        SET DISEASE_NM   = #{diseaseNm},
+            SYMPTOM      = #{symptom},
+            HOSPITAL_NM  = #{hospitalNm},
+            PRESCRIPTION = #{prescription}
         WHERE DISEASE_ID = #{diseaseId}
     </update>
 
     <select id="selectDiseaseMonth" parameterType="map" resultMap="diseaseMap">
-        SELECT DISEASE_ID,
-        NOTE_ID,
-        DISEASE_DT,
-        DISEASE_NM,
-        SYMPTOM,
-        HOSPITAL_NM,
-        PRESCRIPTION
+        SELECT
+            DISEASE_ID,
+            NOTE_ID,
+            DISEASE_DT,
+            DISEASE_NM,
+            SYMPTOM,
+            HOSPITAL_NM,
+            PRESCRIPTION
         FROM DISEASE_F
         WHERE NOTE_ID = #{noteId}
-        AND DISEASE_DT LIKE CONCAT(#{diseaseMonth}, '-%');
+              AND DISEASE_DT LIKE CONCAT(#{diseaseMonth}, '-%');
     </select>
 
     <select id="selectDisease" parameterType="map" resultMap="diseaseMap">
-        SELECT DISEASE_ID,
-        NOTE_ID,
-        DISEASE_DT,
-        DISEASE_NM,
-        SYMPTOM,
-        HOSPITAL_NM,
-        PRESCRIPTION
+        SELECT
+            DISEASE_ID,
+            NOTE_ID,
+            DISEASE_DT,
+            DISEASE_NM,
+            SYMPTOM,
+            HOSPITAL_NM,
+            PRESCRIPTION
         FROM DISEASE_F
         WHERE DISEASE_ID = #{diseaseId}
     </select>
