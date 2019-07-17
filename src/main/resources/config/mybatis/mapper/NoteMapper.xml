@@ -8,6 +8,7 @@
         <result column="NOTE_STAT_CD" property="noteStatCd"/>
         <result column="SEX" property="sex"/>
         <result column="BIRTH_DT" property="birthDt"/>
+        <result column="FILE_ID" property="fileId"/>
         <result column="REG_USER_ID" property="regUserId"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
@@ -18,6 +19,7 @@
         <result column="USER_PWD" property="userPwd"/>
         <result column="USER_NM" property="userNm"/>
         <result column="USER_ROLE" property="userRole"/>
+        <result column="FILE_ID" property="fileId"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
@@ -40,7 +42,8 @@
             N.NOTE_ID,
             N.NOTE_NM,
             N.REG_USER_ID,
-            N.REG_DTM
+            N.REG_DTM,
+            N.FILE_ID
         FROM NOTE_F N
         WHERE N.NOTE_STAT_CD = '001'
               AND N.REG_USER_ID = #{userId}
@@ -109,7 +112,8 @@
             U.USER_ID,
             U.USER_LOGIN_ID,
             U.EMAIL,
-            U.USER_NM
+            U.USER_NM,
+            U.FILE_ID
         FROM USER_NOTE_R UN
             INNER JOIN USER_F U ON (UN.USER_ID = U.USER_ID)
         WHERE UN.NOTE_ID = #{noteId}
@@ -139,7 +143,8 @@
             N.NOTE_NM,
             N.NOTE_STAT_CD,
             N.SEX,
-            N.BIRTH_DT
+            N.BIRTH_DT,
+            N.FILE_ID
         FROM USER_NOTE_R UN
             INNER JOIN NOTE_F N
                 ON (UN.NOTE_ID = N.NOTE_ID AND N.REG_USER_ID != #{userId} AND N.NOTE_STAT_CD = 001)

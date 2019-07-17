@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.product.luffy.utils.UserContext;
 import org.springframework.stereotype.Service;
 
 import com.product.luffy.mapper.UserMapper;
@@ -41,6 +42,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> selectSearchUser(String searchVal) {
-        return userMapper.selectSearchUser(searchVal);
+        return userMapper.selectSearchUser(searchVal, UserContext.getUserId());
     }
 }

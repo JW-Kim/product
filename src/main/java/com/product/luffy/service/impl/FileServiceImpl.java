@@ -1,23 +1,22 @@
 package com.product.luffy.service.impl;
 
+import com.product.luffy.mapper.FileMapper;
+import com.product.luffy.po.File;
+import com.product.luffy.service.FileService;
+import com.product.luffy.utils.IdGen;
+import com.product.luffy.utils.UserContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.product.luffy.mapper.FileMapper;
-import com.product.luffy.po.File;
-import com.product.luffy.service.FileService;
-import com.product.luffy.utils.IdGen;
 
 @Service("com.product.luffy.service.impl.FileService")
 public class FileServiceImpl implements FileService {
@@ -38,7 +37,7 @@ public class FileServiceImpl implements FileService {
             int month = cal.get(cal.MONTH) + 1;
 
             LOGGER.debug("year : " + year + ", month : " + month);
-            path = "D:\\photo\\" + year + "\\" + month;
+            path = "D:\\photo\\" + UserContext.getUserId()+ "\\" + year + "\\" + month;
             java.io.File f = new java.io.File(path);
             f.mkdirs();
 

@@ -3,6 +3,7 @@ package com.product.luffy.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.product.luffy.po.User;
@@ -17,7 +18,7 @@ public interface UserMapper {
 
     int updateUser(Map<String, String> paramMap);
 
-    List<User> selectSearchUser(String searchVal);
+    List<User> selectSearchUser(@Param("searchVal")String searchVal, @Param("userId") String userId);
 }
 
 

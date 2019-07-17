@@ -8,6 +8,7 @@
         <result column="USER_PWD" property="userPwd"/>
         <result column="USER_NM" property="userNm"/>
         <result column="USER_ROLE" property="userRole"/>
+        <result column="FILE_ID" property="fileId"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
@@ -64,10 +65,12 @@
             USER_PWD,
             USER_NM,
             USER_ROLE,
+            FILE_ID,
             REG_DTM
         FROM USER_F
         WHERE USER_LOGIN_ID LIKE CONCAT('%', #{searchVal}, '%')
               OR USER_NM LIKE CONCAT('%', #{searchVal}, '%')
+          AND USER_ID != #{userId}
         ORDER BY USER_NM, USER_LOGIN_ID
     </select>
 </mapper>
