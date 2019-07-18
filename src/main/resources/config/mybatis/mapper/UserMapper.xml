@@ -9,6 +9,7 @@
         <result column="USER_NM" property="userNm"/>
         <result column="USER_ROLE" property="userRole"/>
         <result column="FILE_ID" property="fileId"/>
+        <result column="EMAIL" property="email"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
@@ -72,5 +73,16 @@
               OR USER_NM LIKE CONCAT('%', #{searchVal}, '%')
           AND USER_ID != #{userId}
         ORDER BY USER_NM, USER_LOGIN_ID
+    </select>
+
+    <select id="selectUserInfo" resultMap="UserResultMap">
+        SELECT USER_ID,
+                USER_LOGIN_ID,
+                USER_NM,
+                EMAIL,
+                REG_DTM,
+                FILE_ID
+          FROM USER_F
+         WHERE USER_ID = #{userId}
     </select>
 </mapper>

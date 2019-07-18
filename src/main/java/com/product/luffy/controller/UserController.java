@@ -53,6 +53,19 @@ public class UserController {
         return gridResponseObject;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/info")
+    public @ResponseBody
+    ResponseObject<Boolean> selectUserInfo() {
+        ResponseObject
+                <Boolean> responseObject = new ResponseObject<Boolean>();
+        LOGGER.debug(">>>> selectUserInfo 시작");
+
+        responseObject.setData(userService.selectUserInfo());
+        responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+
+        return responseObject;
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/selectUserExist")
     public @ResponseBody
     ResponseObject<Boolean> selectUserExist(@RequestParam("userLoginId") String userLoginId,
@@ -66,6 +79,7 @@ public class UserController {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "로그인ID, email주소가 올바르지 않습니다.");
 
         }
+
 
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("userLoginId", userLoginId);

@@ -10,6 +10,8 @@ public interface UserService {
 
     public User selectUser(Map<String, String> paramMap);
 
+    public User selectUserInfo();
+
     public int insertUser(Map<String, String> paramMap);
 
     public int updateUser(Map<String, String> paramMap);
