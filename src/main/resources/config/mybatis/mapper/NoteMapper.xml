@@ -120,17 +120,30 @@
               AND UN.USER_ID != #{userId}
     </select>
 
-    <insert id="insertShareUser" parameterType="Map">
+    <insert id="insertShareUserList" parameterType="Map">
         INSERT INTO USER_NOTE_R (USER_ID,
                                  NOTE_ID,
                                  REG_USER_ID,
                                  REG_DTM)
-            VALUE (#{userId},
-                   #{noteId},
-                   #{regUserId},
-                   NOW())
+            VALUE
+            <foreach collection="userIdList" item="item" separator=",">
+                (#{item.userId},
+                #{noteId},
+                #{regUserId},
+                NOW())
+            </foreach>
     </insert>
 
+    <insert id="insertShareUser" parameterType="Map">
+        INSERT INTO USER_NOTE_R (USER_ID,
+        NOTE_ID,
+        REG_USER_ID,
+        REG_DTM)
+        VALUE (#{userId},
+        #{noteId},
+        #{regUserId},
+        NOW())
+    </insert>
     <delete id="deleteShareUser" parameterType="Map">
         DELETE FROM USER_NOTE_R
         WHERE USER_ID = #{userId}

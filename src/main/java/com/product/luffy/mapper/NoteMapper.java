@@ -27,6 +27,8 @@ public interface NoteMapper {
 
     public List<User> selectShareUserList(@Param("userId") String UserId, @Param("noteId") String noteId);
 
+    public int insertShareUserList(Map<String, Object> paramMap);
+
     public int insertShareUser(Map<String, String> paramMap);
 
     public int deleteShareUser(@Param("noteId") String noteId, @Param("userId") String userId);

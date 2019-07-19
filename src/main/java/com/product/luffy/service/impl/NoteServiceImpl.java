@@ -72,6 +72,10 @@ public class NoteServiceImpl implements NoteService {
         return noteMapper.insertShareUser(paramMap);
     }
 
+    public int insertShareUserList(Map<String, Object> paramMap) {
+        return noteMapper.insertShareUserList(paramMap);
+    }
+
     public int deleteShareUser(String noteId, String userId) {
         return noteMapper.deleteShareUser(noteId, userId);
     }

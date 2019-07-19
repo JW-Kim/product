@@ -86,6 +86,23 @@ public class NoteController {
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
         return responseObject;
     }
+    @RequestMapping(value = "/{noteId}/share/userList", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseObject<Boolean> insertShareUserList(@PathVariable("noteId") String noteId,
+                                            @RequestBody Map<String, Object> params) {
+        ResponseObject<Boolean> responseObject = new ResponseObject<Boolean>();
+
+        if (params.get("userIdList") == null) {
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
+        }
+
+        params.put("noteId", noteId);
+        params.put("regUserId", UserContext.getUserId());
+
+        responseObject.setData(noteService.insertShareUserList(params));
+        responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+        return responseObject;
+    }
 
     @RequestMapping(value = "/{noteId}/share/user", method = RequestMethod.DELETE)
     public @ResponseBody

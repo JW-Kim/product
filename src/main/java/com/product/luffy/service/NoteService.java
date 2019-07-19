@@ -24,6 +24,8 @@ public interface NoteService {
 
     public int insertShareUser(Map<String, String> paramMap);
 
+    public int insertShareUserList(Map<String, Object> paramMap);
+
     public int deleteShareUser(String noteId, String userId);
 
     public List<Note> selectShareNoteList();
