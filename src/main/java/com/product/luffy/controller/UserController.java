@@ -161,6 +161,7 @@ public class UserController {
 
         String userPwd = requestParams.get("userPwd") == null ? null : requestParams.get("userPwd") + "";
         String userNm = requestParams.get("userNm") == null ? null : requestParams.get("userNm") + "";
+        String fileId = requestParams.get("fileId") == null ? null : requestParams.get("fileId") + "";
 
         if ((userPwd == null || "".equals(userPwd)) && (userNm == null || "".equals(userNm))) {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "파라미터 정보가 올바르지 않습니다.");
@@ -177,6 +178,10 @@ public class UserController {
 
         if (!(userNm == null || "".equals(userNm))) {
             paramMap.put("userNm", userNm);
+        }
+
+        if (!(fileId == null || "".equals(fileId))) {
+            paramMap.put("fileId", fileId);
         }
 
         rtn = userService.updateUser(paramMap);
