@@ -1,6 +1,7 @@
 package com.product.luffy.controller;
 
 
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import javax.annotation.Resource;
@@ -137,15 +138,15 @@ public class NoteController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    ResponseObject<String> insertNote(@RequestBody Map<String, String> requestParams) {
+    ResponseObject<String> insertNote(@RequestBody Map<String, Object> requestParams) {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         int rtn = 0;
 
-        Map<String, String> paramMap = checkInsertNoteParam(requestParams);
+        Map<String, Object> paramMap = checkInsertNoteParam(requestParams);
 
         rtn = noteService.insertNote(paramMap);
 
-        responseObject.setData(rtn);
+        responseObject.setData(paramMap.get("noteId"));
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 
         return responseObject;
@@ -191,13 +192,20 @@ public class NoteController {
         return responseObject;
     }
 
-    private Map<String, String> checkInsertNoteParam(Map<String, String> params) {
+    private Map<String, Object> checkInsertNoteParam(Map<String, Object> params) {
         if (params.get("noteNm") == null || params.get("sex") == null || params.get("birthDt") == null) {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
         }
 
         params.put("noteId", IdGen.getNextId());
-        params.put("userId", UserContext.getUserId());
+        params.put("regUserId", UserContext.getUserId());
+
+        List<Map<String, String>> shareList = (List<Map<String, String>>) params.get("shareList");
+
+        Map<String, String> map = new HashMap();
+        map.put("userId", UserContext.getUserId());
+        shareList.add(map);
+        params.put("userIdList", shareList);
 
         return params;
 

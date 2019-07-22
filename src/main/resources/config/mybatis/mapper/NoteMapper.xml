@@ -63,7 +63,7 @@
                 '001',
                 #{sex},
                 #{birthDt},
-                #{userId},
+                #{regUserId},
                 NOW())
     </insert>
 

@@ -12,7 +12,7 @@ public interface NoteService {
 
     public List<Note> selectMyNoteListByUserId();
 
-    public int insertNote(Map<String, String> paramMap);
+    public int insertNote(Map<String, Object> paramMap);
 
     public int updateNote(Map<String, String> paramMap);
 
