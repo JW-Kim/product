@@ -27,6 +27,7 @@
         SELECT
             N.NOTE_ID,
             N.NOTE_NM,
+            N.FILEiD,
             N.REG_USER_ID,
             N.REG_DTM
         FROM NOTE_F N
@@ -102,7 +103,8 @@
             SEX,
             BIRTH_DT,
             REG_USER_ID,
-            REG_DTM
+            REG_DTM,
+            FILE_ID
         FROM NOTE_F
         WHERE NOTE_ID = #{noteId}
     </select>

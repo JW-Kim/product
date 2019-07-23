@@ -1,24 +1,22 @@
 package com.product.luffy.controller;
 
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-import javax.annotation.Resource;
-
+import com.product.luffy.po.Note;
 import com.product.luffy.po.User;
-import org.aspectj.weaver.ast.Not;
+import com.product.luffy.service.NoteService;
+import com.product.luffy.utils.Exception.ProductRuntimeException;
+import com.product.luffy.utils.IdGen;
+import com.product.luffy.utils.UserContext;
+import com.product.luffy.utils.response.GridResponseObject;
+import com.product.luffy.utils.response.HttpResultCode;
+import com.product.luffy.utils.response.ResponseObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.product.luffy.po.Note;
-import com.product.luffy.service.NoteService;
-import com.product.luffy.utils.response.GridResponseObject;
-import com.product.luffy.utils.response.HttpResultCode;
-import com.product.luffy.utils.Exception.ProductRuntimeException;
-import com.product.luffy.utils.response.ResponseObject;
-import com.product.luffy.utils.IdGen;
-import com.product.luffy.utils.UserContext;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
