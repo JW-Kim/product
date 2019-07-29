@@ -16,6 +16,8 @@ public interface DiaryMapper {
 
     public Diary selectDiary(Map<String, String> paramMap);
 
+    public Diary selectPreDiaryInfo(Map<String, String> paramMap);
+
     public int insertDiary(Diary diary);
 
     public int insertState(Diary diary);

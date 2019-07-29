@@ -14,6 +14,8 @@ public interface DiaryService {
 
     public Diary selectDiary(String diaryId);
 
+    public Diary selectPreDiaryInfo(String diaryId, String diaryDt);
+
     public int insertDiary(Diary diary);
 
     public int updateDiary(Diary diary);

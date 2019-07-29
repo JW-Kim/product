@@ -3,6 +3,7 @@ package com.product.luffy.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.product.luffy.utils.response.HttpResultCode;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -55,10 +56,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                     UserContext.put(auth);
 
                 } catch (JWTVerificationException exception) {
-                    throw new ProductRuntimeException("인증에 실패하였습니다.");
+                    throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "인증에 실패하였습니다.");
                 }
             } else {
-                throw new ProductRuntimeException("인증에 실패하였습니다.");
+                throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "인증에 실패하였습니다.");
             }
         }
 

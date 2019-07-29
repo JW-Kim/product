@@ -32,8 +32,10 @@ public class ProductExceptionHandler {
         ResponseObject<Object> resObj = new ResponseObject<Object>();
         if (resResultCode != null) {
             resObj.setResultCode(resResultCode);
+            response.setStatus(e.getResultCode().getHttpStatus());
         } else {
             resObj.setResultCode(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION);
+            response.setStatus(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION.getHttpStatus());
         }
         resObj.setMessage(resMessage);
         resObj.setData(resData);

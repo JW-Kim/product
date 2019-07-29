@@ -83,6 +83,19 @@ public class DiaryController {
         return responseObject;
     }
 
+    @RequestMapping(value = "/preInfo/{noteId}", method = RequestMethod.GET)
+    public @ResponseBody
+    ResponseObject<Diary> selectPreDiaryInfo(@PathVariable("noteId") String noteId, @RequestParam("diaryDt") String diaryDt) {
+        ResponseObject<Diary> responseObject = new ResponseObject<Diary>();
+        LOGGER.debug(">>>>>>>>>> selectPreDiaryInfo 시작 : " + noteId);
+
+        Diary diary = diaryService.selectPreDiaryInfo(noteId, diaryDt);
+        responseObject.setData(diary);
+        responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+
+        return responseObject;
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
     ResponseObject<String> insertDiary(@RequestBody Map<String, Object> requestParams) {

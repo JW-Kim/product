@@ -46,6 +46,16 @@ public class DiaryServiceImpl implements DiaryService {
         return diary;
     }
 
+    public Diary selectPreDiaryInfo(String noteId, String diaryDt) {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("noteId", noteId);
+        paramMap.put("diaryDt", diaryDt);
+
+        Diary diary = diaryMapper.selectPreDiaryInfo(paramMap);
+
+        return diary;
+    }
+
     public int insertDiary(Diary diary) {
         int rtn = 0;
         LOGGER.debug(">>>>>>>>>>>>>> DiaryService Diary  {} : ", diary.toString());
