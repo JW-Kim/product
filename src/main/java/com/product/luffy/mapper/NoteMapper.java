@@ -23,7 +23,7 @@ public interface NoteMapper {
 
     public int deleteNote(Map<String, String> paramMap);
 
-    public Note selectNote(@Param("noteId") String noteId);
+    public Note selectNote(@Param("noteId") String noteId, @Param("userId") String userId);
 
     public List<User> selectShareUserList(@Param("userId") String UserId, @Param("noteId") String noteId);
 
@@ -34,4 +34,6 @@ public interface NoteMapper {
     public int deleteShareUser(@Param("noteId") String noteId, @Param("userId") String userId);
 
     public List<Note> selectShareNoteList(@Param("userId") String userId);
+
+    public Note selectUserNote(@Param("noteId") String noteId, @Param("userId") String userId);
 }

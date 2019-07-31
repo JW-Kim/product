@@ -31,4 +31,8 @@ public interface DiaryService {
     public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
 
     public Disease selectDisease(Map<String, String> paramMap);
+
+    public Boolean selectDiaryAuth(String diaryId);
+
+    public Boolean selectDiseaseAuth(String diseaseId);
 }

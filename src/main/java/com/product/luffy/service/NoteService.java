@@ -30,4 +30,5 @@ public interface NoteService {
 
     public List<Note> selectShareNoteList();
 
+    public Boolean selectUserNote(String noteId);
 }

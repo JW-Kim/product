@@ -331,4 +331,20 @@
         SET DIARY_STAT_CD = '002'
         WHERE DIARY_ID = #{diaryId}
     </update>
+
+    <select id="selectDiaryAuth" parameterType="String" resultMap="DiaryResultMap">
+        SELECT *
+           FROM DIARY_F D
+                 INNER JOIN USER_NOTE_R UN
+                 ON (D.NOTE_ID = UN.NOTE_ID AND UN.USER_ID = #{userId})
+         WHERE D.DIARY_ID = #{diaryId}
+    </select>
+
+    <select id="selectDiseaseAuth" parameterType="String" resultMap="diseaseMap">
+        SELECT *
+        FROM DISEASE_F D
+        INNER JOIN USER_NOTE_R UN
+        ON (D.NOTE_ID = UN.NOTE_ID AND UN.USER_ID = #{userId})
+        WHERE D.DISEASE_F = #{diseaseId}
+    </select>
 </mapper>

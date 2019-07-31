@@ -59,7 +59,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     public Note selectNote(String noteId) {
-        return noteMapper.selectNote(noteId);
+        return noteMapper.selectNote(noteId, UserContext.getUserId());
     }
 
     public List<User> selectShareUserList(String noteId) {
@@ -80,5 +80,9 @@ public class NoteServiceImpl implements NoteService {
 
     public List<Note> selectShareNoteList() {
         return noteMapper.selectShareNoteList(UserContext.getUserId());
+    }
+
+    public Boolean selectUserNote(String noteId) {
+        return noteMapper.selectUserNote(noteId, UserContext.getUserId()) == null;
     }
 }

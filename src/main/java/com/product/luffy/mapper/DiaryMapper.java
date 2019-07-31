@@ -3,6 +3,7 @@ package com.product.luffy.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.product.luffy.po.Diary;
@@ -39,4 +40,8 @@ public interface DiaryMapper {
     public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
 
     public Disease selectDisease(Map<String, String> paramMap);
+
+    public Diary selectDiaryAuth(@Param("diaryId") String diaryId, @Param("userId") String userId);
+
+    public Disease selectDiseaseAuth(@Param("diseaseId") String diseaseId, @Param("userId") String userId);
 }
