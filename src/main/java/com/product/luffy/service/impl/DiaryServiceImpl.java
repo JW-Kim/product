@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.product.luffy.utils.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,16 @@ public class DiaryServiceImpl implements DiaryService {
         paramMap.put("diaryId", diaryId);
 
         Diary diary = diaryMapper.selectDiary(paramMap);
+
+        return diary;
+    }
+
+    public Diary selectPreDiaryInfo(String noteId, String diaryDt) {
+        Map<String, String> paramMap = new HashMap<String, String>();
+        paramMap.put("noteId", noteId);
+        paramMap.put("diaryDt", diaryDt);
+
+        Diary diary = diaryMapper.selectPreDiaryInfo(paramMap);
 
         return diary;
     }
@@ -108,4 +119,11 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryMapper.selectDisease(paramMap);
     }
 
+    public Boolean selectDiaryAuth(String diaryId) {
+        return diaryMapper.selectDiaryAuth(diaryId, UserContext.getUserId()) == null;
+    }
+
+    public Boolean selectDiseaseAuth(String diseaseId) {
+        return diaryMapper.selectDiseaseAuth(diseaseId, UserContext.getUserId()) == null;
+    }
 }

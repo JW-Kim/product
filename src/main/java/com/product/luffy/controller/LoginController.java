@@ -60,11 +60,11 @@ public class LoginController {
                         .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 1000))
                         .sign(algorithm);
             } catch (JWTCreationException exception) {
-                throw new ProductRuntimeException("토큰생성에 실패했습니다.");
+                throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN,"토큰생성에 실패했습니다.");
             }
 
         } else {
-            throw new ProductRuntimeException("아이디 및 비밀번호가 일치하지 않습니다.");
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "아이디 및 비밀번호가 일치하지 않습니다.");
         }
 
         responseObject.setData(token);

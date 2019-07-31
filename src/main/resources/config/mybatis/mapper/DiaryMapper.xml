@@ -183,6 +183,25 @@
                 NOW())
     </insert>
 
+    <select id="selectPreDiaryInfo" parameterType="Map" resultMap="DiaryResultMap">
+        SELECT (SELECT S.HEIGHT
+                   FROM DIARY_F D
+                   INNER JOIN STATE_F S
+                   ON (D.DIARY_ID = S.DIARY_ID AND S.HEIGHT IS NOT NULL)
+                  WHERE D.NOTE_ID = #{noteId}
+                    AND D.REG_DTM <![CDATA[ < ]]> #{diaryDt}
+                  ORDER BY D.REG_DTM DESC
+                  LIMIT 1) AS HEIGHT,
+                (SELECT S.WEIGHT
+                   FROM DIARY_F D
+                 INNER JOIN STATE_F S
+                     ON (D.DIARY_ID = S.DIARY_ID AND S.WEIGHT IS NOT NULL)
+                  WHERE D.NOTE_ID = #{noteId}
+                    AND D.REG_DTM <![CDATA[ < ]]> #{diaryDt}
+                ORDER BY D.REG_DTM DESC
+                 LIMIT 1) AS WEIGHT
+    </select>
+
     <insert id="insertState" parameterType="com.product.luffy.po.Diary">
         INSERT INTO `STATE_F`(`STATE_ID`,
         `DIARY_ID`,
@@ -312,4 +331,20 @@
         SET DIARY_STAT_CD = '002'
         WHERE DIARY_ID = #{diaryId}
     </update>
+
+    <select id="selectDiaryAuth" parameterType="String" resultMap="DiaryResultMap">
+        SELECT *
+           FROM DIARY_F D
+                 INNER JOIN USER_NOTE_R UN
+                 ON (D.NOTE_ID = UN.NOTE_ID AND UN.USER_ID = #{userId})
+         WHERE D.DIARY_ID = #{diaryId}
+    </select>
+
+    <select id="selectDiseaseAuth" parameterType="String" resultMap="diseaseMap">
+        SELECT *
+        FROM DISEASE_F D
+        INNER JOIN USER_NOTE_R UN
+        ON (D.NOTE_ID = UN.NOTE_ID AND UN.USER_ID = #{userId})
+        WHERE D.DISEASE_F = #{diseaseId}
+    </select>
 </mapper>

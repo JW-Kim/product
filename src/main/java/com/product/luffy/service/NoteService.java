@@ -12,7 +12,7 @@ public interface NoteService {
 
     public List<Note> selectMyNoteListByUserId();
 
-    public int insertNote(Map<String, String> paramMap);
+    public int insertNote(Map<String, Object> paramMap);
 
     public int updateNote(Map<String, String> paramMap);
 
@@ -24,8 +24,11 @@ public interface NoteService {
 
     public int insertShareUser(Map<String, String> paramMap);
 
+    public int insertShareUserList(Map<String, Object> paramMap);
+
     public int deleteShareUser(String noteId, String userId);
 
     public List<Note> selectShareNoteList();
 
+    public Boolean selectUserNote(String noteId);
 }

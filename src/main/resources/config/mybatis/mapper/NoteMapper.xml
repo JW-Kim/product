@@ -9,6 +9,7 @@
         <result column="SEX" property="sex"/>
         <result column="BIRTH_DT" property="birthDt"/>
         <result column="FILE_ID" property="fileId"/>
+        <result column="USER_ID" property="userId"/>
         <result column="REG_USER_ID" property="regUserId"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
@@ -23,10 +24,19 @@
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
+    <select id="selectUserNote" parameterType="String" resultMap="NoteResultMap">
+        SELECT USER_ID,
+                NOTE_ID
+          FROM USER_NOTE_F
+         WHERE NOTE_ID = #{noteId}
+           AND USER_ID = #{userId}
+    </select>
+
     <select id="selectNoteListByUserId" parameterType="map" resultMap="NoteResultMap">
         SELECT
             N.NOTE_ID,
             N.NOTE_NM,
+            N.FILE_ID,
             N.REG_USER_ID,
             N.REG_DTM
         FROM NOTE_F N
@@ -56,6 +66,7 @@
                             NOTE_STAT_CD,
                             SEX,
                             BIRTH_DT,
+                            FILE_ID,
                             REG_USER_ID,
                             REG_DTM)
         VALUES (#{noteId},
@@ -63,7 +74,8 @@
                 '001',
                 #{sex},
                 #{birthDt},
-                #{userId},
+                #{fileId},
+                #{regUserId},
                 NOW())
     </insert>
 
@@ -84,6 +96,7 @@
             <if test="noteNm != null">NOTE_NM = #{noteNm},</if>
             <if test="sex != null">SEX = #{sex},</if>
             <if test="birthDt != null">BIRTH_DT = #{birthDt},</if>
+            <if test="fileId != null">FILE_ID = #{fileId},</if>
         </trim>
         WHERE NOTE_ID = #{noteId}
     </update>
@@ -96,15 +109,18 @@
 
     <select id="selectNote" parameterType="String" resultMap="NoteResultMap">
         SELECT
-            NOTE_ID,
-            NOTE_NM,
-            NOTE_STAT_CD,
-            SEX,
-            BIRTH_DT,
-            REG_USER_ID,
-            REG_DTM
-        FROM NOTE_F
-        WHERE NOTE_ID = #{noteId}
+            N.NOTE_ID,
+            N.NOTE_NM,
+            N.NOTE_STAT_CD,
+            N.SEX,
+            N.BIRTH_DT,
+            N.REG_USER_ID,
+            N.REG_DTM,
+            N.FILE_ID
+        FROM NOTE_F N
+            INNER JOIN USER_NOTE_R UN
+            ON (N.NOTE_ID = UN.NOTE_ID AND UN.USER_ID = #{userId})
+        WHERE N.NOTE_ID = #{noteId}
     </select>
 
     <select id="selectShareUserList" parameterType="String" resultMap="UserResultMap">
@@ -120,17 +136,30 @@
               AND UN.USER_ID != #{userId}
     </select>
 
-    <insert id="insertShareUser" parameterType="Map">
+    <insert id="insertShareUserList" parameterType="Map">
         INSERT INTO USER_NOTE_R (USER_ID,
                                  NOTE_ID,
                                  REG_USER_ID,
                                  REG_DTM)
-            VALUE (#{userId},
-                   #{noteId},
-                   #{regUserId},
-                   NOW())
+            VALUE
+            <foreach collection="userIdList" item="item" separator=",">
+                (#{item.userId},
+                #{noteId},
+                #{regUserId},
+                NOW())
+            </foreach>
     </insert>
 
+    <insert id="insertShareUser" parameterType="Map">
+        INSERT INTO USER_NOTE_R (USER_ID,
+        NOTE_ID,
+        REG_USER_ID,
+        REG_DTM)
+        VALUE (#{userId},
+        #{noteId},
+        #{regUserId},
+        NOW())
+    </insert>
     <delete id="deleteShareUser" parameterType="Map">
         DELETE FROM USER_NOTE_R
         WHERE USER_ID = #{userId}

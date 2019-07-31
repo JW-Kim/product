@@ -15,21 +15,25 @@ public interface NoteMapper {
 
     public List<Note> selectMyNoteListByUserId(Map<String, String> paramMap);
 
-    public int insertNote(Map<String, String> paramMap);
+    public int insertNote(Map<String, Object> paramMap);
 
-    public int insertUserNote(Map<String, String> paramMap);
+    public int insertUserNote(Map<String, Object> paramMap);
 
     public int updateNote(Map<String, String> paramMap);
 
     public int deleteNote(Map<String, String> paramMap);
 
-    public Note selectNote(@Param("noteId") String noteId);
+    public Note selectNote(@Param("noteId") String noteId, @Param("userId") String userId);
 
     public List<User> selectShareUserList(@Param("userId") String UserId, @Param("noteId") String noteId);
+
+    public int insertShareUserList(Map<String, Object> paramMap);
 
     public int insertShareUser(Map<String, String> paramMap);
 
     public int deleteShareUser(@Param("noteId") String noteId, @Param("userId") String userId);
 
     public List<Note> selectShareNoteList(@Param("userId") String userId);
+
+    public Note selectUserNote(@Param("noteId") String noteId, @Param("userId") String userId);
 }

@@ -14,6 +14,8 @@ public interface DiaryService {
 
     public Diary selectDiary(String diaryId);
 
+    public Diary selectPreDiaryInfo(String diaryId, String diaryDt);
+
     public int insertDiary(Diary diary);
 
     public int updateDiary(Diary diary);
@@ -29,4 +31,8 @@ public interface DiaryService {
     public List<Disease> selectDiseaseMonth(Map<String, String> paramMap);
 
     public Disease selectDisease(Map<String, String> paramMap);
+
+    public Boolean selectDiaryAuth(String diaryId);
+
+    public Boolean selectDiseaseAuth(String diseaseId);
 }

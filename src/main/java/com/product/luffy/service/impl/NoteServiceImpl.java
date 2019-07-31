@@ -1,20 +1,18 @@
 package com.product.luffy.service.impl;
 
+import com.product.luffy.mapper.NoteMapper;
+import com.product.luffy.po.Note;
+import com.product.luffy.po.User;
+import com.product.luffy.service.NoteService;
+import com.product.luffy.utils.Exception.ProductRuntimeException;
+import com.product.luffy.utils.UserContext;
+import com.product.luffy.utils.response.HttpResultCode;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
-import com.product.luffy.po.User;
-import org.springframework.stereotype.Service;
-
-import com.product.luffy.mapper.NoteMapper;
-import com.product.luffy.po.Note;
-import com.product.luffy.service.NoteService;
-import com.product.luffy.utils.UserContext;
-import com.product.luffy.utils.Exception.ProductRuntimeException;
-import com.product.luffy.utils.response.HttpResultCode;
 
 
 @Service("com.product.luffy.service.impl.NoteService")
@@ -37,14 +35,14 @@ public class NoteServiceImpl implements NoteService {
         return noteMapper.selectMyNoteListByUserId(paramMap);
     }
 
-    public int insertNote(Map<String, String> paramMap) {
+    public int insertNote(Map<String, Object> paramMap) {
         int rtn = 0;
 
         rtn = noteMapper.insertNote(paramMap);
         if (rtn != 1)
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "노트 등록이 정상적으로 되지 않았습니다.");
 
-        rtn = noteMapper.insertUserNote(paramMap);
+        rtn = noteMapper.insertShareUserList(paramMap);
         if (rtn != 1)
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 노트 등록이 정상적으로 되지 않았습니다.");
 
@@ -61,7 +59,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     public Note selectNote(String noteId) {
-        return noteMapper.selectNote(noteId);
+        return noteMapper.selectNote(noteId, UserContext.getUserId());
     }
 
     public List<User> selectShareUserList(String noteId) {
@@ -72,11 +70,19 @@ public class NoteServiceImpl implements NoteService {
         return noteMapper.insertShareUser(paramMap);
     }
 
+    public int insertShareUserList(Map<String, Object> paramMap) {
+        return noteMapper.insertShareUserList(paramMap);
+    }
+
     public int deleteShareUser(String noteId, String userId) {
         return noteMapper.deleteShareUser(noteId, userId);
     }
 
     public List<Note> selectShareNoteList() {
         return noteMapper.selectShareNoteList(UserContext.getUserId());
+    }
+
+    public Boolean selectUserNote(String noteId) {
+        return noteMapper.selectUserNote(noteId, UserContext.getUserId()) == null;
     }
 }

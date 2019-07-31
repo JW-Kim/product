@@ -29,6 +29,10 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
+    public User selectUserInfo() {
+        return  userMapper.selectUserInfo(UserContext.getUserId());
+    }
+
     public User selectUser(Map<String, String> paramMap) {
         return userMapper.selectUser(paramMap);
     }

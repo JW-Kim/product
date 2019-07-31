@@ -1,23 +1,22 @@
 package com.product.luffy.controller;
 
 
-import java.util.Map;
-import java.util.HashMap;
-import javax.annotation.Resource;
-
+import com.product.luffy.po.Note;
 import com.product.luffy.po.User;
-import org.aspectj.weaver.ast.Not;
+import com.product.luffy.service.NoteService;
+import com.product.luffy.utils.Exception.ProductRuntimeException;
+import com.product.luffy.utils.IdGen;
+import com.product.luffy.utils.UserContext;
+import com.product.luffy.utils.response.GridResponseObject;
+import com.product.luffy.utils.response.HttpResultCode;
+import com.product.luffy.utils.response.ResponseObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.product.luffy.po.Note;
-import com.product.luffy.service.NoteService;
-import com.product.luffy.utils.response.GridResponseObject;
-import com.product.luffy.utils.response.HttpResultCode;
-import com.product.luffy.utils.Exception.ProductRuntimeException;
-import com.product.luffy.utils.response.ResponseObject;
-import com.product.luffy.utils.IdGen;
-import com.product.luffy.utils.UserContext;
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -63,6 +62,9 @@ public class NoteController {
     public @ResponseBody
     GridResponseObject<User> selectShareUserList(@PathVariable("noteId") String noteId) {
         GridResponseObject<User> gridResponseObject = new GridResponseObject<User>();
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
 
         gridResponseObject.setData(noteService.selectShareUserList(noteId));
         gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
@@ -79,10 +81,34 @@ public class NoteController {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
         }
 
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
+
         params.put("noteId", noteId);
         params.put("regUserId", UserContext.getUserId());
 
         responseObject.setData(noteService.insertShareUser(params));
+        responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+        return responseObject;
+    }
+    @RequestMapping(value = "/{noteId}/share/userList", method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseObject<Boolean> insertShareUserList(@PathVariable("noteId") String noteId,
+                                            @RequestBody Map<String, Object> params) {
+        ResponseObject<Boolean> responseObject = new ResponseObject<Boolean>();
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
+
+        if (params.get("userIdList") == null) {
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
+        }
+
+        params.put("noteId", noteId);
+        params.put("regUserId", UserContext.getUserId());
+
+        responseObject.setData(noteService.insertShareUserList(params));
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
         return responseObject;
     }
@@ -92,6 +118,9 @@ public class NoteController {
     ResponseObject<Boolean> deleteShareUser(@PathVariable("noteId") String noteId,
                                             @RequestParam String userId) {
         ResponseObject<Boolean> responseObject = new ResponseObject<Boolean>();
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
 
         responseObject.setData(noteService.deleteShareUser(noteId, userId));
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
@@ -112,6 +141,9 @@ public class NoteController {
     public @ResponseBody
     ResponseObject<Boolean> deleteShareNote(@PathVariable("noteId") String noteId) {
         ResponseObject<Boolean> responseObject = new ResponseObject<Boolean>();
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
 
         responseObject.setData(noteService.deleteShareUser(noteId, UserContext.getUserId()));
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
@@ -120,15 +152,15 @@ public class NoteController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    ResponseObject<String> insertNote(@RequestBody Map<String, String> requestParams) {
+    ResponseObject<String> insertNote(@RequestBody Map<String, Object> requestParams) {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         int rtn = 0;
 
-        Map<String, String> paramMap = checkInsertNoteParam(requestParams);
+        Map<String, Object> paramMap = checkInsertNoteParam(requestParams);
 
         rtn = noteService.insertNote(paramMap);
 
-        responseObject.setData(rtn);
+        responseObject.setData(paramMap.get("noteId"));
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
 
         return responseObject;
@@ -140,6 +172,9 @@ public class NoteController {
                                       @RequestBody Map<String, String> requestParams) {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         int rtn = 0;
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
 
         if ((requestParams.get("noteNm") == null || "".equals(requestParams.get("noteNm"))) &&
                 (requestParams.get("sex") == null || "".equals(requestParams.get("sex"))) &&
@@ -162,6 +197,9 @@ public class NoteController {
     ResponseObject<String> deleteNote(@PathVariable("noteId") String noteId) {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         int rtn = 0;
+        if(noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
 
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("noteId", noteId);
@@ -174,13 +212,20 @@ public class NoteController {
         return responseObject;
     }
 
-    private Map<String, String> checkInsertNoteParam(Map<String, String> params) {
+    private Map<String, Object> checkInsertNoteParam(Map<String, Object> params) {
         if (params.get("noteNm") == null || params.get("sex") == null || params.get("birthDt") == null) {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
         }
 
         params.put("noteId", IdGen.getNextId());
-        params.put("userId", UserContext.getUserId());
+        params.put("regUserId", UserContext.getUserId());
+
+        List<Map<String, String>> shareList = (List<Map<String, String>>) params.get("shareList");
+
+        Map<String, String> map = new HashMap();
+        map.put("userId", UserContext.getUserId());
+        shareList.add(map);
+        params.put("userIdList", shareList);
 
         return params;
 
