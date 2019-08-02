@@ -184,22 +184,22 @@
     </insert>
 
     <select id="selectPreDiaryInfo" parameterType="Map" resultMap="DiaryResultMap">
-        SELECT (SELECT S.HEIGHT
+        SELECT IFNULL((SELECT S.HEIGHT
                    FROM DIARY_F D
                    INNER JOIN STATE_F S
                    ON (D.DIARY_ID = S.DIARY_ID AND S.HEIGHT IS NOT NULL)
                   WHERE D.NOTE_ID = #{noteId}
                     AND D.REG_DTM <![CDATA[ < ]]> #{diaryDt}
                   ORDER BY D.REG_DTM DESC
-                  LIMIT 1) AS HEIGHT,
-                (SELECT S.WEIGHT
+                  LIMIT 1), 0) AS HEIGHT,
+                IFNULL((SELECT S.WEIGHT
                    FROM DIARY_F D
                  INNER JOIN STATE_F S
                      ON (D.DIARY_ID = S.DIARY_ID AND S.WEIGHT IS NOT NULL)
                   WHERE D.NOTE_ID = #{noteId}
                     AND D.REG_DTM <![CDATA[ < ]]> #{diaryDt}
                 ORDER BY D.REG_DTM DESC
-                 LIMIT 1) AS WEIGHT
+                 LIMIT 1), 0) AS WEIGHT
     </select>
 
     <insert id="insertState" parameterType="com.product.luffy.po.Diary">
