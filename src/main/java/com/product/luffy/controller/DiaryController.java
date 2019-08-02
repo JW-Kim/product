@@ -244,7 +244,7 @@ public class DiaryController {
         if(diaryService.selectDiseaseAuth(diseaseId)){
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
         }
-        
+
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("diseaseId", diseaseId);
 
