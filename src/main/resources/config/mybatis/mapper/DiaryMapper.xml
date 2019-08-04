@@ -184,22 +184,30 @@
     </insert>
 
     <select id="selectPreDiaryInfo" parameterType="Map" resultMap="DiaryResultMap">
-        SELECT IFNULL((SELECT S.HEIGHT
+        SELECT IFNULL(
+                  (SELECT S.HEIGHT
                    FROM DIARY_F D
-                   INNER JOIN STATE_F S
-                   ON (D.DIARY_ID = S.DIARY_ID AND S.HEIGHT IS NOT NULL)
-                  WHERE D.NOTE_ID = #{noteId}
-                    AND D.REG_DTM <![CDATA[ < ]]> #{diaryDt}
-                  ORDER BY D.REG_DTM DESC
-                  LIMIT 1), 0) AS HEIGHT,
-                IFNULL((SELECT S.WEIGHT
+                        INNER JOIN STATE_F S
+                           ON (D.DIARY_ID = S.DIARY_ID AND S.HEIGHT IS NOT NULL)
+                   WHERE     D.NOTE_ID = #{noteId}
+                         AND D.DIARY_DT <![CDATA[ < ]]>  STR_TO_DATE(#{diaryDt}, '%Y-%m-%d')
+                         AND D.DIARY_STAT_CD = '001'
+                   ORDER BY D.REG_DTM DESC
+                   LIMIT 1),
+                  0)
+                  AS HEIGHT,
+               IFNULL(
+                  (SELECT S.WEIGHT
                    FROM DIARY_F D
-                 INNER JOIN STATE_F S
-                     ON (D.DIARY_ID = S.DIARY_ID AND S.WEIGHT IS NOT NULL)
-                  WHERE D.NOTE_ID = #{noteId}
-                    AND D.REG_DTM <![CDATA[ < ]]> #{diaryDt}
-                ORDER BY D.REG_DTM DESC
-                 LIMIT 1), 0) AS WEIGHT
+                        INNER JOIN STATE_F S
+                           ON (D.DIARY_ID = S.DIARY_ID AND S.WEIGHT IS NOT NULL)
+                   WHERE     D.NOTE_ID = #{noteId}
+                         AND D.DIARY_DT <![CDATA[ < ]]>  STR_TO_DATE(#{diaryDt}, '%Y-%m-%d')
+                         AND D.DIARY_STAT_CD = '001'
+                   ORDER BY D.REG_DTM DESC
+                   LIMIT 1),
+                  0)
+                  AS WEIGHT
     </select>
 
     <insert id="insertState" parameterType="com.product.luffy.po.Diary">
