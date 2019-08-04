@@ -27,7 +27,7 @@
     <select id="selectUserNote" parameterType="String" resultMap="NoteResultMap">
         SELECT USER_ID,
                 NOTE_ID
-          FROM USER_NOTE_F
+          FROM USER_NOTE_R
          WHERE NOTE_ID = #{noteId}
            AND USER_ID = #{userId}
     </select>
