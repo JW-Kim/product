@@ -345,6 +345,6 @@
         FROM DISEASE_F D
         INNER JOIN USER_NOTE_R UN
         ON (D.NOTE_ID = UN.NOTE_ID AND UN.USER_ID = #{userId})
-        WHERE D.DISEASE_F = #{diseaseId}
+        WHERE D.DISEASE_ID = #{diseaseId}
     </select>
 </mapper>
