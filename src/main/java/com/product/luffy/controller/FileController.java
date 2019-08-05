@@ -2,6 +2,7 @@ package com.product.luffy.controller;
 
 import com.product.luffy.po.File;
 import com.product.luffy.service.FileService;
+import com.product.luffy.utils.Exception.ProductRuntimeException;
 import com.product.luffy.utils.response.HttpResultCode;
 import com.product.luffy.utils.response.ResponseObject;
 import org.slf4j.Logger;
@@ -45,6 +46,11 @@ public class FileController {
 
     @RequestMapping(value = "/download", method = RequestMethod.GET)
     public HttpEntity<byte[]> downloadFile(@RequestParam("fileId") String fileId) {
+
+        File fileAuth = fileService.selectFileAuthYn(fileId);
+        if(fileAuth == null || fileAuth.getFileAuthYn() == null) {
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "not download Auth");
+        }
 
         java.io.File file;
 

@@ -77,4 +77,8 @@ public class FileServiceImpl implements FileService {
     public File selectFile(Map<String, Object> paramMap) {
         return fileMapper.selectFile(paramMap);
     }
+
+    public File selectFileAuthYn(String fileId) {
+        return fileMapper.selectFileAuthYn(fileId, UserContext.getUserId());
+    }
 }

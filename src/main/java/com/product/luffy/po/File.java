@@ -7,6 +7,15 @@ public class File {
     private String fileSize;
     private String filePath;
     private String regDtm;
+    private Boolean fileAuthYn;
+
+    public Boolean getFileAuthYn() {
+        return fileAuthYn;
+    }
+
+    public void setFileAuthYn(Boolean fileAuthYn) {
+        this.fileAuthYn = fileAuthYn;
+    }
 
     public String getFileId() {
         return fileId;

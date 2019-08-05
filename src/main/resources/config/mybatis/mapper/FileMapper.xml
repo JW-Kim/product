@@ -7,6 +7,7 @@
         <result column="FILE_EXT_NM" property="fileExtNm"/>
         <result column="FILE_SIZE" property="fileSize"/>
         <result column="FILE_PATH" property="filePath"/>
+        <result column="FILE_AUTH_YN" property="fileAuthYn"/>
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
@@ -35,4 +36,22 @@
         FROM FILE_F
         WHERE FILE_ID = #{fileId}
     </select>
+
+    <select id="selectFileAuthYn" parameterType="String" resultMap="FileMap">
+        SELECT TRUE AS FILE_AUTH_YN
+           FROM USER_NOTE_R UN
+           INNER JOIN
+              (SELECT D.NOTE_ID
+                  FROM DIARY_F D
+                  INNER JOIN FILE_F F
+                  ON (D.FILE_ID = F.FILE_ID
+                       AND F.FILE_ID = #{fileId}
+                       AND F.FILE_AUTH_CD = 'PRI')) A
+           ON (UN.NOTE_ID = A.NOTE_ID AND UN.USER_ID = #{userId})
+        UNION ALL
+        SELECT TRUE AS FILE_AUTH_YN
+          FROM FILE_F
+         WHERE FILE_ID = #{fileId} AND FILE_AUTH_CD = 'ALL'
+    </select>
+
 </mapper>

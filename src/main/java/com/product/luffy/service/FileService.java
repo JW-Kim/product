@@ -10,4 +10,6 @@ public interface FileService {
     public File insertFile(MultipartFile file);
 
     public File selectFile(Map<String, Object> paramMap);
+
+    public File selectFileAuthYn(String fileId);
 }
