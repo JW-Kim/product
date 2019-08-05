@@ -6,6 +6,7 @@ import com.product.luffy.po.User;
 import com.product.luffy.service.NoteService;
 import com.product.luffy.utils.Exception.ProductRuntimeException;
 import com.product.luffy.utils.IdGen;
+import com.product.luffy.utils.ProductUtil;
 import com.product.luffy.utils.UserContext;
 import com.product.luffy.utils.response.GridResponseObject;
 import com.product.luffy.utils.response.HttpResultCode;
@@ -183,6 +184,7 @@ public class NoteController {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "피라미터 정보가 올바르지 않습니다.");
         }
         requestParams.put("noteId", noteId);
+        requestParams.put("noteNm", ProductUtil.cleanXss(requestParams.get("noteNm")+""));
 
         rtn = noteService.updateNote(requestParams);
 
@@ -219,6 +221,7 @@ public class NoteController {
 
         params.put("noteId", IdGen.getNextId());
         params.put("regUserId", UserContext.getUserId());
+        params.put("noteNm", ProductUtil.cleanXss(params.get("noteNm")+""));
 
         List<Map<String, String>> shareList = (List<Map<String, String>>) params.get("shareList");
 

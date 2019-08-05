@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.product.luffy.service.NoteService;
+import com.product.luffy.utils.ProductUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -257,8 +258,8 @@ public class DiaryController {
     private Diary setDiary(String diaryId, Map<String, Object> params) {
         Diary diary = new Diary();
         diaryId = diaryId == null ? IdGen.getNextId() : diaryId;
-        String title = params.get("title") == null ? null : (String) params.get("title");
-        String content = params.get("content") == null ? null : (String) params.get("content");
+        String title = params.get("title") == null ? null : ProductUtil.cleanXss(params.get("title")+"");
+        String content = params.get("content") == null ? null : ProductUtil.cleanXss(params.get("content")+"");
         String fileId = params.get("fileId") == null ? null : (String) params.get("fileId");
         String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
         String diaryDt = "";
@@ -270,7 +271,7 @@ public class DiaryController {
         String dinnerCd = params.get("dinnerCd") == null ? "" : (String) params.get("dinnerCd");
         String shitCd = params.get("shitCd") == null ? "" : (String) params.get("shitCd");
         String shitCnt = params.get("shitCnt") == null ? "" : (String) params.get("shitCnt");
-        String shitDesc = params.get("shitDesc") == null ? "" : (String) params.get("shitDesc");
+        String shitDesc = params.get("shitDesc") == null ? "" : ProductUtil.cleanXss(params.get("shitDesc")+"");
         String sleepStartTime = params.get("sleepStartTime") == null ? null : (String) params.get("sleepStartTime");
         String sleepEndTime = params.get("sleepEndTime") == null ? null : (String) params.get("sleepEndTime");
         int height = params.get("height") == null ? null : Integer.parseInt(params.get("height") + "");
@@ -315,10 +316,10 @@ public class DiaryController {
         Disease disease = new Disease();
 
         diseaseId = diseaseId == null ? IdGen.getNextId() : diseaseId;
-        String diseaseNm = params.get("diseaseNm") == null ? null : (String) params.get("diseaseNm");
-        String symptom = params.get("symptom") == null ? null : (String) params.get("symptom");
-        String hospitalNm = params.get("hospitalNm") == null ? null : (String) params.get("hospitalNm");
-        String prescription = params.get("prescription") == null ? null : (String) params.get("prescription");
+        String diseaseNm = params.get("diseaseNm") == null ? null : ProductUtil.cleanXss(params.get("diseaseNm")+"");
+        String symptom = params.get("symptom") == null ? null : ProductUtil.cleanXss(params.get("symptom")+"");
+        String hospitalNm = params.get("hospitalNm") == null ? null : ProductUtil.cleanXss(params.get("hospitalNm")+"");
+        String prescription = params.get("prescription") == null ? null : ProductUtil.cleanXss(params.get("prescription")+"");
         String noteId = params.get("noteId") == null ? null : (String) params.get("noteId");
 
         String diseaseDt = "";

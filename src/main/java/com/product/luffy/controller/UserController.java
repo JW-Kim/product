@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.product.luffy.utils.ProductUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,10 +112,10 @@ public class UserController {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         LOGGER.debug(">>>> insertUser 시작" + requestParams);
 
-        String userLoginId = requestParams.get("userLoginId") + "";
-        String email = requestParams.get("email") + "";
-        String userPwd = requestParams.get("userPwd") + "";
-        String userNm = requestParams.get("userNm") + "";
+        String userLoginId = ProductUtil.cleanXss(requestParams.get("userLoginId") + "");
+        String email = ProductUtil.cleanXss(requestParams.get("email") + "");
+        String userPwd = ProductUtil.cleanXss(requestParams.get("userPwd") + "");
+        String userNm = ProductUtil.cleanXss(requestParams.get("userNm") + "");
 
         if (userLoginId == null || "".equals(userLoginId) || email == null || "".equals(email) ||
                 userPwd == null || "".equals(userPwd) || userNm == null || "".equals(userNm)
@@ -153,14 +154,14 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/{userId}")
     public @ResponseBody
-    ResponseObject<String> updatetUser(@RequestBody Map<String, Object> requestParams) {
+    ResponseObject<String> updateUser(@RequestBody Map<String, Object> requestParams) {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         LOGGER.debug(">>>> updateUser 시작" + requestParams);
 
         int rtn = 0;
 
-        String userPwd = requestParams.get("userPwd") == null ? null : requestParams.get("userPwd") + "";
-        String userNm = requestParams.get("userNm") == null ? null : requestParams.get("userNm") + "";
+        String userPwd = requestParams.get("userPwd") == null ? null : ProductUtil.cleanXss(requestParams.get("userPwd") + "");
+        String userNm = requestParams.get("userNm") == null ? null : ProductUtil.cleanXss(requestParams.get("userNm") + "");
         String fileId = requestParams.get("fileId") == null ? null : requestParams.get("fileId") + "";
 
         if ((userPwd == null || "".equals(userPwd)) && (userNm == null || "".equals(userNm))) {
