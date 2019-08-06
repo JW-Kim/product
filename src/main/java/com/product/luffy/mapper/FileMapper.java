@@ -14,4 +14,6 @@ public interface FileMapper {
     public File selectFile(Map<String, Object> paramMap);
 
     public File selectFileAuthYn(@Param("fileId") String fileId, @Param("userId") String userId);
+
+    public int updateFile(File file);
 }

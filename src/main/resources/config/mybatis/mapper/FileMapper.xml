@@ -17,12 +17,14 @@
         `FILE_EXT_NM`,
         `FILE_SIZE`,
         `FILE_PATH`,
+        `FILE_AUTH_CD`,
         `REG_DTM`)
         VALUES (#{fileId},
         #{fileNm},
         #{fileExtNm},
         #{fileSize},
         #{filePath},
+        'ALL',
         NOW());
     </insert>
 
@@ -54,4 +56,9 @@
          WHERE FILE_ID = #{fileId} AND FILE_AUTH_CD = 'ALL'
     </select>
 
+    <update id="updateFile" parameterType="com.product.luffy.po.File">
+        UPDATE FILE_F
+           SET FILE_AUTH_CD = #{fileAuthCd}
+         WHERE FILE_ID = #{fileId}
+    </update>
 </mapper>

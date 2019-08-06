@@ -7,7 +7,16 @@ public class File {
     private String fileSize;
     private String filePath;
     private String regDtm;
+    private String fileAuthCd;
     private Boolean fileAuthYn;
+
+    public String getFileAuthCd() {
+        return fileAuthCd;
+    }
+
+    public void setFileAuthCd(String fileAuthCd) {
+        this.fileAuthCd = fileAuthCd;
+    }
 
     public Boolean getFileAuthYn() {
         return fileAuthYn;

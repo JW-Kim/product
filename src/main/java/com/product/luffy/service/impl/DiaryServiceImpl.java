@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.product.luffy.mapper.FileMapper;
+import com.product.luffy.po.File;
 import com.product.luffy.utils.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,9 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Resource(name = "com.product.luffy.mapper.DiaryMapper")
     private DiaryMapper diaryMapper;
+
+    @Resource(name = "com.product.luffy.mapper.FileMapper")
+    private FileMapper fileMapper;
 
     public List<Diary> selectDiaryList(String noteId) {
         LOGGER.debug(">>>>>>>>>>>>>> DiaryService selectDiaryList 시작 {} : ");
@@ -66,6 +71,13 @@ public class DiaryServiceImpl implements DiaryService {
         //insert STATE_F
         rtn = diaryMapper.insertState(diary);
 
+        if(diary.getFileId() != null) {
+            File file = new File();
+            file.setFileId(diary.getFileId());
+            file.setFileAuthCd("PRI");
+            fileMapper.updateFile(file);
+        }
+
         return rtn;
     }
 
@@ -75,6 +87,13 @@ public class DiaryServiceImpl implements DiaryService {
         rtn = diaryMapper.updateDiary(diary);
 
         rtn = diaryMapper.updateState(diary);
+
+        if(diary.getFileId() != null) {
+            File file = new File();
+            file.setFileId(diary.getFileId());
+            file.setFileAuthCd("PRI");
+            fileMapper.updateFile(file);
+        }
 
         return rtn;
     }
