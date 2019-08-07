@@ -5,7 +5,7 @@ public class NoteCfg {
     private String noteId;
     private String noteCfgCd;
     private String noteCfgStatCd;
-    private String noteCfgVal;
+    private String noteCfgCdVal;
     private String regUserId;
 
     public String getNoteId() {
@@ -32,12 +32,12 @@ public class NoteCfg {
         this.noteCfgStatCd = noteCfgStatCd;
     }
 
-    public String getNoteCfgVal() {
-        return noteCfgVal;
+    public String getNoteCfgCdVal() {
+        return noteCfgCdVal;
     }
 
-    public void setNoteCfgVal(String noteCfgVal) {
-        this.noteCfgVal = noteCfgVal;
+    public void setNoteCfgCdVal(String noteCfgCdVal) {
+        this.noteCfgCdVal = noteCfgCdVal;
     }
 
     public String getRegUserId() {

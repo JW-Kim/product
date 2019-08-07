@@ -217,7 +217,7 @@
     </select>
 
     <select id="selectNoteCfgList" resultMap="NoteCfgResultMap">
-        SELECT #{noteId} AS NOTE_ID
+        SELECT #{noteId} AS NOTE_ID,
                 C.CD_DTL_ID AS NOTE_CFG_CD,
                 C.CD_VAL AS NOTE_CFG_CD_VAL,
                 IFNULL(NC.NOTE_CFG_STAT_CD, 'N') AS NOTE_CFG_STAT_CD
