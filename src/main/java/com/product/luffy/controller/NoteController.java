@@ -2,6 +2,7 @@ package com.product.luffy.controller;
 
 
 import com.product.luffy.po.Note;
+import com.product.luffy.po.NoteCfg;
 import com.product.luffy.po.User;
 import com.product.luffy.service.NoteService;
 import com.product.luffy.utils.Exception.ProductRuntimeException;
@@ -57,6 +58,19 @@ public class NoteController {
         responseObject.setData(noteService.selectNote(noteId));
         responseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
         return responseObject;
+    }
+
+    @RequestMapping(value = "/cfg", method = RequestMethod.GET)
+    public @ResponseBody
+    GridResponseObject<NoteCfg> selectNoteCfgList(@RequestParam("noteId") String noteId) {
+        GridResponseObject<NoteCfg> gridResponseObject = new GridResponseObject<NoteCfg>();
+        if(!"".equals(noteId) && noteService.selectUserNote(noteId)){
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_FORBIDDEN, "no Auth");
+        }
+
+        gridResponseObject.setData(noteService.selectNoteCfgList(noteId));
+        gridResponseObject.setResultCode(HttpResultCode.PRODUCT_SUCCESS);
+        return gridResponseObject;
     }
 
     @RequestMapping(value = "/{noteId}/share/user", method = RequestMethod.GET)
@@ -170,7 +184,7 @@ public class NoteController {
     @RequestMapping(method = RequestMethod.POST, value = "/{noteId}")
     public @ResponseBody
     ResponseObject<String> updateNote(@PathVariable("noteId") String noteId,
-                                      @RequestBody Map<String, String> requestParams) {
+                                      @RequestBody Map<String, Object> requestParams) {
         ResponseObject<String> responseObject = new ResponseObject<String>();
         int rtn = 0;
         if(noteService.selectUserNote(noteId)){
@@ -185,6 +199,7 @@ public class NoteController {
         }
         requestParams.put("noteId", noteId);
         requestParams.put("noteNm", ProductUtil.cleanXss(requestParams.get("noteNm")+""));
+        requestParams.put("noteCfgList", (List<Map<String, String>>) requestParams.get("noteCfgList"));
 
         rtn = noteService.updateNote(requestParams);
 
@@ -224,11 +239,13 @@ public class NoteController {
         params.put("noteNm", ProductUtil.cleanXss(params.get("noteNm")+""));
 
         List<Map<String, String>> shareList = (List<Map<String, String>>) params.get("shareList");
+        List<Map<String, String>> noteCfgList = (List<Map<String, String>>) params.get("noteCfgList");
 
         Map<String, String> map = new HashMap();
         map.put("userId", UserContext.getUserId());
         shareList.add(map);
         params.put("userIdList", shareList);
+        params.put("noteCfgList", noteCfgList);
 
         return params;
 

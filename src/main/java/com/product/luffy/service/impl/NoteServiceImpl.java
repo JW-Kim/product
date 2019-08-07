@@ -2,6 +2,7 @@ package com.product.luffy.service.impl;
 
 import com.product.luffy.mapper.NoteMapper;
 import com.product.luffy.po.Note;
+import com.product.luffy.po.NoteCfg;
 import com.product.luffy.po.User;
 import com.product.luffy.service.NoteService;
 import com.product.luffy.utils.Exception.ProductRuntimeException;
@@ -46,12 +47,19 @@ public class NoteServiceImpl implements NoteService {
         if (rtn != 1)
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 노트 등록이 정상적으로 되지 않았습니다.");
 
+        noteMapper.insertNoteCfgList(paramMap);
+
         return rtn;
 
     }
 
-    public int updateNote(Map<String, String> paramMap) {
-        return noteMapper.updateNote(paramMap);
+    public int updateNote(Map<String, Object> paramMap) {
+        int rtn = 0;
+        rtn = noteMapper.updateNote(paramMap);
+
+        noteMapper.deleteNoteCfgList(paramMap.get("noteId")+"");
+        noteMapper.insertNoteCfgList(paramMap);
+        return rtn;
     }
 
     public int deleteNote(Map<String, String> paramMap) {
@@ -84,5 +92,13 @@ public class NoteServiceImpl implements NoteService {
 
     public Boolean selectUserNote(String noteId) {
         return noteMapper.selectUserNote(noteId, UserContext.getUserId()) == null;
+    }
+
+    public List<NoteCfg> selectNoteCfgList(String noteId) {
+        if("".equals(noteId)) {
+            return noteMapper.selectNoteCfgDefaultList();
+        } else {
+            return noteMapper.selectNoteCfgList(noteId);
+        }
     }
 }

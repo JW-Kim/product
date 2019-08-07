@@ -3,8 +3,10 @@ package com.product.luffy.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.product.luffy.po.NoteCfg;
 import com.product.luffy.po.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 import com.product.luffy.po.Note;
 
@@ -19,7 +21,7 @@ public interface NoteMapper {
 
     public int insertUserNote(Map<String, Object> paramMap);
 
-    public int updateNote(Map<String, String> paramMap);
+    public int updateNote(Map<String, Object> paramMap);
 
     public int deleteNote(Map<String, String> paramMap);
 
@@ -36,4 +38,12 @@ public interface NoteMapper {
     public List<Note> selectShareNoteList(@Param("userId") String userId);
 
     public Note selectUserNote(@Param("noteId") String noteId, @Param("userId") String userId);
+
+    public int insertNoteCfgList(Map<String, Object> paramMap);
+
+    public int deleteNoteCfgList(@Param("noteId") String noteId);
+
+    public List<NoteCfg> selectNoteCfgDefaultList();
+
+    public List<NoteCfg> selectNoteCfgList(@Param("noteId") String noteId);
 }
