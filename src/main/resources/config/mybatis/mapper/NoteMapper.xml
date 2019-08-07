@@ -24,6 +24,13 @@
         <result column="REG_DTM" property="regDtm"/>
     </resultMap>
 
+    <resultMap id="NoteCfgResultMap" type="com.product.luffy.po.NoteCfg">
+        <result column="NOTE_ID" property="noteId" />
+        <result column="NOTE_CFG_CD" property="noteCfgCd" />
+        <result column="NOTE_CFG_CD_VAL" property="noteCfgCdVal" />
+        <result column="NOTE_CFG_STAT_CD" property="noteCfgStatCd" />
+    </resultMap>
+
     <select id="selectUserNote" parameterType="String" resultMap="NoteResultMap">
         SELECT USER_ID,
                 NOTE_ID
@@ -150,6 +157,27 @@
             </foreach>
     </insert>
 
+    <insert id="insertNoteCfgList" parameterType="Map">
+        INSERT INTO NOTE_CFG_B (NOTE_ID,
+                                  NOTE_CFG_CD,
+                                  NOTE_CFG_STAT_CD,
+                                  REG_USER_ID,
+                                  REG_DTM)
+        VALUE
+        <foreach collection="noteCfgList" item="item" separator=",">
+            (#{noteId},
+            #{item.noteCfgCd},
+            #{item.noteCfgStatCd},
+            #{regUserId},
+            NOW())
+        </foreach>
+    </insert>
+
+    <delete id="deleteNoteCfgList" parameterType="String">
+        DELETE FROM NOTE_CFG_B
+         WHERE NOTE_ID = #{noteId}
+    </delete>
+
     <insert id="insertShareUser" parameterType="Map">
         INSERT INTO USER_NOTE_R (USER_ID,
         NOTE_ID,
@@ -178,5 +206,27 @@
             INNER JOIN NOTE_F N
                 ON (UN.NOTE_ID = N.NOTE_ID AND N.REG_USER_ID != #{userId} AND N.NOTE_STAT_CD = 001)
         WHERE USER_ID = #{userId}
+    </select>
+
+    <select id="selectNoteCfgDefaultList" resultMap="NoteCfgResultMap">
+        SELECT CD_DTL_ID AS NOTE_CFG_CD,
+                CD_VAL AS NOTE_CFG_CD_VAL,
+                'Y' AS NOTE_CFG_STAT_CD
+           FROM CD_DTL_F
+          WHERE CD_ID = 2
+    </select>
+
+    <select id="selectNoteCfgList" resultMap="NoteCfgResultMap">
+        SELECT #{noteId} AS NOTE_ID
+                C.CD_DTL_ID AS NOTE_CFG_CD,
+                C.CD_VAL AS NOTE_CFG_CD_VAL,
+                IFNULL(NC.NOTE_CFG_STAT_CD, 'N') AS NOTE_CFG_STAT_CD
+           FROM CD_DTL_F C
+           LEFT JOIN
+              (SELECT *
+                 FROM NOTE_CFG_B
+                WHERE NOTE_ID = #{noteId}) NC
+           ON (NC.NOTE_CFG_CD = C.CD_DTL_ID)
+         WHERE C.CD_ID = 2
     </select>
 </mapper>
