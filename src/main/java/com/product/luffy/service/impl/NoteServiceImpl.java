@@ -44,7 +44,7 @@ public class NoteServiceImpl implements NoteService {
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "노트 등록이 정상적으로 되지 않았습니다.");
 
         rtn = noteMapper.insertShareUserList(paramMap);
-        if (rtn != 1)
+        if (rtn == 0)
             throw new ProductRuntimeException(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION, "사용자 노트 등록이 정상적으로 되지 않았습니다.");
 
         noteMapper.insertNoteCfgList(paramMap);
