@@ -45,6 +45,9 @@ public class LoginController {
         Map<String, String> paramMap = new HashMap<String, String>();
         paramMap.put("userLoginId", username);
         User user = userService.selectUser(paramMap);
+        if(user == null) {
+            throw new ProductRuntimeException(HttpResultCode.PRODUCT_INVALID_PARAMETER, "아이디 및 비밀번호가 일치하지 않습니다.");
+        }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String token = "";
         //비밀번호가 동일하면

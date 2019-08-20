@@ -70,8 +70,8 @@
             FILE_ID,
             REG_DTM
         FROM USER_F
-        WHERE USER_LOGIN_ID LIKE CONCAT('%', #{searchVal}, '%')
-              OR USER_NM LIKE CONCAT('%', #{searchVal}, '%')
+        WHERE (USER_LOGIN_ID LIKE CONCAT('%', #{searchVal}, '%')
+              OR USER_NM LIKE CONCAT('%', #{searchVal}, '%'))
           AND USER_ID != #{userId}
         ORDER BY USER_NM, USER_LOGIN_ID
     </select>

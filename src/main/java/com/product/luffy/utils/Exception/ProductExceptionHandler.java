@@ -51,6 +51,7 @@ public class ProductExceptionHandler {
 
         if (e instanceof MissingServletRequestParameterException) {
             resObj.setResultCode(HttpResultCode.PRODUCT_INVALID_PARAMETER);
+            response.setStatus(HttpResultCode.PRODUCT_INTERNAL_SERVER_EXCEPTION.getHttpStatus());
             resObj.setMessage(e.getMessage());
         }
         return resObj;
