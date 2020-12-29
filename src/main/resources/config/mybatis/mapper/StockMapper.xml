@@ -49,7 +49,7 @@
         WHERE S.STOCK_ID = #{stockId}
     </select>
 
-    <delete id="deletStock">
+    <delete id="deleteStock">
         DELETE FROM STOCK_F
           WHERE STOCK_ID = #{stockId}
     </delete>
@@ -92,6 +92,7 @@
     <update id="updateStock" parameterType="map">
         UPDATE STOCK_F
         <trim prefix="SET" suffixOverrides=",">
+            <if test="companyId != null">COMPANY_ID = #{companyId},</if>
             <if test="direction != null">DIRECTION = #{direction},</if>
             <if test="maxPrice != null">MAX_PRICE = #{maxPrice},</if>
             <if test="minPrice != null">MIN_PRICE = #{minPrice},</if>

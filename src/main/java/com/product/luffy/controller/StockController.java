@@ -46,7 +46,7 @@ public class StockController {
         return responseObject;
     }
 
-    @RequestMapping(value="/{stockId}", method = RequestMethod.POST)
+    @RequestMapping(value="/delete/{stockId}", method = RequestMethod.POST)
     public @ResponseBody
     ResponseObject<Stock> deleteStock(@PathVariable("stockId") String stockId) {
         ResponseObject<Stock> responseObject = new ResponseObject<>();
