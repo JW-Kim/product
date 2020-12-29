@@ -13,5 +13,6 @@
         <mapper resource="config/mybatis/mapper/CodeMapper.xml"/>
         <mapper resource="config/mybatis/mapper/FileMapper.xml"/>
         <mapper resource="config/mybatis/mapper/NoteMapper.xml"/>
+        <mapper resource="config/mybatis/mapper/StockMapper.xml"/>
     </mappers>
 </configuration>

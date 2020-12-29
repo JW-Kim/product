@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.product.luffy.mapper.StockMapper">
+
+    <resultMap id="CompanyResultMap" type="com.product.luffy.po.Company">
+        <id column="COMPANY_ID" property="companyId"/>
+        <result column="COMPANY_NM" property="companyNm"/>
+        <result column="URL" property="url"/>
+    </resultMap>
+
+    <resultMap id="StockResultMap" type="com.product.luffy.po.Stock">
+        <id column="STOCK_ID" property="stockId"/>
+        <result column="STOCK_DT" property="stockDt"/>
+        <result column="COMPANY_ID" property="companyId"/>
+        <result column="DIRECTION" property="direction"/>
+        <result column="MAX_PRICE" property="maxPrice"/>
+        <result column="MIN_PRICE" property="minPrice"/>
+        <result column="PRICE" property="price"/>
+        <result column="PRE_CLOSING_PRICE" property="preClosingPrice"/>
+        <result column="COMPANY_NM" property="companyNm" />
+    </resultMap>
+
+    <select id="selectStockList" resultMap="StockResultMap">
+        SELECT S.STOCK_ID,
+                S.STOCK_DT,
+                S.COMPANY_ID,
+                S.DIRECTION,
+                S.MAX_PRICE,
+                S.MIN_PRICE,
+                S.PRICE,
+                S.PRE_CLOSING_PRICE,
+                C.COMPANY_NM
+          FROM STOCK_F S INNER JOIN COMPANY_F C ON S.COMPANY_ID = C.COMPANY_ID
+         WHERE S.STOCK_DT = #{stockDt}
+      ORDER BY C.COMPANY_NM ASC
+    </select>
+
+    <select id="selectStock" resultMap="StockResultMap">
+        SELECT S.STOCK_ID,
+        S.STOCK_DT,
+        S.COMPANY_ID,
+        S.DIRECTION,
+        S.MAX_PRICE,
+        S.MIN_PRICE,
+        S.PRICE,
+        S.PRE_CLOSING_PRICE,
+        C.COMPANY_NM
+        FROM STOCK_F S INNER JOIN COMPANY_F C ON S.COMPANY_ID = C.COMPANY_ID
+        WHERE S.STOCK_ID = #{stockId}
+    </select>
+
+    <delete id="deletStock">
+        DELETE FROM STOCK_F
+          WHERE STOCK_ID = #{stockId}
+    </delete>
+
+    <select id="selectCompanyList" resultMap="CompanyResultMap">
+        SELECT *
+        FROM COMPANY_F
+       WHERE COMPANY_NM LIKE CONCAT('%', #{searchVal}, '%')
+    ORDER BY COMPANY_NM ASC
+    </select>
+
+    <insert id="insertCompany" parameterType="map">
+        INSERT INTO COMPANY_F (COMPANY_ID,
+                            COMPANY_NM,
+                            URL)
+        VALUES (#{companyId},
+                #{companyNm},
+                #{url})
+    </insert>
+
+    <insert id="insertStock" parameterType="map">
+        INSERT INTO STOCK_F (STOCK_ID,
+                        STOCK_DT,
+                        COMPANY_ID,
+                        DIRECTION,
+                        MAX_PRICE,
+                        MIN_PRICE,
+                        PRICE,
+                        PRE_CLOSING_PRICE)
+        VALUES (#{stockId},
+                #{stockDt},
+                #{companyId},
+                #{direction},
+                #{maxPrice},
+                #{minPrice},
+                #{price},
+                #{preClosingPrice})
+    </insert>
+
+    <update id="updateStock" parameterType="map">
+        UPDATE STOCK_F
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="direction != null">DIRECTION = #{direction},</if>
+            <if test="maxPrice != null">MAX_PRICE = #{maxPrice},</if>
+            <if test="minPrice != null">MIN_PRICE = #{minPrice},</if>
+            <if test="price != null">PRICE = #{price},</if>
+            <if test="preClosingPrice != null">PRE_CLOSING_PRICE = #{preClosingPrice},</if>
+        </trim>
+        WHERE STOCK_ID = #{stockId}
+    </update>
+</mapper>
